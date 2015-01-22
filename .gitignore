@@ -1,0 +1,32 @@
+
+#  Mac
+.DS_Store
+.LSOverride
+
+#  Subversion / CVS
+.svn
+CVS
+
+#  Eclipse
+.classpath
+.project
+.settings/
+
+#  Xcode
+xcuserdata
+*.xccheckout
+[Bb]uild
+*.o
+
+#  Maven
+[Tt]arget
+
+#  IntelliJ
+*.iml
+.idea
+
+#  Relcy Specific
+# src/main/proto
+# fetcher.sh
+dependency-reduced-pom.xml
+*.log
