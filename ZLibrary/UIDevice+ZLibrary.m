@@ -3,7 +3,7 @@
 //  Search
 //
 //  Created by Edward Smith on 1/29/14.
-//  Copyright (c) 2014 Relcy, Inc. All rights reserved.
+//  Copyright (c) 2014 Edward Smith, All rights reserved.
 //
 //	Based largely on code by Erica Sadun, http://ericasadun.com
 //	iPhone Developer's Cookbook, 6.x Edition
@@ -72,7 +72,7 @@
 	NSString* result = descriptionDictionary[self.modelIdentifier];
 	if (!result)
 		{
-		ZDebugBreakMessage(@"No description for %@.", self.modelIdentifier);
+		ZDebugBreakPointMessage(@"No description for %@.", self.modelIdentifier);
 		result = @"iOS Device";
 		}
 		
@@ -200,25 +200,25 @@
     
     if ((mib[5] = if_nametoindex("en0")) == 0)
 		{
-        ZDebugBreakMessage(@"Error: if_nametoindex error.");
+        ZDebugBreakPointMessage(@"Error: if_nametoindex error.");
         return nil;
     	}
     
     if (sysctl(mib, 6, NULL, &len, NULL, 0) < 0)
 		{
-        ZDebugBreakMessage(@"Error: sysctl error.");
+        ZDebugBreakPointMessage(@"Error: sysctl error.");
         return nil;
     	}
     
     if ((buf = malloc(len)) == NULL)
 		{
-        ZDebugBreakMessage(@"Error: Memory allocation error.");
+        ZDebugBreakPointMessage(@"Error: Memory allocation error.");
         return nil;
     	}
     
     if (sysctl(mib, 6, buf, &len, NULL, 0) < 0)
 		{
-        ZDebugBreakMessage(@"Error: sysctl error.");
+        ZDebugBreakPointMessage(@"Error: sysctl error.");
         free(buf);
         return nil;
     	}

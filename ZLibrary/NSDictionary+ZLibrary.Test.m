@@ -3,7 +3,7 @@
 //  Search
 //
 //  Created by Edward Smith on 11/6/13.
-//  Copyright (c) 2013 Relcy, Inc. All rights reserved.
+//  Copyright (c) 2013 Edward Smith, All rights reserved.
 //
 
 
@@ -55,7 +55,7 @@
 	
 	#define test(key, value) \
 		result = [testDictionary objectOfClass:[NSString class] forPath:key]; \
-		XCTAssertTrue([result isEqual:value], @"%s objectOfClass:forPath %@ should return %@ but returned %@." \
+		XCTAssertTrue(result && value && [result isEqual:value], @"%s objectOfClass:forPath %@ should return %@ but returned %@." \
 			, __PRETTY_FUNCTION__, key, value, result)
 	
 	test(@"dictionary.item0", @"itemString0");

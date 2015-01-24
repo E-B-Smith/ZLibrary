@@ -1,6 +1,5 @@
 
 
-
 //-----------------------------------------------------------------------------------------------
 //
 //																						 ZDebug.m
@@ -12,7 +11,6 @@
 //								 -©- Copyright © 1996-2013 Edward Smith, all rights reserved. -©-
 //
 //-----------------------------------------------------------------------------------------------
-
 
 
 #import "ZDebug.h"
@@ -34,15 +32,18 @@
 
 #if ZDEBUG
 
-void ZDebugMessageHandlerOutputToLog(NSString* m)
+void ZDebugMessageHandlerOutputToLog(ZDebugLevel debugLevel, NSString* m)
 	{
-	NSString* text = [m stringByReplacingOccurrencesOfString:@"%" withString:@"%%"];
-	NSLog(text, nil);
+	if (debugLevel < ZDebugLevelLog)
+		{
+		NSString* text = [m stringByReplacingOccurrencesOfString:@"%" withString:@"%%"];
+		NSLog(text, nil);
+		}
 	}
 
 static NSFileHandle *messageHandlerFile = nil;
 
-void ZDebugMessageHandlerOutputToFile(NSString* m)
+void ZDebugMessageHandlerOutputToFile(ZDebugLevel debugLevel, NSString* m)
 	{
 	if (messageHandlerFile)
 		[messageHandlerFile  writeData:[m dataUsingEncoding:NSUTF8StringEncoding]];
@@ -83,19 +84,19 @@ ZDebugMessageHandlerProcedurePtr ZDebugSetMessageHandler(ZDebugMessageHandlerPro
 	return Old;
 	}
 	
-bool ZDebugEnableAssert(bool Enable)
+bool ZDebugSetBreakOnAssertEnabled(bool Enable)
 	{
 	bool Last = ZDebugAssertEnabledBool;
 	ZDebugAssertEnabledBool = Enable;
 	return Last;
 	}
 
-bool ZDebugAssertEnabled()
+bool ZDebugBreakOnAssertIsEnabled()
 	{
 	return ZDebugAssertEnabledBool;
 	}
 	
-bool ZDebugSet(bool OnOff)
+bool ZDebugSetEnabled(bool OnOff)
 	{
 	bool last = ZDebugSetBoolean;
 	if (OnOff)
@@ -104,7 +105,12 @@ bool ZDebugSet(bool OnOff)
 		ZDebugSetBoolean = 0;
 	return last;
 	}
-	
+
+bool ZDebugIsEnabled()
+	{
+	return ZDebugSetBoolean;
+	}
+
 void ZDebugInitialize()
 	{
     static dispatch_once_t onceToken = 0;
@@ -181,13 +187,13 @@ void ZDebugSetOptions(NSString* debugOptionString)
 		}}
 	}
 	
-void ZDebugMessageProcedure(int debugLevel, const char* file, int lineNumber, NSString* message, ...)
+void ZDebugMessageProcedure(ZDebugLevel debugLevel, const char* file, int lineNumber, NSString* message, ...)
 	{
 	if (!ZDebugIsInitialized) ZDebugInitialize();
 	ZDebugAssert(file && [message isKindOfClass:[NSString class]]);
 	NSString* f = [[NSString stringWithCString:file encoding:NSMacOSRomanStringEncoding] lastPathComponent];
 	NSString* fileLower = [f lowercaseString];
-	if (debugLevel == ZDebugLevelAssert || debugLevel == ZDebugLevelOn)
+	if (debugLevel == ZDebugLevelAssert || debugLevel > ZDebugLevelNone)
 		{}
 	else
 	if ([ZDebugIncludeFiles containsObject:@"allon"])
@@ -203,7 +209,7 @@ void ZDebugMessageProcedure(int debugLevel, const char* file, int lineNumber, NS
 	va_start(args, message);		
 	NSString* m = autorelease_if_needed([[NSString alloc] initWithFormat:message arguments:args]);
 	NSString* s = [NSString stringWithFormat:@"%@(%d): %@", f, lineNumber, m];
-	ZDebugMessageHandler(s);
+	if (ZDebugMessageHandler) ZDebugMessageHandler(debugLevel, s);
 	va_end(args);
 	}
 	
@@ -219,7 +225,12 @@ BOOL ZDebugAssertProcedure(bool condition, const char* file, int lineNumber, con
 	return NO;
 	}
 
+#else	//	else ! ZDEBUG
+
+static ZDebugMessageHandlerProcedurePtr ZDebugMessageHandler = NULL;
+
 #endif	//	ZDEBUG
+
 
 void ZLogProcedure(const char* file, int lineNumber, NSString* message, ...)
 	{
@@ -228,6 +239,7 @@ void ZLogProcedure(const char* file, int lineNumber, NSString* message, ...)
 	va_start(args, message);		
 	NSString* m = autorelease_if_needed([[NSString alloc] initWithFormat:message arguments:args]);
 	NSString* s = [NSString stringWithFormat:@"%@(%d): %@", f, lineNumber, m];
+	if (ZDebugMessageHandler) ZDebugMessageHandler(ZDebugLevelLog, s);
 	NSLog(s, nil);
 	va_end(args);
 	}

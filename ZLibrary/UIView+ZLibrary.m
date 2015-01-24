@@ -1,10 +1,17 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  UIView+ZLibrary.m
-//  Search
+//																				UIView+ZLibrary.m
+//																					 ZLibrary-iOS
 //
-//  Created by Edward Smith on 12/3/13.
-//  Copyright (c) 2013 Relcy, Inc. All rights reserved.
+//								   										UIView utility categories
+//																	   Edward Smith, January 2011
 //
+//								 -©- Copyright © 1996-2014 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
 
 
 #import "UIView+ZLibrary.h"
@@ -111,11 +118,21 @@
 	return [self imageWithSubviews:YES];
 	}
 
-- (void) applyToViewHeirarchy:(void (^) (UIView* subview))block
+- (void) applyBlockToSubviewHeirarchy:(void (^) (UIView* subview))block
 	{
 	block(self);
 	for (UIView* view in self.subviews)
-		[view applyToViewHeirarchy:block];
+		[view applyBlockToSubviewHeirarchy:block];
+	}
+
+- (void) applyBlockToSuperviewHeirarchy:(void (^) (UIView* subview))block
+	{
+	UIView* view = self;
+	while (view)
+		{
+		block(view);
+		view = view.superview;
+		}
 	}
 
 static BOOL globalViewFramesAreEnabled = NO;
@@ -130,7 +147,8 @@ void ZDebugGlobalEnableDebugViewFrames(BOOL enabled)
 	#if defined(ZDEBUG)
 	
 	if (!(on && globalViewFramesAreEnabled)) return;
-	[self applyToViewHeirarchy:^(UIView *subview) { subview.showDebugFrame = YES; }];
+	[self applyBlockToSubviewHeirarchy:
+		^ (UIView *subview) { subview.showDebugFrame = YES; }];
 	
 	#endif
 	}
@@ -179,6 +197,11 @@ void ZDebugGlobalEnableDebugViewFrames(BOOL enabled)
 		object = [object nextResponder];
 		
 	return ([object isKindOfClass:[UIViewController class]]) ? object : nil;
+	}
+
+- (void) setBackgroundColorPatternNamed:(NSString*)patternImageName
+	{
+	self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:patternImageName]];
 	}
 
 @end

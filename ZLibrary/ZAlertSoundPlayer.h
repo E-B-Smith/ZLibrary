@@ -21,7 +21,7 @@
 @interface ZAlertSoundPlayer : NSObject
 
 //	If filename is nil, the phone will vibrate.
-+ (ZAlertSoundPlayer*) alertSoundWithBundleFile:(NSString*)filename;
++ (ZAlertSoundPlayer*) alertSoundWithBundleResourceName:(NSString*)filename;
 - (BOOL) play;
 
 @end

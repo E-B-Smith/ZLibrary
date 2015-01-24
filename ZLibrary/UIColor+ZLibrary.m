@@ -3,7 +3,7 @@
 //  Search
 //
 //  Created by Edward Smith on 1/17/14.
-//  Copyright (c) 2014 Relcy, Inc. All rights reserved.
+//  Copyright (c) 2014 Edward Smith, All rights reserved.
 //
 
 
@@ -65,10 +65,12 @@
 	return result;
 	}
 
+
 + (UIColor*) colorWith255R:(NSInteger)red G:(NSInteger)green B:(NSInteger)blue
 	{
 	return [UIColor colorWithRed:(CGFloat)red/255.0 green:(CGFloat)green/255.0 blue:(CGFloat)blue/255.0 alpha:1.0];
 	}
+
 
 - (UIColor*) colorByBlendingWhite:(CGFloat)percent
 	{
@@ -77,6 +79,17 @@
 		return self;
 	CGFloat p = MAX(0.0, MIN(percent, 1.0));
 	UIColor *color = [UIColor colorWithRed:MIN(r+p, 1.0) green:MIN(g+p, 1.0) blue:MIN(b+p, 1.0) alpha:a];
+	return color;
+	}
+
+
+- (UIColor*) colorByBlendingBlack:(CGFloat)percent
+	{
+	CGFloat r=0,g=0,b=0,a=0;
+	if (![self  ZRed:&r green:&g blue:&b alpha:&a])
+		return self;
+	CGFloat p = MAX(0.0, MIN(percent, 1.0));
+	UIColor *color = [UIColor colorWithRed:MAX(r-p, 0.0) green:MAX(g-p, 0.0) blue:MAX(b-p, 0.0) alpha:a];
 	return color;
 	}
 

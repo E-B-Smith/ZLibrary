@@ -3,7 +3,7 @@
 //  Search
 //
 //  Created by Edward Smith on 1/29/14.
-//  Copyright (c) 2014 Relcy, Inc. All rights reserved.
+//  Copyright (c) 2014 Edward Smith, All rights reserved.
 //
 
 

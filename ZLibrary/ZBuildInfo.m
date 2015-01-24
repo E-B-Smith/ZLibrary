@@ -9,7 +9,7 @@
 //															  Tracks build time and version info.
 //																		 Edward Smith, March 2007
 //
-//								 -©- Copyright © 1996-2013 Edward Smith, all rights reserved. -©-
+//								 -©- Copyright © 1996-2014 Edward Smith, all rights reserved. -©-
 //
 //-----------------------------------------------------------------------------------------------
 

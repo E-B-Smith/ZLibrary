@@ -30,7 +30,10 @@
 void alertSoundCompletionProcedure(SystemSoundID soundID, void* alertSoundPlayer)
 	{
 	if (alertSoundPlayer)
+		{
+		AudioServicesRemoveSystemSoundCompletion(soundID);
 		[(__bridge ZAlertSoundPlayer*)alertSoundPlayer alertSoundFinished:soundID];
+		}
 	}
 
 
@@ -55,9 +58,6 @@ void alertSoundCompletionProcedure(SystemSoundID soundID, void* alertSoundPlayer
 			return self;
 			}
 		}
-		
-	error = AudioServicesAddSystemSoundCompletion(soundID, NULL, NULL, alertSoundCompletionProcedure, (__bridge void *)(self));
-	if (error) ZLog(@"Error setting sound completion: %d.", error);
 
 	return self;
 	}
@@ -68,7 +68,7 @@ void alertSoundCompletionProcedure(SystemSoundID soundID, void* alertSoundPlayer
 		AudioServicesDisposeSystemSoundID(soundID);
 	}
 
-+ (ZAlertSoundPlayer*) alertSoundWithBundleFile:(NSString *)filename
++ (ZAlertSoundPlayer*) alertSoundWithBundleResourceName:(NSString *)filename
 	{
 	NSURL* url = nil;
 	if (filename)
@@ -92,14 +92,17 @@ void alertSoundCompletionProcedure(SystemSoundID soundID, void* alertSoundPlayer
 	{
 	if (soundID)
 		{
-        self.keepAlive = self;
-		AudioServicesPlayAlertSound(soundID);	
-		return YES;
+		OSStatus error = AudioServicesAddSystemSoundCompletion(soundID, NULL, NULL, alertSoundCompletionProcedure, (__bridge void *)(self));
+		if (error)
+			ZLog(@"Error setting sound completion: %d.", error);
+		else
+			{
+	        self.keepAlive = self;
+			AudioServicesPlayAlertSound(soundID);
+			return YES;
+			}
 		}
-	else 
-		{
-		return NO;
-		}
+	return NO;
 	}
 
 - (void) alertSoundFinished:(SystemSoundID)soundID_

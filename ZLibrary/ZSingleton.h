@@ -1,10 +1,16 @@
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  ZSingleton.h
-//  ZLib-iPhone
+//																			   		 ZSingleton.h
+//																					 ZLibrary-Mac
 //
-//  Created by Edward Smith on 4/3/11.
-//  Copyright 2011 Edward Smith. All rights reserved.
+//								   								  A rigorous singleton base class
+//																	  Edward Smith, November 2008
 //
+//								 -©- Copyright © 1996-2014 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
 
 
 #import <Foundation/Foundation.h>

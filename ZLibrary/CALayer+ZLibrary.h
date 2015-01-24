@@ -1,10 +1,17 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  CALayer+ZLibrary.h
-//  Search
+//																			   CALayer+ZLibrary.h
+//																					 ZLibrary-iOS
 //
-//  Created by Edward Smith on 12/10/13.
-//  Copyright (c) 2013 Relcy, Inc. All rights reserved.
+//								   									   Useful CALayer catagories.
+//																	  Edward Smith, December 2013
 //
+//								 -©- Copyright © 1996-2014 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
 
 
 #import <QuartzCore/QuartzCore.h>

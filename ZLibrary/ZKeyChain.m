@@ -1,9 +1,9 @@
 //
 //  ZKeyChain.m
-//  Search
+//  ZLibrary
 //
 //  Created by Edward Smith on 4/24/14.
-//  Copyright (c) 2014 Relcy, Inc. All rights reserved.
+//  Copyright (c) 2014 Edward Smith, All rights reserved.
 //
 
 

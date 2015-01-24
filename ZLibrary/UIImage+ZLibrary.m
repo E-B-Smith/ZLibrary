@@ -3,7 +3,7 @@
 //  Search
 //
 //  Created by Edward Smith on 12/9/13.
-//  Copyright (c) 2013 Relcy, Inc. All rights reserved.
+//  Copyright (c) 2013 Edward Smith, All rights reserved.
 //
 
 
@@ -182,7 +182,7 @@
 			
     if (error)
 		{
-        ZLog(@"Error from convolution %ld", error);
+        ZLog(@"Error from convolution: %ld", error);
     	}
     
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
@@ -209,6 +209,28 @@
     return result;
 	}
 
+- (UIImage*) imageSliceAtIndex:(NSInteger)index size:(CGSize)size inset:(CGSize)inset
+	{
+	CGFloat columns = self.size.width  / size.width;
+
+	CGRect copyRect;
+	copyRect.size.width = size.width * self.scale;
+	copyRect.size.height = size.height * self.scale;
+	inset.height *= self.scale;
+	inset.width  *= self.scale;
+
+	copyRect.origin.x = (index % (NSInteger) columns) * copyRect.size.width;
+	copyRect.origin.y = (index / (NSInteger) columns) * copyRect.size.height;
+
+	copyRect = CGRectInset(copyRect, inset.width, inset.height);
+
+	CGImageRef cgImage = CGImageCreateWithImageInRect(self.CGImage, copyRect);
+	UIImage * imageSlice = [UIImage imageWithCGImage:cgImage];
+	CGImageRelease(cgImage);
+
+	return imageSlice;
+	}
+
 + (UIImage*) imageNamedR4:(NSString *)name;	//	Tries to load a retina 4 image first if available and appropriate.
 	{
 	if ([UIScreen mainScreen].bounds.size.height > 480.0)
@@ -222,4 +244,85 @@
 	return [UIImage imageNamed:name];
 	}
 
+/*
+- (UIImage*) imageTintedWithColor:(UIColor *)color
+	{
+	UIImage *image = nil;
+	CGColorSpaceRef colorSpace = NULL;
+	CGContextRef context = NULL;
+	
+	CGSize size = self.size;
+	size.height *= self.scale;
+	size.width *= self.scale;
+	CGRect rect = CGRectMake(0.0, 0.0, size.width, size.height);
+	colorSpace = CGColorSpaceCreateDeviceRGB();
+	if (!colorSpace) goto cleanup;
+	context = CGBitmapContextCreate(NULL, size.width, size.height, 8, 0, colorSpace, kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Big);
+	if (!context) goto cleanup;
+	
+//	CGContextScaleCTM(context, 1, -1);
+//	CGContextTranslateCTM(context, 0, -size.height);
+	CGContextSetFillColor(context, CGColorGetComponents(color.CGColor));
+	CGContextFillRect(context, rect);
+	CGContextSetBlendMode(context, kCGBlendModeOverlay);
+	CGContextDrawImage(context, rect, self.CGImage);
+
+	UIGraphicsPushContext(context);	
+	image = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsPopContext();
+	
+cleanup:
+	if (colorSpace) CGColorSpaceRelease(colorSpace);
+	if (context) CGContextRelease(context);
+	return image;
+	}
+*/
+
+- (UIImage*) imageTintedWithColor:(UIColor *)color
+	{
+	CGRect rect = CGRectMake(0.0, 0.0, self.size.width*self.scale, self.size.height*self.scale);
+	UIGraphicsBeginImageContextWithOptions(rect.size, NO, self.scale);
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	if (!context) return nil;
+	
+	//	Orient the image correctly -- 
+	CGContextScaleCTM(context, 1, -1);
+	CGContextTranslateCTM(context, 0, -rect.size.height);
+	
+	//	Set the color -- 
+	CGContextSetFillColorWithColor(context, color.CGColor);	
+	CGContextFillRect(context, rect);
+	
+	//	Blend the image -- 
+	CGContextSetBlendMode(context, kCGBlendModeDestinationIn);
+	CGContextDrawImage(context, rect, self.CGImage);
+
+	UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+
+	return image;
+	}
+
+- (UIImage*) imageWithSize:(CGSize)size
+	{
+	CGRect rect = CGRectMake(0.0, 0.0, size.width*self.scale, size.height*self.scale);
+	UIGraphicsBeginImageContextWithOptions(rect.size, NO, self.scale);
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	if (!context) return nil;
+	
+	//	Orient the image correctly -- 
+	CGContextScaleCTM(context, 1, -1);
+	CGContextTranslateCTM(context, 0, -rect.size.height);
+	
+	//	Set the color -- 
+	CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
+	CGContextFillRect(context, rect);
+	CGContextDrawImage(context, rect, self.CGImage);
+
+	UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+
+	return image;
+	}
+	
 @end

@@ -9,7 +9,7 @@
 //															  Tracks build time and version info.
 //																		 Edward Smith, March 2007
 //
-//								 -©- Copyright © 1996-2013 Edward Smith, all rights reserved. -©-
+//								 -©- Copyright © 1996-2014 Edward Smith, all rights reserved. -©-
 //
 //-----------------------------------------------------------------------------------------------
 
@@ -34,7 +34,10 @@
 //
 //		/usr/libexec/PlistBuddy -c "set :ZBuildInfoDate `date`" "${target}"
 //		echo "Updated build timestamp in ${target}"
-//		
+//
+//	(${PListBuddy} -c "delete :ZBuildInfoDate" "${target}") &> /dev/null
+//	${PListBuddy} -c "add :ZBuildInfoDate date `date`" "${target}"
+//
 //	The script must run after the 'Copy Bundle Resources' stage runs.
 //
 //	Add this as the input file:

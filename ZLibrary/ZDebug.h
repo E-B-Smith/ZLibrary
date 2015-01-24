@@ -1,6 +1,5 @@
 
 
-
 //-----------------------------------------------------------------------------------------------
 //
 //																						 ZDebug.h
@@ -115,78 +114,83 @@ extern "C" {
 #endif
 
 
-typedef void (*ZDebugMessageHandlerProcedurePtr)(NSString* debugString);
+typedef enum ZDebugLevel
+	{
+	 ZDebugLevelNone = 0
+	,ZDebugLevelDebug 
+	,ZDebugLevelAssert
+	,ZDebugLevelLog
+	,ZDebugLevelWarning
+	,ZDebugLevelError
+	}
+	ZDebugLevel;
+
+
+typedef void (*ZDebugMessageHandlerProcedurePtr)(ZDebugLevel level, NSString* debugString);
 
 
 #ifdef ZDEBUG	// -------------------------------------------------------------------------------
 
 	
-extern void ZDebugMessageProcedure(int debugLevel, const char* file, int lineNumber, NSString* message, ...);
-extern BOOL ZDebugAssertProcedure(bool condition, const char* file, int lineNumber, const char* conditionString, NSString* messageString);
+extern void ZDebugMessageProcedure(ZDebugLevel debugLevel, const char* file, int lineNumber, NSString* message, ...);
+extern BOOL ZDebugAssertProcedure(bool assertCondition, const char* file, int lineNumber, const char* conditionString, NSString* messageString);
 
 //	Default log message handlers --
-extern void ZDebugMessageHandlerOutputToLog(NSString* m);
-extern void ZDebugMessageHandlerOutputToFile(NSString* m);
+extern void ZDebugMessageHandlerOutputToLog(ZDebugLevel debugLevel, NSString* m);
+extern void ZDebugMessageHandlerOutputToFile(ZDebugLevel debugLevel, NSString* m);
 extern void ZDebugMessageHandlerOutputToFileInitializeWithOutputURL(NSURL* url);
 
-extern ZDebugMessageHandlerProcedurePtr ZDebugSetMessageHandler(ZDebugMessageHandlerProcedurePtr newHandler); //	Returns the previous handler.
+//	Returns the previous handler.
+extern ZDebugMessageHandlerProcedurePtr ZDebugSetMessageHandler(ZDebugMessageHandlerProcedurePtr newHandler);
 
-extern bool ZDebugEnableAssert(bool enable);													//	Returns previous enabled value.
-extern bool ZDebugAssertEnabled();
+extern bool ZDebugSetBreakOnAssertEnabled(bool enable);								//	Returns previous enabled value.
+extern bool ZDebugBreakOnAssertIsEnabled();
 
-extern bool ZDebugSetBoolean;
+extern bool ZDebugIsEnabled();
+extern bool ZDebugSetEnabled(bool onOff);											//	Returns previous state of ZDebugIsEnabled().
+extern void ZDebugSetOptions(NSString* debugOptions);								//	Set file level debug messages on or off.
 
-extern bool ZDebugSet(bool onOff);																//	Returns previous state of ZDebugSet().
-extern void ZDebugSetOptions(NSString* debugOptions);											//	Set file level debug messages on or off.
 
-#define ZDebugLevelOff							0
-#define ZDebugLevelOn							1
-#define ZDebugLevelAssert						2
-
-#define ZDebug(...)								do { ZDebugMessageProcedure(ZDebugSetBoolean, __FILE__, __LINE__, __VA_ARGS__); } while (0)
+#define ZDebug(...)									do { ZDebugMessageProcedure(ZDebugLevelDebug, __FILE__, __LINE__, __VA_ARGS__); } while (0)
 													 
 
 
-#define ZDebugAssert(condition)					do { BOOL b = ZDebugAssertProcedure((condition), __FILE__, __LINE__, #condition, nil); \
-													if (ZDebugAssertEnabled() && !b) ZDebugBreakPoint(); } \
-													while (0)
+#define ZDebugAssert(condition)						do { BOOL b = ZDebugAssertProcedure((condition), __FILE__, __LINE__, #condition, nil); \
+														if (ZDebugBreakOnAssertIsEnabled() && !b) ZDebugBreakPoint(); } \
+														while (0)
 
-#define ZDebugAssertWithMessage(condition, message)	\
-												do { BOOL b = ZDebugAssertProcedure((condition), __FILE__, __LINE__, #condition, message); \
-													if (ZDebugAssertEnabled() && !b) ZDebugBreakPoint(); } \
-													while (0)
+#define ZDebugAssertWithMessage(condition, message)	do { BOOL b = ZDebugAssertProcedure((condition), __FILE__, __LINE__, #condition, message); \
+														if (ZDebugBreakOnAssertIsEnabled() && !b) ZDebugBreakPoint(); } \
+														while (0)
 
-#define ZDebugLogFunctionEntry()				ZDebug(@"%s", __FUNCTION__)
+#define ZDebugLogFunctionName() 					ZDebug(@"%s", __FUNCTION__)
 
 
-#define ZDebugBreakMessage(...)					do { ZDebugMessageProcedure(ZDebugSetBoolean, __FILE__, __LINE__, __VA_ARGS__); \
-													ZDebugBreakPoint(); } \
-													while (0)
+#define ZDebugBreakPointMessage(...)				do { ZDebugMessageProcedure(ZDebugIsEnabled(), __FILE__, __LINE__, __VA_ARGS__); \
+														ZDebugBreakPoint(); } \
+														while (0)
 				
-#define ZDebugBreakPoint()						raise(SIGINT)
+#define ZDebugBreakPoint()							raise(SIGINT)
 
 
 #else	//	not ZDEBUG ---------------------------------------------------------------------------
 
 
-#define ZDebugMessageProcedure(debugOff, file, lineNumber, message, ...)		do {} while (0)
+#define ZDebugMessageProcedure(debugLevel, file, lineNumber, message, ...)		do {} while (0)
 #define ZDebugAssertProcedure(condition, file, lineNumber, conditionString)		do {} while (0)
 
-#define ZDebugSetMessageHandler(NewHandler)										NULL
-#define ZDebugEnableAssert(Enable)												false
+#define ZDebugSetMessageHandler(NewHandler)			NULL
+#define ZDebugSetAssertEnabled(Enable)				false
 
-#define ZDebugSet(OnOff)														false
-#define ZDebugSetOptions(debugOptions)											/*true*/
-
-#define ZDebugLevelOff								0
-#define ZDebugLevelOn								1
-#define ZDebugLevelAssert							2
+#define ZDebugIsEnabled()							false
+#define ZDebugSetEnabled(OnOff)						false
+#define ZDebugSetOptions(debugOptions)				/*true*/
 
 #define ZDebug(...)									do {} while (0)
-#define ZDebugLogFunctionEntry()					do {} while (0)
+#define ZDebugLogFunctionName()						do {} while (0)
 #define ZDebugAssert(Condition)						do {} while (0)
 #define ZDebugAssertWithMessage(condition, message)	do {} while (0)
-#define ZDebugBreakMessage(...)						do {} while (0)
+#define ZDebugBreakPointMessage(...)				do {} while (0)
 #define ZDebugBreakPoint()							do {} while (0)
 
 #endif	//	ZDEBUG --------------------------------------------------------------------------------

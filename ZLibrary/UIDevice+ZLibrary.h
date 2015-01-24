@@ -3,7 +3,7 @@
 //  Search
 //
 //  Created by Edward Smith on 1/29/14.
-//  Copyright (c) 2014 Relcy, Inc. All rights reserved.
+//  Copyright (c) 2014 Edward Smith, All rights reserved.
 //
 
 //	Based largely on code by Erica Sadun, http://ericasadun.com
@@ -73,25 +73,33 @@ UIDeviceIDMacro( "iPad3,5",		"iPad 4 GSM",			"P102AP")
 UIDeviceIDMacro( "iPad3,6",		"iPad 4 GSM+CDMA",		"P103AP")
 UIDeviceIDMacro( "iPad4,1",		"iPad Air Wi-Fi",		"J71AP" )
 UIDeviceIDMacro( "iPad4,2",		"iPad Air Cell",		"J72AP" )
-UIDeviceIDMacro( "iPad2,5",		"iPad mini 1G Wi-Fi",	"P105AP")
-UIDeviceIDMacro( "iPad2,6",		"iPad mini 1G GSM",		"P106AP")
-UIDeviceIDMacro( "iPad2,7",		"iPad mini 1G CDMA",	"P107AP")
-UIDeviceIDMacro( "iPad4,4",		"iPad mini 2G Wi-Fi",	"J85AP" )
-UIDeviceIDMacro( "iPad4,5",		"iPad mini 2G Cell",	"J86AP" )
+UIDeviceIDMacro( "iPad2,5",		"iPad Mini 1G Wi-Fi",	"P105AP")
+UIDeviceIDMacro( "iPad2,6",		"iPad Mini 1G GSM",		"P106AP")
+UIDeviceIDMacro( "iPad2,7",		"iPad Mini 1G CDMA",	"P107AP")
+UIDeviceIDMacro( "iPad4,4",		"iPad Mini 2G Wi-Fi",	"J85AP" )
+UIDeviceIDMacro( "iPad4,5",		"iPad Mini 2G Cell",	"J86AP" )
 
 UIDeviceIDMacro( "iPhone1,1",	"iPhone 2G",			"M68AP" )
 UIDeviceIDMacro( "iPhone1,2",	"iPhone 3G",			"N82AP" )
+
 UIDeviceIDMacro( "iPhone2,1",	"iPhone 3GS",			"N88AP" )
+
 UIDeviceIDMacro( "iPhone3,1",	"iPhone 4",				"N90AP" )
 UIDeviceIDMacro( "iPhone3,2",	"iPhone 4 A",			"N90BAP")
 UIDeviceIDMacro( "iPhone3,3",	"iPhone 4 CDMA",		"N92AP" )
+
 UIDeviceIDMacro( "iPhone4,1",	"iPhone 4S",			"N94AP" )
+
 UIDeviceIDMacro( "iPhone5,1",	"iPhone 5 GSM",			"N41AP" )
 UIDeviceIDMacro( "iPhone5,2",	"iPhone 5 GSM+CDMA",	"N42AP" )
 UIDeviceIDMacro( "iPhone5,3",	"iPhone 5c GSM",		"N48AP" )
 UIDeviceIDMacro( "iPhone5,4",	"iPhone 5c Global",		"N49AP" )
+
 UIDeviceIDMacro( "iPhone6,1",	"iPhone 5s GSM",		"N51AP" )
 UIDeviceIDMacro( "iPhone6,2",	"iPhone 5s Global",		"N53AP" )
+
+UIDeviceIDMacro( "iPhone7,1",	"iPhone 6+ Global",		"N56AP" )
+UIDeviceIDMacro( "iPhone7,2",	"iPhone 6 Global",		"N61AP" )
 
 UIDeviceIDMacro( "iPod1,1",		"iPod touch 1G",		"N45AP" )
 UIDeviceIDMacro( "iPod2,1",		"iPod touch 2G",		"N72AP" )

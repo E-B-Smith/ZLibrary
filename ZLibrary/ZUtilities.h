@@ -3,7 +3,7 @@
 //  Search
 //
 //  Created by Edward Smith on 11/6/13.
-//  Copyright (c) 2013 Relcy, Inc. All rights reserved.
+//  Copyright (c) 2013 Edward Smith, All rights reserved.
 //
 
 
@@ -85,8 +85,10 @@ typedef enum UIViewContentModeExtension
 extern CGRect ZRectForContentMode(UIViewContentMode mode, CGRect idealRect, CGRect boundsRect);
 #endif 
 
+//
 //	
-//	Performing blocks on threads --
+//	Performing blocks and threads --
+//
 //
 
 
@@ -125,9 +127,9 @@ static inline void ZSleepForSeconds(NSTimeInterval seconds)
 //	the same sequence of 'random' numbers are produced.  Great for testing,
 //	bad for cryptography.
 
-extern void     ZSequentialRandSeed(uint64_t seed);	//	If 0 is passed as a seed, a seed is choosen from epoch time.
-extern uint64_t ZSequentialRandSeedValue();			//	Returns the value used as a seed.
-extern double   ZSequentialRand();					//	Return a random double in range of [0.0, 1.0).
+extern void     ZSequentialRandSetSeed(uint64_t seed);	//	If -1 is passed as a seed, a seed is choosen from epoch time.
+extern uint64_t ZSequentialRandGetSeed();				//	Returns the value used as a seed.
+extern double   ZSequentialRand();						//	Return a random double in range of [0.0, 1.0).
 
 
 //
@@ -139,11 +141,14 @@ extern double   ZSequentialRand();					//	Return a random double in range of [0.
 #endif
 
 
-#define ZEmptyStringIfNil(nsstring)	(nsstring)?:@""
+#define ZEmptyStringIfNil(nsstring)			(nsstring)?:@""
+#define ZRange(value, minValue, maxValue)	MAX(MIN(value, maxValue), minValue)
+
+static inline CGFloat ZSignf(CGFloat n)		{ return (n < 0.0) ? -1.0 : 1.0; }
 
 
 //
-//	Map stuff --
+//	Map functions --
 //
 
 

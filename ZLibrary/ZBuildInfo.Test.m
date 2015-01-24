@@ -1,10 +1,17 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  ZBuildInfo.Test.m
-//  Search
+//																				ZBuildInfo.Test.m
+//																	 ZLibrary for Mac and iPhone.
 //
-//  Created by Edward Smith on 11/21/13.
-//  Copyright (c) 2013 Relcy, Inc. All rights reserved.
+//															  Tracks build time and version info.
+//																		 Edward Smith, March 2007
 //
+//								 -©- Copyright © 1996-2014 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
 
 
 #import <XCTest/XCTest.h>
@@ -32,6 +39,8 @@
 	XCTAssertTrue(NSOrderedSame == [ZBuildInfo compareVersionString:@"1.2.1" withVersionString:@"1.2.1"]);
 	XCTAssertTrue(NSOrderedAscending == [ZBuildInfo compareVersionString:@"1.2.1" withVersionString:@"1.2.2"]);
 	XCTAssertTrue(NSOrderedDescending == [ZBuildInfo compareVersionString:@"1.2.2" withVersionString:@"1.2.1"]);
+	XCTAssertTrue(NSOrderedSame == [ZBuildInfo compareVersionString:@"1.2.1.3" withVersionString:@"1.2.1.3"]);
+	XCTAssertTrue(NSOrderedAscending == [ZBuildInfo compareVersionString:@"1.2.1" withVersionString:@"1.2.1.3"]);
 
 	XCTAssertTrue(NSOrderedSame == [ZBuildInfo compareVersionString:@"1.020.1" withVersionString:@"1.20.1"]);
 	XCTAssertTrue(NSOrderedAscending == [ZBuildInfo compareVersionString:@"1.02.1" withVersionString:@"1.020.2"]);

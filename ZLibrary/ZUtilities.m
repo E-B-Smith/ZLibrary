@@ -3,7 +3,7 @@
 //  Search
 //
 //  Created by Edward Smith on 11/6/13.
-//  Copyright (c) 2013 Relcy, Inc. All rights reserved.
+//  Copyright (c) 2013 Edward Smith, All rights reserved.
 //
 
 
@@ -144,12 +144,12 @@ CGRect ZRectForContentMode(UIViewContentMode mode, CGRect idealRect, CGRect boun
 
 static uint64_t ZSequentialRandSeedInitialValue = (uint64_t) -1;
 
-uint64_t ZSequentialRandSeedValue()
+uint64_t ZSequentialRandGetSeed()
 	{
 	return ZSequentialRandSeedInitialValue;
 	}
 
-void ZSequentialRandSeed(uint64_t seed)
+void ZSequentialRandSetSeed(uint64_t seed)
 	{
 	if (seed == (uint64_t)-1)
 		seed = rint(time(NULL) * 555.0);
@@ -167,6 +167,8 @@ void ZSequentialRandSeed(uint64_t seed)
 double ZSequentialRand()
 	{
 	#ifndef __clang_analyzer__
-	return drand48();
+	  return drand48();
+	#else
+	  return 1.0;
 	#endif
 	}
