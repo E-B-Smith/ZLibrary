@@ -34,13 +34,13 @@ Subtrees
 Add Tree:
 
 		git remote add ZLibrary ssh://git@violent.blue/~/ZLibrary.git
-		git subtree add --prefix=External ZLibrary master
+		git subtree add --prefix=.../External/ZLibrary ZLibrary master
 
 Pull:
 
-		git subtree pull --prefix=External --squash ZLibrary master
+		git subtree pull --prefix=.../External/Library --squash ZLibrary master
 
 Push:
 
-		git subtree push --prefix=External ZLibrary master
+		git subtree push --prefix=.../External/ZLibrary ZLibrary master
 
