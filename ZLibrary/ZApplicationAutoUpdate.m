@@ -17,6 +17,7 @@
 #import "ZApplicationAutoUpdate.h"
 #import "ZDebug.h"
 #import "ZBuildInfo.h"
+#import "ZAlertView.h"
 #import "UIDevice+ZLibrary.h"
 
 
@@ -147,7 +148,8 @@ static const NSInteger kRCAAlertTagID = 0xfeed;
 				//	If the manifest has a URL for the new package and the
 				//	new version is greater than this version, then update --
 
-				NSInteger order = [ZBuildInfo compareVersionString:oldVersion withVersionString:self.updateVersion];
+				NSInteger order =
+					[ZBuildInfo compareVersionString:oldVersion withVersionString:self.updateVersion];
 				if (order == NSOrderedAscending)
 					{
 					NSURL *url = [NSURL URLWithString:urlString];
@@ -183,7 +185,8 @@ static const NSInteger kRCAAlertTagID = 0xfeed;
 		self.completionHandler(self);
 	}
 	
-- (void) checkForUpdatesAtURLString:(NSString*)urlString completionHandler:(void (^)(ZApplicationAutoUpdate*))handler
+- (void) checkForUpdatesAtURLString:(NSString*)urlString
+			completionHandler:(void (^)(ZApplicationAutoUpdate*))handler
 	{
 	self.completionHandler = handler;
 	
@@ -207,10 +210,36 @@ static const NSInteger kRCAAlertTagID = 0xfeed;
 	NSString* urlString = 
 		[NSString stringWithFormat:@"itms-services://?action=download-manifest&url=%@", updateManifestURL];
 	NSURL* url = [NSURL URLWithString:urlString];
-	[[UIApplication sharedApplication] openURL:url];
+	if ([[UIApplication sharedApplication] openURL:url])
+		{
+		[ZAlertView showAlertWithTitle:nil
+			message:@"Your app update is downloading to your home screen."
+			dismissBlock:
+			^ (ZAlertView *alertView, NSInteger dismissButtonIndex)
+				{
+				if ([[UIApplication sharedApplication] respondsToSelector:@selector(suspend)])
+					{
+					ZDebug(@"Suspending for install.");
+					[[UIApplication sharedApplication] performSelector:@selector(suspend)];
+					}
+				else
+					ZDebug(@"Suspend not supported!");
+				}
+			cancelButtonTitle:@"OK"
+			otherButtonTitles:nil];
+		}
+	else
+		{
+		[ZAlertView showAlertWithTitle:nil
+			message:@"Sorry, your app can't be updated right now."
+			dismissBlock:nil
+			cancelButtonTitle:@"OK"
+			otherButtonTitles:nil];
+		}
 	}
 
-- (void) askInstallWithForceUpdate:(BOOL)forcedUpdate completion:(void (^) (BOOL willUpdate))askUpdateCompletionHandler;
+- (void) askInstallWithForceUpdate:(BOOL)forcedUpdate
+			completion:(void (^) (BOOL willUpdate))askUpdateCompletionHandler;
 	{
 	self.alert.delegate = nil;
 	[self.alert dismissWithClickedButtonIndex:0 animated:NO];
@@ -229,11 +258,15 @@ static const NSInteger kRCAAlertTagID = 0xfeed;
 		okTitle = nil;
 		cancelTitle = @"OK";
 		}
-		
+
+	NSString * message =
+		[NSString stringWithFormat:@"A new version of\n%@ is available.\nUpdate your application?",
+			self.updateTitle];
+
 	self.alert =
 		[[UIAlertView alloc]
 			initWithTitle:@"Application Update"
-			message:[NSString stringWithFormat:@"A new version of\n%@ is available.\nUpdate your application?", self.updateTitle]
+			message:message
 			delegate:self 
 			cancelButtonTitle:cancelTitle
 			otherButtonTitles:okTitle, nil];
