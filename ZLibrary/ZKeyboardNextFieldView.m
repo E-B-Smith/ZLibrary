@@ -18,7 +18,7 @@
 #import "ZKeyboardNextFieldView.h"
 
 
-static NSString * UIKitLocalizedString(NSString *string)
+static NSString * UIKitLocalizedString(NSString *string)	//	Not sure why this isn't already defined?
 	{
 	NSBundle *UIKitBundle = [NSBundle bundleForClass:[UIApplication class]];
 	return UIKitBundle ? [UIKitBundle localizedStringForKey:string value:string table:nil] : string;
@@ -192,6 +192,7 @@ static NSString * UIKitLocalizedString(NSString *string)
 	self.responders = nil;
 	[self updateSegmentedControl];
 	}
+
 
 #pragma mark - Actions
 
