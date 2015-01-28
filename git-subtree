@@ -38,6 +38,7 @@ while true; do
     # pwd
     node=$(basename `pwd`)
     if [[ -d ./.git ]]; then
+        gitpath=${gitpath%%/}
         git subtree $verb --prefix="$gitpath" $option ZLibrary master
         exit 0
     else
