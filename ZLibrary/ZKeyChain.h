@@ -19,4 +19,7 @@
 + (id) securedPasswordValueForPasswordKey:(NSString*)passwordKey
 			service:(NSString*)service;
 
++ (void) deleteSecuredPasswordValueForPasswordKey:(NSString*)passwordKey 
+			service:(NSString*)service;
+			
 @end

@@ -151,22 +151,22 @@ extern bool ZDebugSetEnabled(bool onOff);											//	Returns previous state of
 extern void ZDebugSetOptions(NSString* debugOptions);								//	Set file level debug messages on or off.
 
 
-#define ZDebug(...)									do { ZDebugMessageProcedure(ZDebugLevelDebug, __FILE__, __LINE__, __VA_ARGS__); } while (0)
+#define ZDebug(...)									do  { ZDebugMessageProcedure(ZDebugLevelDebug, __FILE__, __LINE__, __VA_ARGS__); } while (0)
 													 
+#define ZDebugLogMethod()							ZDebug(@"%@",  NSStringFromSelector(_cmd));
 
-
-#define ZDebugAssert(condition)						do { BOOL b = ZDebugAssertProcedure((condition), __FILE__, __LINE__, #condition, nil); \
+#define ZDebugAssert(condition)						do  { BOOL b = ZDebugAssertProcedure((condition), __FILE__, __LINE__, #condition, nil); \
 														if (ZDebugBreakOnAssertIsEnabled() && !b) ZDebugBreakPoint(); } \
 														while (0)
 
-#define ZDebugAssertWithMessage(condition, message)	do { BOOL b = ZDebugAssertProcedure((condition), __FILE__, __LINE__, #condition, message); \
+#define ZDebugAssertWithMessage(condition, message)	do  { BOOL b = ZDebugAssertProcedure((condition), __FILE__, __LINE__, #condition, message); \
 														if (ZDebugBreakOnAssertIsEnabled() && !b) ZDebugBreakPoint(); } \
 														while (0)
 
 #define ZDebugLogFunctionName() 					ZDebug(@"%s", __FUNCTION__)
 
 
-#define ZDebugBreakPointMessage(...)				do { ZDebugMessageProcedure(ZDebugIsEnabled(), __FILE__, __LINE__, __VA_ARGS__); \
+#define ZDebugBreakPointMessage(...)				do  { ZDebugMessageProcedure(ZDebugLevelError, __FILE__, __LINE__, __VA_ARGS__); \
 														ZDebugBreakPoint(); } \
 														while (0)
 				
@@ -187,6 +187,7 @@ extern void ZDebugSetOptions(NSString* debugOptions);								//	Set file level d
 #define ZDebugSetOptions(debugOptions)				/*true*/
 
 #define ZDebug(...)									do {} while (0)
+#define ZDebugLogMethod()							do {} while (0)
 #define ZDebugLogFunctionName()						do {} while (0)
 #define ZDebugAssert(Condition)						do {} while (0)
 #define ZDebugAssertWithMessage(condition, message)	do {} while (0)
