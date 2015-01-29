@@ -151,11 +151,16 @@ static inline CGFloat ZSignf(CGFloat n)		{ return (n < 0.0) ? -1.0 : 1.0; }
 //	Map functions --
 //
 
+//	Locations --
+
+extern CLLocationCoordinate2D LocationCoordinateFromNSString(NSString*string);
+extern NSString* NSStringFromLocationCoordinate(CLLocationCoordinate2D location);
 
 MKMapRect MKMapRectFromCoordinateRegion(MKCoordinateRegion region);
 BOOL MKLocationCoordinate2DIsValid(CLLocationCoordinate2D coordinate);
 
 extern MKCoordinateRegion MKCoordinateRegionZero;
+extern CLLocationCoordinate2D CLLocationCoordinateInvalid;
 
 MKCoordinateRegion MKBoundingRegionOfAnnotations(NSArray* annotations);
 

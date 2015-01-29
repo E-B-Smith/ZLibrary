@@ -167,10 +167,13 @@ extern void ZDebugSetOptions(NSString* debugOptions);								//	Set file level d
 
 
 #define ZDebugBreakPointMessage(...)				do  { ZDebugMessageProcedure(ZDebugLevelError, __FILE__, __LINE__, __VA_ARGS__); \
+														ZDebugFlushMessages(); \
 														ZDebugBreakPoint(); } \
 														while (0)
 				
 #define ZDebugBreakPoint()							raise(SIGINT)
+
+#define ZDebugFlushMessages()						do {} while (0)
 
 
 #else	//	not ZDEBUG ---------------------------------------------------------------------------
@@ -193,6 +196,7 @@ extern void ZDebugSetOptions(NSString* debugOptions);								//	Set file level d
 #define ZDebugAssertWithMessage(condition, message)	do {} while (0)
 #define ZDebugBreakPointMessage(...)				do {} while (0)
 #define ZDebugBreakPoint()							do {} while (0)
+#define ZDebugFlushMessages()						do {} while (0)
 
 #endif	//	ZDEBUG --------------------------------------------------------------------------------
 

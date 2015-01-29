@@ -65,6 +65,7 @@
 				#undef ignore_id
 				
 				default:
+					ZDebugBreakPointMessage(@"Format not handled: %c", type);
 					[NSException raise:NSInvalidArgumentException format:@"Format not handled: %c", type];
 					return;
 				}

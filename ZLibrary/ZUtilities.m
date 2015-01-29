@@ -67,7 +67,33 @@ MKCoordinateRegion MKBoundingRegionOfAnnotations(NSArray* annotations)
 	return region;
 	}
 
+CLLocationCoordinate2D CLLocationCoordinateInvalid = { -360.0, -360.0 };
 
+
+CLLocationCoordinate2D LocationCoordinateFromNSString(NSString*string)
+	{
+	double lat,lng;
+	CLLocationCoordinate2D location = CLLocationCoordinateInvalid;
+	if (!string) return location;
+	NSScanner * s = [NSScanner scannerWithString:string];
+	[s scanCharactersFromSet:[NSCharacterSet whitespaceAndNewlineCharacterSet] intoString:nil];
+	[s scanString:@"(" intoString:nil];
+	if (![s scanDouble:&lat])
+		return location;
+	[s scanCharactersFromSet:[NSCharacterSet whitespaceAndNewlineCharacterSet] intoString:nil];
+	[s scanString:@"," intoString:nil];
+	[s scanCharactersFromSet:[NSCharacterSet whitespaceAndNewlineCharacterSet] intoString:nil];
+	if (![s scanDouble:&lng])
+		return location;
+	location.latitude = lat;
+	location.longitude = lng;
+	return location;
+	}
+	
+NSString* NSStringFromLocationCoordinate(CLLocationCoordinate2D location)
+	{
+	return [NSString stringWithFormat:@"(%f, %f)", location.latitude, location.longitude];
+	}
 
 CGRect ZRectForContentMode(UIViewContentMode mode, CGRect idealRect, CGRect boundsRect)
 	{
