@@ -124,6 +124,11 @@
 	return resultString;
 	}
 
+- (NSString*) stringByTrimmingWhiteSpace
+	{
+	return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	}
+	
 - (NSString*) stringByEncodingJSONCharacters
 	{
 	NSCharacterSet* badCharacters = [NSCharacterSet characterSetWithCharactersInString:@"\n\t\r\b\"\'&\f\\"];
