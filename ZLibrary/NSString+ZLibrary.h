@@ -29,6 +29,7 @@
 - (NSString*) stringByStrippingCharactersInSet:(NSCharacterSet*)characterSet;
 - (NSString*) stringByKeepingCharactersInSet:(NSCharacterSet*)characterSet;
 - (NSString*) stringByFormattingAsPhoneNumberAndDeletingCharacters:(BOOL)deleting;
+- (NSString*) stringByTrimmingWhiteSpace;
 
 - (NSString*) formatAsPhoneNumberWithBackspace:(BOOL)backspace;
 

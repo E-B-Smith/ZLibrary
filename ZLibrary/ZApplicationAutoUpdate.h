@@ -24,13 +24,15 @@
 
 @property (nonatomic, strong, readonly) NSError* error;
 
-@property (nonatomic, copy) NSString* updateVersion;
 @property (nonatomic, copy) NSString* updateTitle;
+@property (nonatomic, copy) NSString* updateVersion;
 @property (nonatomic, copy) NSString* updateManifestURL;
 
 - (id)   init;
-- (void) checkForUpdatesAtURLString:(NSString*)string completionHandler:(void (^) (ZApplicationAutoUpdate*))completionHandler;
-- (void) askInstallWithForceUpdate:(BOOL)forcedUpdate completion:(void (^) (BOOL willUpdate))completionHandler;
+- (void) checkForUpdatesAtURLString:(NSString*)string
+			completionHandler:(void (^) (ZApplicationAutoUpdate*))completionHandler;
+- (void) askInstallWithForceUpdate:(BOOL)forcedUpdate
+			completion:(void (^) (BOOL willUpdate))completionHandler;
 - (void) installUpdate;
 
 + (void) checkForUpatesAtURLString:(NSString*)URLString forceUpdate:(BOOL)forceUpdate;

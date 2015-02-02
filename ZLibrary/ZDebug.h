@@ -23,7 +23,7 @@
 //		- Include ZDebug.h and ZDebug.m in your project.
 //
 //		- Define the compile time ZDEBUG in the compiler settings.
-//			
+//
 //			If ZDEBUG is defined in the compiler settings, debug code is included.
 //
 //			If ZDEBUG is not defined, all the debug code is stripped from the compiled
@@ -33,7 +33,7 @@
 //
 //		- Use the ZDebugMessage, ZDebugAssert, ZDebugBreakPoint defines as needed.
 //
-//	By default, no debug messages are emitted until they are enabled.  They can be 
+//	By default, no debug messages are emitted until they are enabled.  They can be
 //	enabled by:
 //
 //		- Programatically, by using the ZDebugSet(true) function.
@@ -45,7 +45,7 @@
 //		- Using the ZDebugSetOptions() function at run time.
 //
 //	The priority is:
-//	
+//
 //	ZDebugSet(true) turns all debug messages on until ZDebugSet(false) is called.
 //	ZDebugSetOptions() at run time overrides ZDebug set in the preferences
 //	overides ZDebug set in the environmental varible.
@@ -61,13 +61,13 @@
 //		- To turn on all debugging information at run time:
 //			Set environmental variable 'ZDebug' to 'AllOn', e.g.: ZDebug=AllOn
 //			or ZDebugSetOptions(@"AllOn");
-//		
+//
 //		- To turn off all debugging information at run time:
 //			Set environmental variable 'ZDebug' to 'AllOff', e.g.: ZDebug=AllOff
 //			or ZDebugSetOptions(@"AllOff");
 //
 //		- To turn on file level debugging at run time:
-//			Set environmental varible 'ZDebug' to a list of files, 
+//			Set environmental varible 'ZDebug' to a list of files,
 //			e.g.:  ZDebug=Controller.m,FileView.m
 //			or ZDebugSetOptions(@"Controller.m,FileView.m");
 //
@@ -82,11 +82,11 @@
 //	Set NSZombieEnabled to YES to enable zombies to help catch the referencing of released objects.
 //	Set NSAutoreleaseFreedObjectCheckEnabled to YES to catch autorelease problems.
 //	Set MallocStackLoggingNoCompact to YES to track and save all memory allocations. Memory intensive.
-//	
+//
 //	Check NSDebug.h for more debug switches.  Check Technical Note TN2124 and TN2239 for more info.
 //
-//	Good exception breakpoints to set: 
-//	
+//	Good exception breakpoints to set:
+//
 //		objc_exception_throw
 //		NSInternalInconsistencyException
 //
@@ -117,7 +117,7 @@ extern "C" {
 typedef enum ZDebugLevel
 	{
 	 ZDebugLevelNone = 0
-	,ZDebugLevelDebug 
+	,ZDebugLevelDebug
 	,ZDebugLevelAssert
 	,ZDebugLevelLog
 	,ZDebugLevelWarning
@@ -131,7 +131,7 @@ typedef void (*ZDebugMessageHandlerProcedurePtr)(ZDebugLevel level, NSString* de
 
 #ifdef ZDEBUG	// -------------------------------------------------------------------------------
 
-	
+
 extern void ZDebugMessageProcedure(ZDebugLevel debugLevel, const char* file, int lineNumber, NSString* message, ...);
 extern BOOL ZDebugAssertProcedure(bool assertCondition, const char* file, int lineNumber, const char* conditionString, NSString* messageString);
 
@@ -152,7 +152,7 @@ extern void ZDebugSetOptions(NSString* debugOptions);								//	Set file level d
 
 
 #define ZDebug(...)									do  { ZDebugMessageProcedure(ZDebugLevelDebug, __FILE__, __LINE__, __VA_ARGS__); } while (0)
-													 
+
 #define ZDebugLogMethod()							ZDebug(@"%@",  NSStringFromSelector(_cmd));
 
 #define ZDebugAssert(condition)						do  { BOOL b = ZDebugAssertProcedure((condition), __FILE__, __LINE__, #condition, nil); \
@@ -167,10 +167,13 @@ extern void ZDebugSetOptions(NSString* debugOptions);								//	Set file level d
 
 
 #define ZDebugBreakPointMessage(...)				do  { ZDebugMessageProcedure(ZDebugLevelError, __FILE__, __LINE__, __VA_ARGS__); \
+														ZDebugFlushMessages(); \
 														ZDebugBreakPoint(); } \
 														while (0)
-				
+
 #define ZDebugBreakPoint()							raise(SIGINT)
+
+#define ZDebugFlushMessages()						do {} while (0)
 
 
 #else	//	not ZDEBUG ---------------------------------------------------------------------------
@@ -193,6 +196,7 @@ extern void ZDebugSetOptions(NSString* debugOptions);								//	Set file level d
 #define ZDebugAssertWithMessage(condition, message)	do {} while (0)
 #define ZDebugBreakPointMessage(...)				do {} while (0)
 #define ZDebugBreakPoint()							do {} while (0)
+#define ZDebugFlushMessages()						do {} while (0)
 
 #endif	//	ZDEBUG --------------------------------------------------------------------------------
 
