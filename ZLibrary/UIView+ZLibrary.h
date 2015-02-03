@@ -43,4 +43,6 @@ extern void ZDebugGlobalEnableDebugViewFrames(BOOL enabled);
 
 - (UIViewController*) viewController;
 
+- (void) removeAllSubviews;
+
 @end

@@ -25,4 +25,6 @@
 - (void) addLineFromPoint:(CGPoint)point1 toPoint:(CGPoint)point2 color:(CGColorRef)color;
 - (void) removeLine;
 
+- (void) removeAllSublayers;
+
 @end

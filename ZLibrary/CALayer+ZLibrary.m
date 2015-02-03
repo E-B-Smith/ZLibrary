@@ -78,4 +78,10 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 	[lineLayer removeFromSuperlayer];
 	}
 
+- (void) removeAllSublayers
+	{
+	NSArray * sv = self.sublayers.copy;
+	for (CALayer*v in sv) [v removeFromSuperlayer];
+	}
+
 @end

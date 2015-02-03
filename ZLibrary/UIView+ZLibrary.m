@@ -204,4 +204,10 @@ void ZDebugGlobalEnableDebugViewFrames(BOOL enabled)
 	self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:patternImageName]];
 	}
 
+- (void) removeAllSubviews
+	{
+	NSArray * sv = self.subviews.copy;
+	for (UIView*v in sv) [v removeFromSuperview];
+	}
+
 @end
