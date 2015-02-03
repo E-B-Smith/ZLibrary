@@ -135,18 +135,18 @@
 		}
 	}
 
-static BOOL globalViewFramesAreEnabled = NO;
+static BOOL globalDebugViewFramesAreEnabled = NO;
 
 void ZDebugGlobalEnableDebugViewFrames(BOOL enabled)
 	{
-	globalViewFramesAreEnabled = enabled;
+	globalDebugViewFramesAreEnabled = enabled;
 	}
 
-- (void) setShowSubviewDebugFrames:(BOOL)on
+- (void) setShowDebugSubviewFrames:(BOOL)on
 	{
 	#if defined(ZDEBUG)
 	
-	if (!(on && globalViewFramesAreEnabled)) return;
+	if (!(on && globalDebugViewFramesAreEnabled)) return;
 	[self applyBlockToSubviewHeirarchy:
 		^ (UIView *subview) { subview.showDebugFrame = YES; }];
 	
@@ -180,7 +180,7 @@ void ZDebugGlobalEnableDebugViewFrames(BOOL enabled)
 	{
 	#if defined(ZDEBUG)
 	
-	if (!(on && globalViewFramesAreEnabled)) return;
+	if (!(on && globalDebugViewFramesAreEnabled)) return;
 	self.layer.borderColor = self.nextDebugColor.CGColor;
 	self.layer.borderWidth = 1.0;
 

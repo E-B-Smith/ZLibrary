@@ -37,7 +37,7 @@ extern void ZDebugGlobalEnableDebugViewFrames(BOOL enabled);
 
 - (UIColor*) nextDebugColor;
 - (void) setShowDebugFrame:(BOOL)on;
-- (void) setShowSubviewDebugFrames:(BOOL)on;
+- (void) setShowDebugSubviewFrames:(BOOL)on;
 
 - (void) setBackgroundColorPatternNamed:(NSString*)name;
 
