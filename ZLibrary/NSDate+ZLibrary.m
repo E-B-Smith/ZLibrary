@@ -33,7 +33,7 @@
 	if (i < _countof(intervals))
 		{
 		NSInteger d = span / modulus[i];
-		result = [NSString stringWithFormat:@"%ld %@ ago", d, strings[i]];
+		result = [NSString stringWithFormat:@"%ld %@ ago", (long)d, strings[i]];
 		}
 	else
 		{
