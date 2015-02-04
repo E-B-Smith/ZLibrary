@@ -8,17 +8,59 @@
 
 
 #import "NSDate+ZLibrary.h"
+#import "ZUtilities.h"
 
 
 @implementation NSDate (ZLibrary)
 
-- (NSString*) relativeDateString
+#if 1
+
+- (NSString*) stringRelativeToNow
 	{
-//	NSTimeInterval intervals[] = { 2*60, 	60.0*60.0, 			2*60.0*60.0, 		2.0*24.0*60.0*60.0 };
-//	NSString * strings [] = 	 { @"now",	@"minutes", 		@"hours", 			@"days" };
-//	
-//	int i = 0;
-	return @"recently";
+	NSTimeInterval intervals[] = { 2*60.0, 	2.0*60.0*60.0, 		24.0*60.0*60.0, 		7.0*24.0*60.0*60.0 };
+	NSTimeInterval modulus[] =   {   60.0,			 60.0,			 60.0*60.0,			24.0*60.0*60.0 };
+	NSString * strings [] = 	 { @"now",	   @"minutes", 	   	      @"hours",    			   @"days" };
+
+	NSTimeInterval span = - [self timeIntervalSinceNow];
+
+	int i = 0;
+	while (i < _countof(intervals) && span > intervals[i]) ++i;
+
+	NSString * result = nil;
+	if (i == 0)
+		result = @"A moment ago";
+	else
+	if (i < _countof(intervals))
+		{
+		NSInteger d = span / modulus[i];
+		result = [NSString stringWithFormat:@"%ld %@ ago", d, strings[i]];
+		}
+	else
+		{
+		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+		dateFormatter.timeStyle = NSDateFormatterNoStyle;
+		dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+		result = [dateFormatter stringFromDate:self];
+		}
+
+	return result;
 	}
-	
+
+#else
+
+- (NSString*) stringRelativeToNow
+	{
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	dateFormatter.timeStyle = NSDateFormatterNoStyle;
+	dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+	//NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+	//NSLocale *frLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"fr_FR"];
+	//dateFormatter.locale = frLocale;
+	dateFormatter.doesRelativeDateFormatting = YES;
+	NSString *dateString = [dateFormatter stringFromDate:self];
+	return dateString;
+	}
+
+#endif
+
 @end
