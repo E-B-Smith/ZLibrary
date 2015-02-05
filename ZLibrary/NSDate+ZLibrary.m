@@ -53,9 +53,6 @@
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	dateFormatter.timeStyle = NSDateFormatterNoStyle;
 	dateFormatter.dateStyle = NSDateFormatterMediumStyle;
-	//NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-	//NSLocale *frLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"fr_FR"];
-	//dateFormatter.locale = frLocale;
 	dateFormatter.doesRelativeDateFormatting = YES;
 	NSString *dateString = [dateFormatter stringFromDate:self];
 	return dateString;
