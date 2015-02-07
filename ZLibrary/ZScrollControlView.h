@@ -9,6 +9,7 @@
 
 #import <UIKit/UIKit.h>
 
+//	Prevents touches to controls on scroll views from being cancelled.
 
 @interface ZScrollControlView : UIScrollView
 @end
