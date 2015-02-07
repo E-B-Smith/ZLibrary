@@ -140,14 +140,16 @@ extern void ZDebugMessageHandlerOutputToLog(ZDebugLevel debugLevel, NSString* m)
 extern void ZDebugMessageHandlerOutputToFile(ZDebugLevel debugLevel, NSString* m);
 extern void ZDebugMessageHandlerOutputToFileInitializeWithOutputURL(NSURL* url);
 
+extern bool ZDebugDebuggerIsAttached();
+
 //	Returns the previous handler.
 extern ZDebugMessageHandlerProcedurePtr ZDebugSetMessageHandler(ZDebugMessageHandlerProcedurePtr newHandler);
 
-extern bool ZDebugSetBreakOnAssertEnabled(bool enable);								//	Returns previous enabled value.
-extern bool ZDebugBreakOnAssertIsEnabled();
+//extern bool ZDebugSetBreakOnAssertEnabled(bool enable);								//	Returns previous enabled value.
+//extern bool ZDebugBreakOnAssertIsEnabled();
 
-extern bool ZDebugIsEnabled();
-extern bool ZDebugSetEnabled(bool onOff);											//	Returns previous state of ZDebugIsEnabled().
+//extern bool ZDebugIsEnabled();
+//extern bool ZDebugSetEnabled(bool onOff);											//	Returns previous state of ZDebugIsEnabled().
 extern void ZDebugSetOptions(NSString* debugOptions);								//	Set file level debug messages on or off.
 
 
@@ -156,22 +158,22 @@ extern void ZDebugSetOptions(NSString* debugOptions);								//	Set file level d
 #define ZDebugLogMethod()							ZDebug(@"%@",  NSStringFromSelector(_cmd));
 
 #define ZDebugAssert(condition)						do  { BOOL b = ZDebugAssertProcedure((condition), __FILE__, __LINE__, #condition, nil); \
-														if (ZDebugBreakOnAssertIsEnabled() && !b) ZDebugBreakPoint(); } \
-														while (0)
+														if (!b) { ZDebugBreakPoint(); } \
+														} while (0)
 
 #define ZDebugAssertWithMessage(condition, message)	do  { BOOL b = ZDebugAssertProcedure((condition), __FILE__, __LINE__, #condition, message); \
-														if (ZDebugBreakOnAssertIsEnabled() && !b) ZDebugBreakPoint(); } \
-														while (0)
+														if (!b) { ZDebugBreakPoint(); } \
+														} while (0)
 
 #define ZDebugLogFunctionName() 					ZDebug(@"%s", __FUNCTION__)
 
 
 #define ZDebugBreakPointMessage(...)				do  { ZDebugMessageProcedure(ZDebugLevelError, __FILE__, __LINE__, __VA_ARGS__); \
-														ZDebugFlushMessages(); \
-														ZDebugBreakPoint(); } \
-														while (0)
+														ZDebugBreakPoint(); \
+														} while (0)
 
-#define ZDebugBreakPoint()							raise(SIGINT)
+#define ZDebugBreakPoint()							do  { if (ZDebugDebuggerIsAttached()) { ZDebugFlushMessages(); raise(SIGINT); } \
+														} while (0)
 
 #define ZDebugFlushMessages()						do {} while (0)
 
