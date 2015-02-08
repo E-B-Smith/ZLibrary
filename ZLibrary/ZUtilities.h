@@ -31,6 +31,26 @@ static inline CGRect ZCenterRectOverRect(CGRect rectToCenter, CGRect overRect)
                        );
        }
 
+static inline CGRect ZCenterRectOverRectX(CGRect rectToCenter, CGRect overRect)
+	{
+   return CGRectMake(
+					overRect.origin.x + ((overRect.size.width - rectToCenter.size.width)/2.0)
+				   ,rectToCenter.origin.y
+				   ,rectToCenter.size.width
+				   ,rectToCenter.size.height
+				   );
+	}
+
+static inline CGRect ZCenterRectOverRectY(CGRect rectToCenter, CGRect overRect)
+	{
+       return CGRectMake(
+                        rectToCenter.origin.x
+                       ,overRect.origin.y + ((overRect.size.height - rectToCenter.size.height)/2.0)
+                       ,rectToCenter.size.width
+                       ,rectToCenter.size.height
+                       );
+	}
+	
 static inline CGRect ZCenterRectOverPoint(CGRect rectToCenter, CGPoint referencePoint)
 	{
 	return CGRectMake(
