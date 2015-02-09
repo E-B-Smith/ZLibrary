@@ -16,7 +16,7 @@ set -eu -o pipefail
 scriptpath="$( cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if (( $# == 0 )); then
-    echo ">>> Error: Option expected." 1>&2
+    echo ">>> Error: Option expected.  Try '$0 -h' for usage." 1>&2
     exit 1
     fi
 
