@@ -94,6 +94,8 @@ static inline CGRect ZRectInflate(CGRect r, CGFloat dx, CGFloat dy)
 	return CGRectInset(r, dx, dy);
 	}
 
+#if TARGET_OS_IPHONE
+
 typedef enum UIViewContentModeExtension
 	{
 	UIViewContentModeClipped	=	(1<<8),
@@ -101,8 +103,8 @@ typedef enum UIViewContentModeExtension
 	}
 	UIViewContentModeExtension;
 
-#if TARGET_OS_IPHONE
 extern CGRect ZRectForContentMode(UIViewContentMode mode, CGRect idealRect, CGRect boundsRect);
+
 #endif 
 
 //

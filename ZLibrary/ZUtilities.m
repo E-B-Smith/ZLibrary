@@ -95,6 +95,8 @@ NSString* NSStringFromLocationCoordinate(CLLocationCoordinate2D location)
 	return [NSString stringWithFormat:@"(%f, %f)", location.latitude, location.longitude];
 	}
 
+#if TARGET_OS_IPHONE
+
 CGRect ZRectForContentMode(UIViewContentMode mode, CGRect idealRect, CGRect boundsRect)
 	{
 	BOOL clipped = !!(mode & UIViewContentModeClipped);
@@ -167,6 +169,8 @@ CGRect ZRectForContentMode(UIViewContentMode mode, CGRect idealRect, CGRect boun
 
 	return idealRect;
 	}
+
+#endif
 
 static uint64_t ZSequentialRandSeedInitialValue = (uint64_t) -1;
 

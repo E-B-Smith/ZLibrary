@@ -45,7 +45,7 @@ void TestDebugProcedure(ZDebugLevel debugLevel, NSString* DebugString)
 	//	Test the debug message facility -- 
 	//	Warning!  These line number can't change or the tests will fail!
 
-	ZDebugSetEnabled(true);
+//	ZDebugSetEnabled(true);
 	ZDebug(@"Debug message with no parameters.");
 	TestPtr = @"ZDebug.Test.m(49): Debug message with no parameters.";
 	XCTAssertEqualObjects(TestPtr, globalTestDebugMessage, @"ZDebug failed to produce the correct debug message.");
@@ -56,7 +56,7 @@ void TestDebugProcedure(ZDebugLevel debugLevel, NSString* DebugString)
 
 	//	Test the assert facility -- 
 
-	ZDebugSetBreakOnAssertEnabled(NO);
+//	ZDebugSetBreakOnAssertEnabled(NO);
 
 	globalTestDebugMessage = nil;
 	ZDebugAssert(2 + 2 == 4);
@@ -70,7 +70,7 @@ void TestDebugProcedure(ZDebugLevel debugLevel, NSString* DebugString)
 	TestPtr = @"ZDebug.Test.m(69): Testing ZLog procedure. This will display in the console log.";
 	XCTAssertEqualObjects(TestPtr, globalTestDebugMessage, @"ZDebugAssert failed to produce the correct debug message.");
 
-	ZDebugSetBreakOnAssertEnabled(YES);
+//	ZDebugSetBreakOnAssertEnabled(YES);
 	ZDebugSetMessageHandler(OldProcedure);
 	}
 
