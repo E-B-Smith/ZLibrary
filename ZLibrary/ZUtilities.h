@@ -60,6 +60,18 @@ static inline CGRect ZCenterRectOverPoint(CGRect rectToCenter, CGPoint reference
 			rectToCenter.size.height);
 	}
 
+static inline CGRect ZAlignRectTopWithRect(CGRect r, CGRect alignRect)
+	{
+	r.origin.y = alignRect.origin.y;
+	return r;
+	}
+	
+static inline CGRect ZAlignRectBottomWithRect(CGRect r, CGRect alignRect)
+	{
+	r.origin.y = alignRect.origin.y + alignRect.size.height - r.size.height;
+	return r;
+	}
+
 static inline CGPoint ZCenterPointOfRect(CGRect rect)
 	{
 	CGPoint p =
