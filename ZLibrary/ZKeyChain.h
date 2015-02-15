@@ -12,14 +12,14 @@
 
 @interface ZKeyChain : NSObject
 
-+ (void) securePasswordValue:(id)password
++ (BOOL) securePasswordValue:(id)password
 			forPasswordKey:(NSString*)passwordKey
 			service:(NSString*)service;
 
 + (id) securedPasswordValueForPasswordKey:(NSString*)passwordKey
 			service:(NSString*)service;
 
-+ (void) deleteSecuredPasswordValueForPasswordKey:(NSString*)passwordKey 
++ (BOOL) deleteSecuredPasswordValueForPasswordKey:(NSString*)passwordKey 
 			service:(NSString*)service;
 			
 @end

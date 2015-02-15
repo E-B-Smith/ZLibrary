@@ -13,8 +13,11 @@
 
 @implementation ZKeyChain
 
-+ (void) securePasswordValue:(id)password forPasswordKey:(NSString*)passwordKey service:(NSString*)service
++ (BOOL) securePasswordValue:(id)password forPasswordKey:(NSString*)passwordKey service:(NSString*)service
 	{
+	if (!password || passwordKey.length <= 0 || service.length <= 0)
+		return NO;
+		
 	NSMutableDictionary* keyDictionary = 
 		[NSMutableDictionary dictionaryWithObjectsAndKeys:
 			(__bridge id)kSecClassGenericPassword,				(__bridge id)kSecClass,
@@ -22,18 +25,19 @@
 			(__bridge id)kSecAttrAccessibleAfterFirstUnlock,	(__bridge id)kSecAttrAccessible,
 			nil];
 		
-	if (passwordKey && password)
+	[keyDictionary setObject:passwordKey forKey:(__bridge id)kSecAttrAccount];
+	SecItemDelete((__bridge CFDictionaryRef)keyDictionary);
+
+	NSData* passwordData = [NSKeyedArchiver archivedDataWithRootObject:password];
+	[keyDictionary setObject:passwordData forKey:(__bridge id)kSecValueData];
+	OSStatus status = SecItemAdd((__bridge CFDictionaryRef)keyDictionary, NULL);
+	if (status) 
 		{
-		[keyDictionary setObject:passwordKey forKey:(__bridge id)kSecAttrAccount];
-		SecItemDelete((__bridge CFDictionaryRef)keyDictionary);
-		if (password)
-			{
-			NSData* passwordData = [NSKeyedArchiver archivedDataWithRootObject:password];
-            [keyDictionary setObject:passwordData forKey:(__bridge id)kSecValueData];
-            OSStatus status = SecItemAdd((__bridge CFDictionaryRef)keyDictionary, NULL);
-            if (status) ZDebug(@"Save to keychain failed with status %d.", status);
-			}
+		ZDebug(@"Save to keychain failed with status %d.", status);
+		return NO;
 		}
+	
+	return YES;
 	}
 
 + (id) securedPasswordValueForPasswordKey:(NSString*)passwordKey service:(NSString*)service
@@ -60,8 +64,11 @@
 	return result;
 	}
 
-+ (void) deleteSecuredPasswordValueForPasswordKey:(NSString*)passwordKey service:(NSString*)service
++ (BOOL) deleteSecuredPasswordValueForPasswordKey:(NSString*)passwordKey service:(NSString*)service
 	{
+	if (passwordKey.length <= 0 || service.length <= 0)
+		return NO;
+	
 	NSDictionary* keyDictionary =
 		[NSDictionary dictionaryWithObjectsAndKeys:
 			(__bridge id)kSecClassGenericPassword,				(__bridge id)kSecClass,
@@ -70,7 +77,13 @@
 			(id)passwordKey,									(__bridge id)kSecAttrAccount,
 			nil];
 	OSStatus status = SecItemDelete((__bridge CFDictionaryRef)keyDictionary);
-	if (status) ZDebug(@"Delete from keychain failed with status %d.", status);
+	if (status) 
+		{
+		ZDebug(@"Delete from keychain failed with status %d.", status);
+		return NO;
+		}
+		
+	return YES;
 	}
 
 @end
