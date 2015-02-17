@@ -28,7 +28,7 @@
 	return path;
 	}
 
-+ (UIBezierPath*) bezierPathWithLineFrom:(CGPoint)p to:(CGPoint)q
++ (UIBezierPath*) bezierPathWithLineFromPoint:(CGPoint)p toPoint:(CGPoint)q
 	{
 	UIBezierPath *path = [UIBezierPath bezierPath];
 	[path moveToPoint:p];

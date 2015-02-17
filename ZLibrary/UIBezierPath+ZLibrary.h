@@ -12,5 +12,5 @@
 
 @interface UIBezierPath (ZLibrary)
 + (UIBezierPath*) bezierPathWithArrowInRect:(CGRect)rect;
-+ (UIBezierPath*) bezierPathWithLineFrom:(CGPoint)p to:(CGPoint)q;
++ (UIBezierPath*) bezierPathWithLineFromPoint:(CGPoint)p toPoint:(CGPoint)q;
 @end
