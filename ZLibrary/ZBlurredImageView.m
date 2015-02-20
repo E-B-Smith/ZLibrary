@@ -22,8 +22,9 @@
 
 - (void) commonInit
 	{
-	self.blurColor = [UIColor colorWithWhite:1.0 alpha:0.650];
-	self.blurRadius = 75.0;
+//	self.blurColor = [UIColor colorWithWhite:1.0 alpha:0.650];
+	self.blurColor = [[UIColor blueColor] colorWithAlphaComponent:0.5];
+	self.blurRadius = 90.0;
 	}
 
 - (instancetype) init
