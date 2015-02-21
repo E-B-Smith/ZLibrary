@@ -158,8 +158,12 @@
     
     vImage_Buffer inBuffer, outBuffer;
     vImage_Error error;
-    void *pixelBuffer;
-    
+    void *pixelBuffer = NULL;
+	CGContextRef ctx = NULL;
+	CGColorSpaceRef colorSpace = NULL;
+	CGImageRef imageRef = NULL;
+	UIImage *result = nil;
+
     CGDataProviderRef inProvider = CGImageGetDataProvider(rawImage);
     CFDataRef inBitmapData = CGDataProviderCopyData(inProvider);
     
@@ -169,7 +173,12 @@
     inBuffer.data = (void*)CFDataGetBytePtr(inBitmapData);
     
     pixelBuffer = malloc(CGImageGetBytesPerRow(rawImage) * CGImageGetHeight(rawImage));
-        
+	if (!pixelBuffer)
+		{
+		ZDebug(@"Can't allocate pixel buffer.");
+		goto exit;
+		}
+
     outBuffer.data = pixelBuffer;
     outBuffer.width = CGImageGetWidth(rawImage);
     outBuffer.height = CGImageGetHeight(rawImage);
@@ -183,11 +192,12 @@
     if (error)
 		{
         ZLog(@"Error from convolution: %ld", error);
+		goto exit;
     	}
     
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    
-    CGContextRef ctx = CGBitmapContextCreate(
+    colorSpace = CGColorSpaceCreateDeviceRGB();
+	if (!colorSpace) goto exit;
+    ctx = CGBitmapContextCreate(
 			outBuffer.data,
 			outBuffer.width,
 			outBuffer.height,
@@ -195,16 +205,18 @@
 			outBuffer.rowBytes,
 			colorSpace,
 			CGImageGetBitmapInfo(self.CGImage));
+    if (!ctx) goto exit;
+	
+    imageRef = CGBitmapContextCreateImage(ctx);
+    result = [UIImage imageWithCGImage:imageRef scale:self.scale orientation:self.imageOrientation];
+
+exit:
+    if (ctx) CGContextRelease(ctx);
+    if (colorSpace) CGColorSpaceRelease(colorSpace);
     
-    CGImageRef imageRef = CGBitmapContextCreateImage (ctx);
-    UIImage *result = [UIImage imageWithCGImage:imageRef scale:self.scale orientation:self.imageOrientation];
-    
-    CGContextRelease(ctx);
-    CGColorSpaceRelease(colorSpace);
-    
-    free(pixelBuffer);
-    CFRelease(inBitmapData);
-    CGImageRelease(imageRef);
+    if (pixelBuffer) free(pixelBuffer);
+    if (inBitmapData) CFRelease(inBitmapData);
+    if (imageRef) CGImageRelease(imageRef);
     
     return result;
 	}
