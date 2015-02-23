@@ -175,6 +175,12 @@ extern double   ZSequentialRand();						//	Return a random double in range of [0
 #endif
 
 
+#define ZInitializeArray(array, value)		\
+	do  { for (int _i = 0; _i < _countof(array); ++_i) \
+			{ array[_i] = value; } \
+		} while (0)
+
+
 #define ZEmptyStringIfNil(nsstring)			(nsstring)?:@""
 #define ZRange(value, minValue, maxValue)	MAX(MIN(value, maxValue), minValue)
 
