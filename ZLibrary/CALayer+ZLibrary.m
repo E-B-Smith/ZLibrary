@@ -34,7 +34,7 @@
 	return nil;
 	}	
 
-- (CALayer*) findSublayerNamed:(NSString*)nameToFind
+- (CALayer*) sublayerNamed:(NSString*)nameToFind
 	{
 	return [self findSublayerUsingPredicateBlock:
 		^ BOOL(CALayer *sublayer) { return [sublayer.name isEqualToString:nameToFind]; }];
@@ -74,7 +74,7 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 
 - (void) removeLine
 	{
-	CALayer *lineLayer = [self findSublayerNamed:kShapeLayerName];
+	CALayer *lineLayer = [self sublayerNamed:kShapeLayerName];
 	[lineLayer removeFromSuperlayer];
 	}
 
