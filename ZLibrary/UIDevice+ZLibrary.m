@@ -20,6 +20,95 @@
 #import <net/if_dl.h>
 
 
+#pragma mark Keys for deviceInfoForKey:
+
+/*
+
+https://github.com/Cykey/ios-reversed-headers/blob/master/MobileGestalt/MobileGestalt.h
+
+deviceInfoForKey:
+
+ActiveWirelessTechnology
+AirplaneMode        
+assistant        
+BasebandCertId        
+BasebandChipId        
+BasebandPostponementStatus        
+BasebandStatus        
+BatteryCurrentCapacity        
+BatteryIsCharging        
+BluetoothAddress        
+BoardId        
+BootNonce        
+BuildVersion        
+CertificateProductionStatus        
+CertificateSecurityMode        
+ChipID        
+CompassCalibrationDictionary        
+CPUArchitecture        
+DeviceClass        
+DeviceColor        
+DeviceEnclosureColor        
+DeviceEnclosureRGBColor        
+DeviceName        
+DeviceRGBColor        
+DeviceSupportsFaceTime        
+DeviceVariant        
+DeviceVariantGuess        
+DiagData        
+dictation        
+DiskUsage        
+EffectiveProductionStatus        
+EffectiveProductionStatusAp        
+EffectiveProductionStatusSEP        
+EffectiveSecurityMode        
+EffectiveSecurityModeAp        
+EffectiveSecurityModeSEP        
+FirmwarePreflightInfo        
+FirmwareVersion        
+FrontFacingCameraHFRCapability        
+HardwarePlatform        
+HasSEP        
+HWModelStr        
+Image4Supported        
+InternalBuild        
+InverseDeviceID        
+ipad        
+MixAndMatchPrevention        
+MLBSerialNumber        
+MobileSubscriberCountryCode        
+MobileSubscriberNetworkCode        
+ModelNumber        
+PartitionType        
+PasswordProtected        
+ProductName        
+ProductType
+ProductVersion        
+ProximitySensorCalibrationDictionary        
+RearFacingCameraHFRCapability        
+RegionCode        
+RegionInfo        
+SDIOManufacturerTuple        
+SDIOProductInfo        
+SerialNumber        
+SIMTrayStatus        
+SoftwareBehavior        
+SoftwareBundleVersion        
+SupportedDeviceFamilies        
+SupportedKeyboards        
+telephony        
+UniqueChipID        
+UniqueDeviceID        
+UserAssignedDeviceName        
+wifi        
+WifiVendor
+
+*/
+
+
+#pragma mark - UIDevice (ZLibrary)
+
+
 @implementation UIDevice (ZLibrary)
 
 
@@ -106,7 +195,7 @@
 #pragma mark - sysctl Utilities
 
 
-- (NSUInteger) getSysInfo: (uint) typeSpecifier
+- (NSUInteger) getSysInfo:(uint)typeSpecifier
 	{
     size_t size = sizeof(int);
     int results;
