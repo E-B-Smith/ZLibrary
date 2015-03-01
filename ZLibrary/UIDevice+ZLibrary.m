@@ -241,8 +241,15 @@
 	
 	BOOL result = NO;
 	Class  btclass = NSClassFromString(@"GKBluetoothSupport");
-	if ([btclass respondsToSelector:@selector(bluetoothStatus)])
-		result = ((int)[btclass performSelector:@selector(bluetoothStatus)] & (int)1) != 0;
+	SEL   selector = NSSelectorFromString(@"bluetoothStatus");
+	if ([btclass respondsToSelector:selector])
+		{
+		#pragma clang diagnostic push
+		#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+		int value = (int) [btclass performSelector:selector];
+		#pragma clang diagnostic pop
+		result = (value & (int)1) ? YES : NO;
+		}
 
 	return result;
 	}

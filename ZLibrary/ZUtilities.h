@@ -16,6 +16,8 @@ extern "C" {
 #endif
 
 
+#pragma mark Geometric Functions
+
 //
 //	Geometric functions --
 //	
@@ -88,17 +90,6 @@ static inline CGFloat ZDistance(CGPoint p1, CGPoint p2)
 	return hypotf(x, y);
 	}
 
-static inline CGFloat Zfrange(CGFloat low, CGFloat value, CGFloat high)
-    {
-    if (value < low)
-        return low;
-    else
-    if (value > high)
-        return high;
-    else
-        return value;
-    }
-	
 static inline CGRect ZRectInflate(CGRect r, CGFloat dx, CGFloat dy)
 	{
 	dx = r.size.width - (r.size.width*dx);
@@ -118,6 +109,9 @@ typedef enum UIViewContentModeExtension
 extern CGRect ZRectForContentMode(UIViewContentMode mode, CGRect idealRect, CGRect boundsRect);
 
 #endif 
+
+
+#pragma mark - Blocks and Threads
 
 //
 //	
@@ -155,6 +149,8 @@ static inline void ZSleepForSeconds(NSTimeInterval seconds)
 	}
 
 
+#pragma mark - ZSequentialRand
+
 //	ZSequentialRand
 //
 //	Random numbers for testing.  Given the same initial random seed,
@@ -166,8 +162,10 @@ extern uint64_t ZSequentialRandGetSeed();				//	Returns the value used as a seed
 extern double   ZSequentialRand();						//	Return a random double in range of [0.0, 1.0).
 
 
+#pragma mark - Misc.
+
 //
-//
+//	Misc.
 //
 
 #ifndef _countof
@@ -184,11 +182,29 @@ extern double   ZSequentialRand();						//	Return a random double in range of [0
 #define ZEmptyStringIfNil(nsstring)			(nsstring)?:@""
 #define ZRange(value, minValue, maxValue)	MAX(MIN(value, maxValue), minValue)
 
-static inline CGFloat ZSignf(CGFloat n)		{ return (n < 0.0) ? -1.0 : 1.0; }
+static inline CGFloat ZSignf(CGFloat n)
+	{
+	return (n < 0.0) ? -1.0 : 1.0;
+	}
 
+static inline CGFloat Zfrange(CGFloat low, CGFloat value, CGFloat high)
+    {
+    if (value < low)
+        return low;
+    else
+    if (value > high)
+        return high;
+    else
+        return value;
+    }
+
+extern void ZLogClassDescription(Class cls);
+
+
+#pragma mark - Mapping functions
 
 //
-//	Map functions --
+//	Mapping functions --
 //
 
 //	Locations --

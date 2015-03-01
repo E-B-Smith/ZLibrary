@@ -8,6 +8,11 @@
 
 
 #import "ZUtilities.h"
+#import "ZDebug.h"
+#import <objc/runtime.h>
+
+
+#pragma mark Mapping Functions
 
 
 MKCoordinateRegion MKCoordinateRegionZero = { {0.0, 0.0}, {0.0, 0.0} };
@@ -95,6 +100,10 @@ NSString* NSStringFromLocationCoordinate(CLLocationCoordinate2D location)
 	return [NSString stringWithFormat:@"(%f, %f)", location.latitude, location.longitude];
 	}
 
+
+#pragma mark - Geometric Functions
+
+
 #if TARGET_OS_IPHONE
 
 CGRect ZRectForContentMode(UIViewContentMode mode, CGRect idealRect, CGRect boundsRect)
@@ -172,6 +181,10 @@ CGRect ZRectForContentMode(UIViewContentMode mode, CGRect idealRect, CGRect boun
 
 #endif
 
+
+#pragma mark - ZSequentialRand
+
+
 static uint64_t ZSequentialRandSeedInitialValue = (uint64_t) -1;
 
 uint64_t ZSequentialRandGetSeed()
@@ -202,3 +215,50 @@ double ZSequentialRand()
 	  return 1.0;
 	#endif
 	}
+
+
+#pragma mark - Misc.
+
+
+void ZLogClassDescription(Class class)
+	{
+	//	Dump the class -- 
+	
+	if (!class)
+		{
+		ZLog(@"Class Dump: Class is nil.");
+		return;
+		}
+		
+	const char* superclassname = "nil";
+	Class superclass = class_getSuperclass(class);
+	if (superclass) superclassname = class_getName(superclass);
+	if (!superclassname) superclassname = "<nil>";
+	
+	ZLog(@"Class '%s' of class '%s':", class_getName(class), superclassname);
+
+	uint count = 0;
+	Method *methods = class_copyMethodList(object_getClass(class), &count);
+	for (int i = 0; i < count; ++i)
+		ZLog(@"Class method name: '%s'", sel_getName(method_getName(methods[i])));
+	if (methods) free(methods);
+
+	count = 0;
+	methods = class_copyMethodList(class, &count);
+	for (int i = 0; i < count; ++i)
+		ZLog(@"Method name: '%s'", sel_getName(method_getName(methods[i])));
+	if (methods) free(methods);
+	
+	count = 0;
+	Ivar *ivars = class_copyIvarList(class, &count);
+	for (int i = 0; i < count; ++i)
+		ZLog(@"Ivar name: '%s'.", ivar_getName(ivars[i]));
+	if (ivars) free(ivars);
+	
+	count = 0;
+	objc_property_t *properties = class_copyPropertyList(class, &count);
+	for (int i = 0; i < count; ++i)
+		ZLog(@"Property name: '%s'.", property_getName(properties[i]));
+	if (properties) free(properties);
+	}
+
