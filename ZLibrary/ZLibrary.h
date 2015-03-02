@@ -33,7 +33,7 @@ Compile Time Switches
 
 
 #if defined(ZAllowAppStoreNonCompliant)
-	#warning Compiling with ZAllowAppStoreNonCompliant set.
+	//#warning Compiling with ZAllowAppStoreNonCompliant set.
 	#define APP_STORE_NON_COMPLIANT( x )	x
 #else
 	#define APP_STORE_NON_COMPLIANT( x )

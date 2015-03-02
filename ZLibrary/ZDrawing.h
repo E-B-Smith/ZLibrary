@@ -18,4 +18,8 @@ extern void ZDrawLinearGradientRect(
 		CGColorRef endColor, CGPoint endPoint);
 
 
-extern void ZDrawGradientFrameRect(CGContextRef context, CGRect outerRect, CGColorRef outerColor, CGFloat gradientBias, CGRect innerRect, CGColorRef innerColor);
+extern void ZDrawGradientFrameRect(
+		CGContextRef context, 
+		CGRect outerRect, CGColorRef outerColor, 
+		CGFloat gradientBias, 
+		CGRect innerRect, CGColorRef innerColor);

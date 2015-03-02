@@ -47,6 +47,7 @@ typedef enum UIDeviceFamily
 - (BOOL) hasRetinaDisplay;
 
 APP_STORE_NON_COMPLIANT( - (BOOL) bluetoothIsEnabled; )
+APP_STORE_NON_COMPLIANT( - (NSString*) usbSerialString; )
 
 @end
 

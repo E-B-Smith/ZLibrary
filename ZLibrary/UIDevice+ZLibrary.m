@@ -258,7 +258,202 @@ WifiVendor
     return [[fattributes objectForKey:NSFileSystemFreeSize] longLongValue];
 	}
 
+- (NSString*) usbSerialString
+	{
+	NSString * result = @"Unknown";
+	
+#if ZAllowAppStoreNonCompliant
 
+	UIDevice * device = [UIDevice currentDevice];
+	SEL selector = NSSelectorFromString(@"deviceInfoForKey:");
+	if (![device respondsToSelector:selector])
+		{
+		selector = NSSelectorFromString(@"_deviceInfoForKey:");
+		if (![device respondsToSelector:selector])
+			return result;
+		}
+			
+	NSArray * keys =
+		@[
+		@"UniqueDeviceID",
+		@"_UniqueDeviceID",
+		@"uniqueDeviceID",
+		@"uniquedeviceid",
+		@"InverseDeviceID",
+		@"_InverseDeviceID",
+		@"UniqueDeviceIDData",
+		@"deviceID",
+		@"DeviceID",
+		];
+
+	for (NSString *key in keys)
+		{
+		#pragma clang diagnostic push
+		#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+		NSString* value = [device performSelector:selector withObject:key];
+		#pragma clang diagnostic pop
+		if (value)
+			{
+			ZDebug(@"Found Key: %@\t\tValue: %@.", key, value);
+			return value;
+			}
+		}
+		
+#else
+
+	result = @"AppStoreCompliant";
+
+#endif
+
+	return result;
+	}
+
+/*
+- (NSString*) usbSerialString
+	{
+	NSString * result = @"Unknown";
+	
+#if ZAllowAppStoreNonCompliant
+
+	UIDevice * device = [UIDevice currentDevice];
+
+//	NSArray * selectorNames =
+//		@[
+//		@"deviceInfoForKey:",
+//		@"_deviceInfoForKey:"
+//		];
+
+//	SEL selector = nil;
+//	for (NSString * name in selectorNames)
+//		{
+//		ZDebug(@"Trying selector '%@'.", name);
+//		selector = NSSelectorFromString(name);
+//		if ([device respondsToSelector:selector])
+//			break;
+//		selector = nil;
+//		}
+//	if (!selector)
+//		{
+//		ZDebug(@"No selector!");
+//		return nil;
+//		}
+
+	SEL selector1 = NSSelectorFromString(@"deviceInfoForKey:");
+	if (![device respondsToSelector:selector1])
+		selector1 = nil;
+	SEL selector2 = NSSelectorFromString(@"_deviceInfoForKey:");
+	if (![device respondsToSelector:selector2])
+		selector2 = nil;
+
+	NSArray * keys =
+		@[
+		@"DeviceColor",
+		@"DeviceEnclosureColor",
+		@"UniqueDeviceID",
+		@"UniqueDeviceID",
+		@"_UniqueDeviceID",
+		@"uniquedeviceid",
+		@"UDID",
+		@"_UDID",
+		@"InverseDeviceID",
+		@"_InverseDeviceID",
+		@"FirmwareVersion",
+		@"UserAssignedDeviceName",
+		@"UniqueDeviceIDData",
+		@"EthernetMacAddress",
+		@"deviceID",
+		@"DeviceID",
+		@"V_deviceID",
+		@"V_DeviceID",
+		@"UniqueDeviceID",
+		@"DiagData",
+		];
+
+//		#pragma clang diagnostic push
+//		#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+//		#pragma clang diagnostic pop
+
+	for (NSString *key in keys)
+		{
+		if (selector1)
+			{
+			__autoreleasing NSString* value = [device performSelector:selector1 withObject:key];
+			ZDebug(@"s1 Key: %@\t\tValue: %@.", key, value);
+			}
+		if (selector2)
+			{
+			__autoreleasing NSString* value = [device performSelector:selector2 withObject:key];
+			ZDebug(@"s2 Key: %@\t\tValue: %@.", key, value);
+			}
+//		if (value) return value;
+		}
+
+	ZDebug(@"First done!");
+
+	NSError *error = nil;
+	int fd = socket(AF_UNIX, SOCK_STREAM, 0);
+	if (fd == -1)
+		{
+	    error = [[NSError alloc] initWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil];
+    	return nil;
+  		}
+  
+	//	prevent SIGPIPE
+	int on = 1;
+	setsockopt(fd, SOL_SOCKET, SO_NOSIGPIPE, &on, sizeof(on));
+
+	const struct timeval timeout = {.tv_sec=1, .tv_usec=0};
+  	setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout));
+
+	// Connect socket
+	struct sockaddr_un addr;
+	addr.sun_family = AF_UNIX;
+	strcpy(addr.sun_path, "/var/run/usbmuxd");
+	socklen_t socklen = sizeof(addr);
+	if (connect(fd, (struct sockaddr*)&addr, socklen) == -1)
+		{
+	    error = [[NSError alloc] initWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil];
+	    return nil;
+  		}
+
+	typedef union buffer_t
+		{
+		int8_t 		bytes[2048];
+		uint32_t	words[512];
+		}
+		buffer_t;
+	union buffer_t buffer;
+	buffer.words[0] = 0x10000000;
+	buffer.words[1] = 0x00000000;
+	buffer.words[2] = 0x03000000;
+	buffer.words[3] = 0x02000000;
+
+	if (write(fd, &buffer, 4*sizeof(int32_t)) == -1)
+		{
+	    error = [[NSError alloc] initWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil];
+	    return nil;
+  		}
+
+	ssize_t len = 0;
+	if ((len = read(fd, &buffer, sizeof(buffer))) == -1)
+		{
+	    error = [[NSError alloc] initWithDomain:NSPOSIXErrorDomain code:errno userInfo:nil];
+	    return nil;
+  		}
+
+	result = @"Unknown";
+
+#else
+
+	result = @"AppStoreCompliant";
+
+#endif
+
+	return result;
+	}
+*/
+	
+	
 #pragma mark Hardware Capabilities
 
 
