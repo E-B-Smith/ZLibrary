@@ -30,11 +30,15 @@
 
 - (id)   init;
 - (void) checkForUpdatesAtURLString:(NSString*)string
-			completionHandler:(void (^) (ZApplicationAutoUpdate*))completionHandler;
+			      completionHandler:(void (^) (ZApplicationAutoUpdate*))completionHandler;
+
 - (void) askInstallWithForceUpdate:(BOOL)forcedUpdate
-			completion:(void (^) (BOOL willUpdate))completionHandler;
+			            completion:(void (^) (BOOL willUpdate))completionHandler;
+
 - (void) installUpdate;
 
-+ (void) checkForUpatesAtURLString:(NSString*)URLString forceUpdate:(BOOL)forceUpdate;
++ (void) checkForUpatesAtURLString:(NSString*)URLString
+					   forceUpdate:(BOOL)forceUpdate
+			            completion:(void (^) (BOOL willUpdate))completionHandler;
 
 @end

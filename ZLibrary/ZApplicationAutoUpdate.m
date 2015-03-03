@@ -304,13 +304,27 @@ static const NSInteger kRCAAlertTagID = 0xfeed;
 		}
 	}
 
-+ (void) checkForUpatesAtURLString:(NSString*)URLString forceUpdate:(BOOL)forceUpdate
++ (void) checkForUpatesAtURLString:(NSString*)URLString
+					   forceUpdate:(BOOL)forceUpdate
+			            completion:(void (^) (BOOL willUpdate))completionHandler;
 	{
-	static ZApplicationAutoUpdate* applicationUpdater = nil;
+	static ZApplicationAutoUpdate* globalApplicationUpdater = nil;
 
-	applicationUpdater = [ZApplicationAutoUpdate new];
+	dispatch_semaphore_t lock = dispatch_semaphore_create(1);
+	dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER);
 
-	[applicationUpdater checkForUpdatesAtURLString:URLString completionHandler:
+	if (globalApplicationUpdater)
+		{
+		dispatch_semaphore_signal(lock);
+		if (completionHandler)
+			completionHandler(NO);
+		return;
+		}
+
+	globalApplicationUpdater = [ZApplicationAutoUpdate new];
+	dispatch_semaphore_signal(lock);
+
+	[globalApplicationUpdater checkForUpdatesAtURLString:URLString completionHandler:
 	^ (ZApplicationAutoUpdate* updater)
 		{
 		if (updater.updateIsAvailable)
@@ -318,11 +332,17 @@ static const NSInteger kRCAAlertTagID = 0xfeed;
 			[updater askInstallWithForceUpdate:forceUpdate completion:
 			^ (BOOL willInstall)
 				{
-				applicationUpdater = nil;
+				globalApplicationUpdater = nil;
+				if (completionHandler)
+					completionHandler(willInstall);
 				}];
 			}
 		else
-			applicationUpdater = nil;
+			{
+			globalApplicationUpdater = nil;
+			if (completionHandler)
+				completionHandler(NO);
+			}
 		 }];
 	}
 

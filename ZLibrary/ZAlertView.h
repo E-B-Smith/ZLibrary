@@ -21,9 +21,9 @@ typedef void (^ ZAlertViewDismissBlock) (ZAlertView* alertView, NSInteger dismis
 + (ZAlertView*) showAlertWithError:(NSError*)error;
 
 + (ZAlertView*) showAlertWithTitle:(NSString*)title
-					message:(NSString *)message
-					dismissBlock:(ZAlertViewDismissBlock)dismissBlock
-					cancelButtonTitle:(NSString*)cancelTitle
-					otherButtonTitles:(NSString*)otherButtonTitles, ...;
+					       message:(NSString *)message
+					  dismissBlock:(ZAlertViewDismissBlock)dismissBlock
+				 cancelButtonTitle:(NSString*)cancelTitle
+				 otherButtonTitles:(NSString*)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
 
 @end
