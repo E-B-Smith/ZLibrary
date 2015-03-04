@@ -12,4 +12,5 @@
 
 @interface ZWildcardGestureRecognizer : UIGestureRecognizer
 - (id) initWithTarget:(id)target action:(SEL)action;
+@property (strong) NSArray * excludedViews;
 @end

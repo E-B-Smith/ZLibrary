@@ -11,6 +11,10 @@
 #import <UIKit/UIGestureRecognizerSubclass.h>
 
 
+@interface ZWildcardGestureRecognizer () <UIGestureRecognizerDelegate>
+@end
+
+
 @implementation ZWildcardGestureRecognizer
 
 - (id) initWithTarget:(id)target action:(SEL)action
@@ -18,6 +22,7 @@
 	self = [super initWithTarget:target action:action];
 	if (!self) return self;
     self.cancelsTouchesInView = NO;
+	self.delegate = self;
     return self;
 	}
 
@@ -58,4 +63,15 @@
     return NO;
 	}
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+	   shouldReceiveTouch:(UITouch *)touch
+	{
+	for (UIView *view in self.excludedViews)
+		{
+		if (touch.view == view)
+			return NO;
+		}
+	return YES;
+	}
+	
 @end
