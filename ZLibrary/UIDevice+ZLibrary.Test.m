@@ -100,7 +100,7 @@
 		@0,						//	Is Simulator
 		@"02:00:00:00:00:00",	//	MAC Address
 		@1,						//	Has Retina
-		@1						//	Bluetooth enabled.
+		@0						//	Bluetooth enabled.
 		];
 
 	int index = 0;
