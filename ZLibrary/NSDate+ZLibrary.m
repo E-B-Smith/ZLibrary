@@ -60,4 +60,9 @@
 
 #endif
 
++ (NSDate*) now
+	{
+	return [NSDate date];
+	}
+	
 @end

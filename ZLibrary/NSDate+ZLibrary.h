@@ -13,5 +13,6 @@
 @interface NSDate (NSDate_ZLibrary)
 
 - (NSString*) stringRelativeToNow;
++ (NSDate*)   now;
 
 @end
