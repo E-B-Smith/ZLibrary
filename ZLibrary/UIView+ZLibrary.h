@@ -45,4 +45,6 @@ extern void ZDebugGlobalEnableDebugViewFrames(BOOL enabled);
 
 - (void) removeAllSubviews;
 
+- (UIColor*) apparentBackgroundColor;
+
 @end

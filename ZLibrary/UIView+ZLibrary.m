@@ -209,5 +209,36 @@ void ZDebugGlobalEnableDebugViewFrames(BOOL enabled)
 	NSArray * sv = self.subviews.copy;
 	for (UIView*v in sv) [v removeFromSuperview];
 	}
+/*
+- (UIColor*) apparentBackgroundColor
+	{
+	UIView *view = self;
+	while (view)
+		{
+		UIColor *backgroundColor = view.backgroundColor;
+		CGFloat r,g,b,a;
+		[backgroundColor getRed:&r green:&g blue:&b alpha:&a];
+		tr = ( (tr * ta) + (r * a) ) / 2.0
+		if (a >= 1.0) break;
+		view = view.superview;
+		}
+	return [UIColor whiteColor];
+	}
+*/
 
+- (UIColor*) apparentBackgroundColor
+	{
+	UIColor * color = nil;
+	UIView *view = self;
+	while (view)
+		{
+		CGFloat r,g,b,a;
+		color = view.backgroundColor;
+		[color getRed:&r green:&g blue:&b alpha:&a];
+		if (a >= 0.5) break;
+		view = view.superview;
+		}
+	return color;
+	}
+	
 @end
