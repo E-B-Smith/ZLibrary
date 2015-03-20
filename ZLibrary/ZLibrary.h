@@ -13,23 +13,23 @@
 //-----------------------------------------------------------------------------------------------
 
 
-/*-----------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------
+//
+//	Compile Time Switches
+//	---------------------
+//
+//	* ZDEBUG
+//
+//	  Defined to enable debug information.
+//	  
+//	* ZAllowAppStoreNonCompliant
+//
+//	  APP_STORE_NON_COMPLIANT( )
+//	  
+//	  Allow code that is non-Apple app store compliant.
+//	  
+//-------------------------------------------------------------------------------------------------
 
-Compile Time Switches
----------------------
-
-* ZDEBUG
-
-  Defined to enable debug information.
-  
-* ZAllowAppStoreNonCompliant
-
-  APP_STORE_NON_COMPLIANT( )
-  
-  Allow code that is non-Apple app store compliant.
-  
--------------------------------------------------------------------------------------------------
-*/
 
 
 #if defined(ZAllowAppStoreNonCompliant)

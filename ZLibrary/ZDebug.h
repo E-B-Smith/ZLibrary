@@ -8,7 +8,7 @@
 //														  Simple debug message & assert functions
 //																		 Edward Smith, March 2007
 //
-//								 -©- Copyright © 1996-2013 Edward Smith, all rights reserved. -©-
+//								 -©- Copyright © 1996-2015 Edward Smith, all rights reserved. -©-
 //
 //-----------------------------------------------------------------------------------------------
 

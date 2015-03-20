@@ -1,26 +1,36 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  ZUtilities.h
-//  Search
+//                                                                                   ZUtilities.h
+//                                                                                   ZLibrary-Mac
 //
-//  Created by Edward Smith on 11/6/13.
-//  Copyright (c) 2013 Edward Smith, All rights reserved.
+//                                                               	Mac and iOS Utility Functions
+//                                                                       Edward Smith, March 2009
 //
+//                               -©- Copyright © 1996-2015 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
+
 
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
 
-#if defined(__cplusplus)
+#ifdef __cplusplus
 extern "C" {
 #endif
 
 
 #pragma mark Geometric Functions
-
+//-----------------------------------------------------------------------------------------------
 //
-//	Geometric functions --
-//	
+//                                        Geometric Functions
+//
+//-----------------------------------------------------------------------------------------------
+
 
 
 static inline CGRect ZCenterRectOverRect(CGRect rectToCenter, CGRect overRect)
@@ -52,7 +62,7 @@ static inline CGRect ZCenterRectOverRectY(CGRect rectToCenter, CGRect overRect)
                        ,rectToCenter.size.height
                        );
 	}
-	
+
 static inline CGRect ZCenterRectOverPoint(CGRect rectToCenter, CGPoint referencePoint)
 	{
 	return CGRectMake(
@@ -67,7 +77,7 @@ static inline CGRect ZAlignRectTopWithRect(CGRect r, CGRect alignRect)
 	r.origin.y = alignRect.origin.y;
 	return r;
 	}
-	
+
 static inline CGRect ZAlignRectBottomWithRect(CGRect r, CGRect alignRect)
 	{
 	r.origin.y = alignRect.origin.y + alignRect.size.height - r.size.height;
@@ -108,16 +118,16 @@ typedef enum UIViewContentModeExtension
 
 extern CGRect ZRectForContentMode(UIViewContentMode mode, CGRect idealRect, CGRect boundsRect);
 
-#endif 
+#endif
 
 
 #pragma mark - Blocks and Threads
+//-----------------------------------------------------------------------------------------------
+//
+//                                        Blocks and Threads
+//
+//-----------------------------------------------------------------------------------------------
 
-//
-//	
-//	Performing blocks and threads --
-//
-//
 
 
 typedef void (^ZPerformBlockType)(void);
@@ -150,12 +160,14 @@ static inline void ZSleepForSeconds(NSTimeInterval seconds)
 
 
 #pragma mark - ZSequentialRand
-
+//-----------------------------------------------------------------------------------------------
 //	ZSequentialRand
 //
 //	Random numbers for testing.  Given the same initial random seed,
 //	the same sequence of 'random' numbers are produced.  Great for testing,
 //	bad for cryptography.
+//-----------------------------------------------------------------------------------------------
+
 
 extern void     ZSequentialRandSetSeed(uint64_t seed);	//	If -1 is passed as a seed, a seed is choosen from epoch time.
 extern uint64_t ZSequentialRandGetSeed();				//	Returns the value used as a seed.
@@ -201,13 +213,13 @@ static inline CGFloat Zfrange(CGFloat low, CGFloat value, CGFloat high)
 extern void ZLogClassDescription(Class cls);
 
 
-#pragma mark - Mapping functions
-
+#pragma mark - Mapping Functions
+//-----------------------------------------------------------------------------------------------
 //
-//	Mapping functions --
+//                                        	Mapping Functions
 //
+//-----------------------------------------------------------------------------------------------
 
-//	Locations --
 
 extern CLLocationCoordinate2D LocationCoordinateFromNSString(NSString*string);
 extern NSString* NSStringFromLocationCoordinate(CLLocationCoordinate2D location);

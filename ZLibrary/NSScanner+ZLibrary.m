@@ -1,10 +1,18 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  ZUtilitiesIOS.m
-//  ZLib-iPhone
+//                                                                           NSScanner+ZLibrary.m
+//                                                                                   ZLibrary-Mac
 //
-//  Created by Edward Smith on 3/7/11.
-//  Copyright 2011 Edward Smith, Inc. All rights reserved.
+//                                                               			  NSScanner Additions
+//                                                                       Edward Smith, March 2011
 //
+//                               -©- Copyright © 1996-2015 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
+
 
 
 #import "NSScanner+ZLibrary.h"

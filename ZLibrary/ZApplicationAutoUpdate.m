@@ -212,21 +212,25 @@ static const NSInteger kRCAAlertTagID = 0xfeed;
 	NSURL* url = [NSURL URLWithString:urlString];
 	if ([[UIApplication sharedApplication] openURL:url])
 		{
-		[ZAlertView showAlertWithTitle:nil
-			message:@"Your app update is downloading to your home screen."
-			dismissBlock:
-			^ (ZAlertView *alertView, NSInteger dismissButtonIndex)
-				{
-				if ([[UIApplication sharedApplication] respondsToSelector:@selector(suspend)])
+		ZAfterSecondsPerformBlock(3.0,
+		^	{
+			[ZAlertView showAlertWithTitle:nil
+				message:@"Your app update is downloading to your home screen."
+				dismissBlock:
+				^ (ZAlertView *alertView, NSInteger dismissButtonIndex)
 					{
-					ZDebug(@"Suspending for install.");
-					[[UIApplication sharedApplication] performSelector:@selector(suspend)];
+					if ([[UIApplication sharedApplication] respondsToSelector:@selector(suspend)])
+						{
+						ZDebug(@"Suspending for install.");
+						[[UIApplication sharedApplication] performSelector:@selector(suspend)];
+						}
+					else
+						ZDebug(@"Suspend not supported!");
 					}
-				else
-					ZDebug(@"Suspend not supported!");
-				}
-			cancelButtonTitle:@"OK"
-			otherButtonTitles:nil];
+				cancelButtonTitle:@"OK"
+				otherButtonTitles:nil];
+			
+			});
 		}
 	else
 		{

@@ -1,10 +1,18 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  ZUtilities.m
-//  Search
+//                                                                                   ZUtilities.m
+//                                                                                   ZLibrary-Mac
 //
-//  Created by Edward Smith on 11/6/13.
-//  Copyright (c) 2013 Edward Smith, All rights reserved.
+//                                                               	Mac and iOS Utility Functions
+//                                                                       Edward Smith, March 2009
 //
+//                               -©- Copyright © 1996-2015 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
+
 
 
 #import "ZUtilities.h"
@@ -13,6 +21,12 @@
 
 
 #pragma mark Mapping Functions
+//-----------------------------------------------------------------------------------------------
+//
+//                                        Mapping Functions
+//
+//-----------------------------------------------------------------------------------------------
+
 
 
 MKCoordinateRegion MKCoordinateRegionZero = { {0.0, 0.0}, {0.0, 0.0} };
@@ -94,7 +108,7 @@ CLLocationCoordinate2D LocationCoordinateFromNSString(NSString*string)
 	location.longitude = lng;
 	return location;
 	}
-	
+
 NSString* NSStringFromLocationCoordinate(CLLocationCoordinate2D location)
 	{
 	return [NSString stringWithFormat:@"(%f, %f)", location.latitude, location.longitude];
@@ -102,6 +116,12 @@ NSString* NSStringFromLocationCoordinate(CLLocationCoordinate2D location)
 
 
 #pragma mark - Geometric Functions
+//-----------------------------------------------------------------------------------------------
+//
+//                                        Geometric Functions
+//
+//-----------------------------------------------------------------------------------------------
+
 
 
 #if TARGET_OS_IPHONE
@@ -118,9 +138,9 @@ CGRect ZRectForContentMode(UIViewContentMode mode, CGRect idealRect, CGRect boun
 		if (idealRect.size.width > boundsRect.size.width)
 			boundsRect.size.width = idealRect.size.width;
 		}
-		
+
 	idealRect = ZCenterRectOverRect(idealRect, boundsRect);
-	
+
 	switch (mode)
 		{
 		case UIViewContentModeScaleToFill:
@@ -222,19 +242,19 @@ double ZSequentialRand()
 
 void ZLogClassDescription(Class class)
 	{
-	//	Dump the class -- 
-	
+	//	Dump the class --
+
 	if (!class)
 		{
 		ZLog(@"Class Dump: Class is nil.");
 		return;
 		}
-		
+
 	const char* superclassname = "nil";
 	Class superclass = class_getSuperclass(class);
 	if (superclass) superclassname = class_getName(superclass);
 	if (!superclassname) superclassname = "<nil>";
-	
+
 	ZLog(@"Class '%s' of class '%s':", class_getName(class), superclassname);
 
 	uint count = 0;
@@ -248,13 +268,13 @@ void ZLogClassDescription(Class class)
 	for (int i = 0; i < count; ++i)
 		ZLog(@"Method name: '%s'", sel_getName(method_getName(methods[i])));
 	if (methods) free(methods);
-	
+
 	count = 0;
 	Ivar *ivars = class_copyIvarList(class, &count);
 	for (int i = 0; i < count; ++i)
 		ZLog(@"Ivar name: '%s'.", ivar_getName(ivars[i]));
 	if (ivars) free(ivars);
-	
+
 	count = 0;
 	objc_property_t *properties = class_copyPropertyList(class, &count);
 	for (int i = 0; i < count; ++i)

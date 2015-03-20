@@ -1,6 +1,6 @@
 //
-//  NSDate+NSDate_ZLibrary.h
-//  Happiness
+//  NSDate+ZLibrary.h
+//  ZLibrary
 //
 //  Created by Edward Smith on 2/3/15.
 //  Copyright (c) 2015 Edward Smith. All rights reserved.

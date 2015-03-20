@@ -71,7 +71,28 @@
 	return [UIColor colorWithRed:(CGFloat)red/255.0 green:(CGFloat)green/255.0 blue:(CGFloat)blue/255.0 alpha:1.0];
 	}
 
++ (UIColor*) colorWithHexInt:(NSUInteger)hex
+	{
+	CGFloat red, green, blue;
+	red   = (hex >> 16) & 0xFF;
+	green = (hex >>  8) & 0xFF;
+	blue  =  hex        & 0xFF;
+	return [UIColor colorWithRed: red / 255.0f green: green / 255.0f blue: blue / 255.0f alpha: 1.0f];
+	}
 
++ (UIColor*) colorWithHex:(NSString*)hexstring
+	{
+	const char *cString = [hexstring cStringUsingEncoding: NSASCIIStringEncoding];
+	NSUInteger hex;
+	
+	if (cString[0] == '#')
+		hex = strtol(cString + 1, NULL, 16);
+	else
+		hex = strtol(cString, NULL, 16);
+	
+	return [self colorWithHexInt:hex];
+	}
+	
 - (UIColor*) colorByBlendingWhite:(CGFloat)percent
 	{
 	CGFloat r=0,g=0,b=0,a=0;

@@ -1,10 +1,17 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  NSScanner+ZLibrary.m
-//  Search
+//                                                                      NSScanner+ZLibrary.Test.m
+//                                                                                   ZLibrary-Mac
 //
-//  Created by Edward Smith on 11/6/13.
-//  Copyright (c) 2013 Edward Smith, All rights reserved.
+//                                                               	     NSScanner Addition Tests
+//                                                                       Edward Smith, March 2011
 //
+//                               -©- Copyright © 1996-2015 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
 
 
 #import <XCTest/XCTest.h>
