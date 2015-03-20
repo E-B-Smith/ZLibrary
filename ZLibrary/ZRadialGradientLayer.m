@@ -127,12 +127,14 @@ exit:
 	if (gradient && ctx)
 		{
 		CGRect bounds = self.bounds;
+		CGPoint sp = CGPointMake(bounds.size.width * _startPoint.x, bounds.size.height * _startPoint.y);
+		CGPoint ep = CGPointMake(bounds.size.width * _endPoint.x, bounds.size.height * _endPoint.y);
+
 		//CGFloat d = ZDistance(CGPointMake(0.0, 0.0), CGPointMake(bounds.size.width, bounds.size.height));
 		CGFloat d = MAX(bounds.size.width, bounds.size.height);
-		CGPoint sp = CGPointMake(bounds.size.width * _startPoint.x, bounds.size.height * _startPoint.y);
 		CGFloat sr = _startRadius * d;
-		CGPoint ep = CGPointMake(bounds.size.width * _endPoint.x, bounds.size.height * _endPoint.y);
 		CGFloat er = _endRadius * d;
+		
 		CGContextDrawRadialGradient(
 			 ctx
 			,gradient
