@@ -15,10 +15,12 @@
 
 @implementation UIImage (ZLibrary)
 
-+ (UIImage*) imageWithColor:(UIColor*)color
++ (UIImage*) imageWithColor:(UIColor*)color size:(CGSize)size
 	{
 	UIImage *image = nil;
-    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+	CGRect rect;
+	rect.origin = CGPointZero;
+	rect.size   = size;
     UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
 	if (context)
@@ -28,7 +30,6 @@
 		image = UIGraphicsGetImageFromCurrentImageContext();
 		}
     UIGraphicsEndImageContext();
-
     return image;
 	}
 

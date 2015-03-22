@@ -31,7 +31,7 @@
 - (NSString*) stringByFormattingAsPhoneNumberAndDeletingCharacters:(BOOL)deleting;
 - (NSString*) stringByTrimmingWhiteSpace;
 
-- (NSString*) formatAsPhoneNumberWithBackspace:(BOOL)backspace;
+- (NSString*) stringFormattedAsPhoneNumberWithBackspace:(BOOL)backspace;
 
 //	Measuring strings --
 

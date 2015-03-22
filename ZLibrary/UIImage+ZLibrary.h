@@ -12,9 +12,9 @@
 
 @interface UIImage (ZLibrary)
 
-+ (UIImage*) imageWithColor:(UIColor*)color;
-- (UIImage*) imageWithGaussianBlurOfRadius:(CGFloat)radius;
++ (UIImage*) imageWithColor:(UIColor*)color size:(CGSize)size;
 + (UIImage*) imageNamedR4:(NSString *)name;		//	Tries to load a retina 4 image first if available.
+- (UIImage*) imageWithGaussianBlurOfRadius:(CGFloat)radius;
 - (UIImage*) imageSliceAtIndex:(NSInteger)index size:(CGSize)size inset:(CGSize)inset;
 - (UIImage*) imageTintedWithColor:(UIColor*)color;
 - (UIImage*) imageWithSize:(CGSize)size;

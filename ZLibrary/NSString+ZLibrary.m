@@ -248,7 +248,7 @@
 	return result;
 	}
 
-- (NSString*) formatAsPhoneNumberWithBackspace:(BOOL)backspace
+- (NSString*) stringFormattedAsPhoneNumberWithBackspace:(BOOL)backspace
 	{
 	NSString* phoneString =
 		[self stringByStrippingCharactersInSet:
