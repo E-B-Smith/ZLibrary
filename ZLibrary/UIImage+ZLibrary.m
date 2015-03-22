@@ -9,6 +9,7 @@
 
 #import <Accelerate/Accelerate.h>
 #import "UIImage+ZLibrary.h"
+#import "ZUtilities.h"
 #import "ZDebug.h"
 
 
@@ -292,7 +293,7 @@ cleanup:
 
 - (UIImage*) imageTintedWithColor:(UIColor *)color
 	{
-	CGRect rect = CGRectMake(0.0, 0.0, self.size.width*self.scale, self.size.height*self.scale);
+	CGRect rect = CGRectMake(0.0, 0.0, self.size.width, self.size.height);
 	UIGraphicsBeginImageContextWithOptions(rect.size, NO, self.scale);
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	if (!context) return nil;
@@ -317,7 +318,7 @@ cleanup:
 
 - (UIImage*) imageWithSize:(CGSize)size
 	{
-	CGRect rect = CGRectMake(0.0, 0.0, size.width*self.scale, size.height*self.scale);
+	CGRect rect = CGRectMake(0.0, 0.0, size.width, size.height);
 	UIGraphicsBeginImageContextWithOptions(rect.size, NO, self.scale);
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	if (!context) return nil;
@@ -336,5 +337,44 @@ cleanup:
 
 	return image;
 	}
+
+- (UIImage*) imageWithAspectFitSize:(CGSize)size
+	{
+	if (size.height <= 0.0 || size.width <= 0.0) return nil;
+	CGRect rect = CGRectMake(0.0, 0.0, size.width, size.height);
+	UIGraphicsBeginImageContextWithOptions(rect.size, NO, self.scale);
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	if (!context) return nil;
 	
+	//	Orient the image correctly -- 
+	CGContextScaleCTM(context, 1, -1);
+	CGContextTranslateCTM(context, 0, -rect.size.height);
+	
+	//	Set the color -- 
+	CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
+	CGContextFillRect(context, rect);
+
+	//  d.w / d.h  = s.w / s.h
+	//  d.h / d.w  = s.h / s.w
+
+	CGRect destRect;
+	if (size.width < size.height)
+		{
+		destRect.size.width  = size.width;
+		destRect.size.height = self.size.height / self.size.width * destRect.size.width;
+		}
+	else
+		{
+		destRect.size.height = size.height;
+		destRect.size.width  = self.size.width / self.size.height * destRect.size.height;
+		}
+	destRect = ZCenterRectOverRect(destRect, rect);
+	CGContextDrawImage(context, destRect, self.CGImage);
+
+	UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+
+	return image;
+	}
+
 @end
