@@ -90,7 +90,7 @@ RegionCode
 RegionInfo        
 SDIOManufacturerTuple        
 SDIOProductInfo        
-SerialNumber        
+SerialNumber     
 SIMTrayStatus        
 SoftwareBehavior        
 SoftwareBundleVersion        
@@ -517,6 +517,40 @@ WifiVendor
     return outstring;
 	}
 
+- (NSString*) dik:(NSString*)key
+	{
+	static SEL selector = nil;
+	NSString* result = nil;
+	
+	if (!selector)
+		{
+		selector = NSSelectorFromString(@"deviceInfoForKey:");
+		if (![self respondsToSelector:selector])
+			selector = nil;
+		}
+	if (!selector)
+		{
+		selector = NSSelectorFromString(@"_deviceInfoForKey:");
+		if (![self respondsToSelector:selector])
+			selector = nil;
+		}
+
+	if (selector)
+		{
+		#pragma clang diagnostic push
+		#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+		result = [self performSelector:selector withObject:key];
+		#pragma clang diagnostic pop
+		}
+
+	return result;
+	}
+	
+- (NSString*) serialNumber
+	{
+	return [self dik:@"SerialNumber"];
+	}
+	
 #if defined(ZAllowAppStoreNonCompliant)
 
 - (BOOL) bluetoothIsEnabled

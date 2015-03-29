@@ -31,6 +31,7 @@ typedef enum UIDeviceFamily
 - (NSString*) modelIdentifier;			//	The firmware string, like 'iPhone6,1'.
 - (NSString*) localizedModelIdentifier;	//	The 'pretty' hardware string: 'iPhone 5S GSM'.
 - (NSString*) hardwareModelIdentifier;	//	The raw hardware string, like 'N51AP'. Not so useful.
+- (NSString*) serialNumber;
 
 - (UIDeviceFamily)  deviceFamily;
 
