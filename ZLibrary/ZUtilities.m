@@ -89,7 +89,7 @@ MKCoordinateRegion MKBoundingRegionOfAnnotations(NSArray* annotations)
 CLLocationCoordinate2D CLLocationCoordinateInvalid = { -360.0, -360.0 };
 
 
-CLLocationCoordinate2D LocationCoordinateFromNSString(NSString*string)
+CLLocationCoordinate2D CLLocationCoordinate2DFromNSString(NSString*string)
 	{
 	double lat,lng;
 	CLLocationCoordinate2D location = CLLocationCoordinateInvalid;
@@ -109,7 +109,7 @@ CLLocationCoordinate2D LocationCoordinateFromNSString(NSString*string)
 	return location;
 	}
 
-NSString* NSStringFromLocationCoordinate(CLLocationCoordinate2D location)
+NSString* NSStringFromCLLocationCoordinate2D(CLLocationCoordinate2D location)
 	{
 	return [NSString stringWithFormat:@"(%f, %f)", location.latitude, location.longitude];
 	}

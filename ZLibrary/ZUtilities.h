@@ -221,8 +221,8 @@ extern void ZLogClassDescription(Class cls);
 //-----------------------------------------------------------------------------------------------
 
 
-extern CLLocationCoordinate2D LocationCoordinateFromNSString(NSString*string);
-extern NSString* NSStringFromLocationCoordinate(CLLocationCoordinate2D location);
+extern CLLocationCoordinate2D CLLocationCoordinate2DFromNSString(NSString*string);
+extern NSString* NSStringFromCLLocationCoordinate2D(CLLocationCoordinate2D location);
 
 MKMapRect MKMapRectFromCoordinateRegion(MKCoordinateRegion region);
 BOOL MKLocationCoordinate2DIsValid(CLLocationCoordinate2D coordinate);
