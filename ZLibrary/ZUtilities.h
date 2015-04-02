@@ -159,6 +159,7 @@ static inline void ZSleepForSeconds(NSTimeInterval seconds)
 	}
 
 
+
 #pragma mark - ZSequentialRand
 //-----------------------------------------------------------------------------------------------
 //	ZSequentialRand
@@ -174,15 +175,22 @@ extern uint64_t ZSequentialRandGetSeed();				//	Returns the value used as a seed
 extern double   ZSequentialRand();						//	Return a random double in range of [0.0, 1.0).
 
 
-#pragma mark - Misc.
 
+#pragma mark - Misc.
+//-----------------------------------------------------------------------------------------------
 //
-//	Misc.
+//										Misc.
 //
+//-----------------------------------------------------------------------------------------------
+
 
 #ifndef _countof
 #define _countof(_Array) (sizeof(_Array) / sizeof(_Array[0]))
 #endif
+
+
+#define ZMacroStringifyInner(x)		#x
+#define ZMacroStringify(x)			ZMacroStringifyInner(x)
 
 
 #define ZInitializeArray(array, value)		\
@@ -213,10 +221,11 @@ static inline CGFloat Zfrange(CGFloat low, CGFloat value, CGFloat high)
 extern void ZLogClassDescription(Class cls);
 
 
+
 #pragma mark - Mapping Functions
 //-----------------------------------------------------------------------------------------------
 //
-//                                        	Mapping Functions
+//                                   Location Mapping Functions
 //
 //-----------------------------------------------------------------------------------------------
 
