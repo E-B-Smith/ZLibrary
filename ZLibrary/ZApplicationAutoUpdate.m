@@ -212,7 +212,7 @@ static const NSInteger kRCAAlertTagID = 0xfeed;
 	NSURL* url = [NSURL URLWithString:urlString];
 	if ([[UIApplication sharedApplication] openURL:url])
 		{
-		ZAfterSecondsPerformBlock(3.0,
+		ZAfterSecondsPerformBlock(2.5,
 		^	{
 			[ZAlertView showAlertWithTitle:nil
 				message:@"Your app update is downloading to your home screen."
