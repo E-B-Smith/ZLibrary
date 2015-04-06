@@ -1,10 +1,17 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  ZWildcardGestureRecognizer.m
-//  ZLibrary-iOS
+//                                                                   ZWildcardGestureRecognizer.m
+//                                                                                   ZLibrary-iOS
 //
-//  Created by Edward Smith on 11/21/11.
-//  Copyright (c) 2015 Edward Smith. All rights reserved.
+//                                              A gesture recognizer that recognizes any gesture.
+//                                                                    Edward Smith, November 2011
 //
+//                               -©- Copyright © 1996-2015 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
 
 
 #import "ZWildcardGestureRecognizer.h"

@@ -1,6 +1,6 @@
 //
 //  UIColor_ZLibrary.m
-//  Search
+//  ZLibrary
 //
 //  Created by Edward Smith on 2/18/14.
 //  Copyright (c) 2014 Edward Smith, All rights reserved.

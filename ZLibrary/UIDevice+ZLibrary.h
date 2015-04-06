@@ -1,6 +1,6 @@
 //
 //  UIDevice+ZLibrary.h
-//  Search
+//  ZLibrary
 //
 //  Created by Edward Smith on 1/29/14.
 //  Copyright (c) 2014 Edward Smith, All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  UITableViewCell+ZLibrary.h
-//  Search
+//  ZLibrary
 //
 //  Created by Edward Smith on 12/5/13.
 //  Copyright (c) 2013 Edward Smith, All rights reserved.

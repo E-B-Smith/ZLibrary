@@ -14,11 +14,9 @@
 //-----------------------------------------------------------------------------------------------
 
 
-
 #import "ZTriangle.h"
 #import "ZMath.h"
 #import "ZDebug.h"
-
 
 	
 NSString* NSStringFromZTriangle(ZTriangle t)

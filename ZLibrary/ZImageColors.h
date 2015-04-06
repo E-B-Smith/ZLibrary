@@ -1,6 +1,6 @@
 //
 //  ZImageColors.h
-//  Search
+//  ZLibrary
 //
 //  Created by Edward Smith on 2/13/14.
 //  Copyright (c) 2014 Edward Smith, All rights reserved.

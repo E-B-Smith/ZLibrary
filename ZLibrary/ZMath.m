@@ -14,9 +14,7 @@
 //-----------------------------------------------------------------------------------------------
 
 
-
 #import "ZMath.h"
-
 
 
 CGFloat ZRectIntersectionArea(CGRect r1, CGRect r2)
@@ -24,4 +22,3 @@ CGFloat ZRectIntersectionArea(CGRect r1, CGRect r2)
     CGRect r = CGRectIntersection(r1, r2);
     return (r.size.height * r.size.width);
     }
-
