@@ -14,11 +14,9 @@
 //-----------------------------------------------------------------------------------------------
 
 
-
 #import "ZTriangle.h"
 #import "ZMath.h"
 #import <iostream>
-
 
 
 #define FileAndLine			__FILE__ << "(" << __LINE__ << "): "

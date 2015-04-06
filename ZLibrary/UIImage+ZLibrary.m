@@ -1,6 +1,6 @@
 //
 //  UIImage+ZLibrary.m
-//  Search
+//  ZLibrary
 //
 //  Created by Edward Smith on 12/9/13.
 //  Copyright (c) 2013 Edward Smith, All rights reserved.

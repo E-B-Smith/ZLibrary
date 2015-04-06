@@ -14,7 +14,6 @@
 //-----------------------------------------------------------------------------------------------
 
 
-
 #import "ZUtilities.h"
 #import "ZDebug.h"
 #import <objc/runtime.h>
@@ -113,6 +112,70 @@ NSString* NSStringFromCLLocationCoordinate2D(CLLocationCoordinate2D location)
 	{
 	return [NSString stringWithFormat:@"(%f, %f)", location.latitude, location.longitude];
 	}
+
+
+@implementation CLLocation (ZLibrary)
+
++ (CLLocation*) locationFromDictionary:(NSDictionary*)dictionary
+	{
+	if (!dictionary) return nil;
+	CLLocationCoordinate2D coordinate;
+	coordinate.latitude  = [dictionary[@"latitude"] doubleValue];
+	coordinate.longitude = [dictionary[@"longitude"] doubleValue ];
+
+	CLLocation *location =
+		[[CLLocation alloc]
+			initWithCoordinate:coordinate
+			altitude:[dictionary[@"altitude"] doubleValue]
+			horizontalAccuracy:[dictionary[@"horizontalAccuracy"] doubleValue]
+			verticalAccuracy:[dictionary[@"verticalAccuracy"] doubleValue ]
+			timestamp:dictionary[@"timestamp"]];
+
+	return location;
+	}
+
+- (NSDictionary*) dictionary
+	{
+	return
+		@{
+		@"longitude": 	[NSNumber numberWithDouble:self.coordinate.longitude],
+		@"latitude":  	[NSNumber numberWithDouble:self.coordinate.latitude],
+		@"altitude":	[NSNumber numberWithDouble:self.altitude],
+		@"timestamp":	ZNSNullIfNil(self.timestamp),
+		@"horizontalAccuracy":		[NSNumber numberWithDouble:self.horizontalAccuracy],
+		@"verticalAccuracy":		[NSNumber numberWithDouble:self.verticalAccuracy]
+		};
+	}
+
+@end
+
+
+@implementation CLPlacemark (ZLibrary)
+
++ (CLPlacemark*) placemarkFromDictionary:(NSDictionary*)dictionary
+	{
+	if (!dictionary) return nil;
+	CLLocationCoordinate2D coordinate;
+	coordinate.latitude  = [dictionary[@"latitude"] doubleValue];
+	coordinate.longitude = [dictionary[@"longitude"] doubleValue ];
+	MKPlacemark * place = [[MKPlacemark alloc] initWithCoordinate:coordinate addressDictionary:dictionary[@"address"]];
+	return place;
+	}
+
+- (NSDictionary*) dictionary
+	{
+	CLLocation * location = self.location;
+	NSDictionary * address = self.addressDictionary;
+
+	NSDictionary *dictionary =
+		@{ 	@"latitude":			[NSNumber numberWithDouble:location.coordinate.latitude],
+			@"longitude":			[NSNumber numberWithDouble:location.coordinate.longitude],
+			@"address":				address };
+
+	return dictionary;
+	}
+
+@end
 
 
 #pragma mark - Geometric Functions

@@ -1,6 +1,6 @@
 //
 //  NSMutableArray+ZLibrary.h
-//  Search
+//  ZLibrary
 //
 //  Created by Edward Smith on 5/20/14.
 //  Copyright (c) 2014 Edward Smith, All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  UINib+ZLibrary.h
-//  Control
+//  ZLibrary
 //
 //  Created by Edward Smith on 5/24/14.
 //  Copyright (c) 2014 Edward Smith, All rights reserved.
