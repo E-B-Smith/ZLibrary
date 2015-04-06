@@ -1,10 +1,17 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  NSDate+ZLibrary.h
-//  ZLibrary
+//																			    NSDate+ZLibrary.h
+//																					 ZLibrary-iOS
 //
-//  Created by Edward Smith on 2/3/15.
-//  Copyright (c) 2015 Edward Smith. All rights reserved.
+//								   											   NSDate extensions.
+//																	  Edward Smith, February 2015
 //
+//								 -©- Copyright © 1996-2014 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
 
 
 #import <Foundation/Foundation.h>

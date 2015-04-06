@@ -6,7 +6,7 @@
 //																			   NSArray+ZLibrary.h
 //																					 ZLibrary-iOS
 //
-//								   Replaces invalid plist objects in an array with proxy objects.
+//								   											   NSArray additions.
 //																	   Edward Smith, January 2013
 //
 //								 -©- Copyright © 1996-2014 Edward Smith, all rights reserved. -©-
