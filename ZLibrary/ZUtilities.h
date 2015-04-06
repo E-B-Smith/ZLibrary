@@ -200,6 +200,8 @@ extern double   ZSequentialRand();						//	Return a random double in range of [0
 
 
 #define ZEmptyStringIfNil(nsstring)			(nsstring)?:@""
+#define ZNSNullIfNil(nsobject)				(nsobject)?:[NSNull null]
+
 #define ZRange(value, minValue, maxValue)	MAX(MIN(value, maxValue), minValue)
 
 static inline CGFloat ZSignf(CGFloat n)
@@ -260,6 +262,19 @@ static inline BOOL MKCoordinateRegionIsValid(MKCoordinateRegion region)
 		region.span.latitudeDelta >= 0.0 && region.span.latitudeDelta < 360.0 &&
 		region.span.longitudeDelta >= 0.0 && region.span.longitudeDelta < 360.0);
 	}
+
+
+@interface CLLocation (ZLibrary)
++ (CLLocation*) locationFromDictionary:(NSDictionary*)dictionary;
+- (NSDictionary*) dictionary;
+@end
+
+
+@interface CLPlacemark (ZLibrary)
++ (CLPlacemark*) placemarkFromDictionary:(NSDictionary*)dictionary;
+- (NSDictionary*) dictionary;
+@end
+
 
 #if defined(__cplusplus)
 }

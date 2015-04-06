@@ -3,7 +3,7 @@
 
 //-----------------------------------------------------------------------------------------------
 //
-//																				  NSArray+PList.h
+//																				  NSArray+PList.m
 //																					 ZLibrary-iOS
 //
 //								   Replaces invalid plist objects in an array with proxy objects.
@@ -14,12 +14,24 @@
 //-----------------------------------------------------------------------------------------------
 
 
-#import <Foundation/Foundation.h>
+#import "NSArray+ZLibrary.h"
+#import "ZUtilities.h"
 
 
-@interface NSArray (NSArrayPList)
+@implementation NSArray (ZLibrary)
 
-- (NSMutableArray*) arrayForPListReplacingInvalidObjectsWith:(id)object;
-- (NSMutableArray*) shuffledArray;	//	If seed < 0 then seed is choosen.
+- (NSMutableArray*) shuffledArray
+	{
+	NSMutableArray * array = [NSMutableArray arrayWithArray:self];
+	for (NSUInteger index = array.count-1; index > 0; --index)
+		{
+		int newIndex = rint(ZSequentialRand() * (double) index);
+		id temp = array[newIndex];
+		array[newIndex] = array[index];
+		array[index] = temp;
+		}
+
+	return array;
+	}
 
 @end
