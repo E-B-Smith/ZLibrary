@@ -155,7 +155,7 @@
 //	TestStringValue(MACAddress);
 	index++;
 	TestNumberValue(hasRetinaDisplay);
-	APP_STORE_NON_COMPLIANT( TestNumberValue(bluetoothIsEnabled) );
+//	APP_STORE_NON_COMPLIANT( TestNumberValue(bluetoothIsEnabled) );
 	}
 
 @end
