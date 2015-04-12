@@ -38,7 +38,13 @@
 	NSMutableAttributedString *result = [NSMutableAttributedString new];
 	while (string)
 		{
-		[result appendAttributedString:string];
+		if ([string isKindOfClass:NSAttributedString.class])
+			[result appendAttributedString:string];
+		else
+		if ([string isKindOfClass:NSString.class])		
+			[result appendAttributedString:[[NSAttributedString alloc] initWithString:(NSString*)string]];
+		else
+			[result appendAttributedString:string];
 		string = va_arg(list, NSAttributedString*);
 		}
 	
