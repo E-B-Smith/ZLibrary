@@ -36,4 +36,53 @@
 	return path;
 	}
 
++ (UIBezierPath*) bezierPathWithArcCenter:(CGPoint)center
+								   radius:(CGFloat)radius
+							   startAngle:(CGFloat)startAngle
+							     endAngle:(CGFloat)endAngle
+								   indent:(CGFloat)indent;
+	{	
+	//	Draw the left indent -- 
+		
+	CGPoint c1;
+	CGFloat rx1 = startAngle + M_PI/2.0;
+	c1.x = indent * cos(rx1) + center.x;
+	c1.y = indent * sin(rx1) + center.y;
+	
+	CGPoint li;
+	CGFloat lr1 = startAngle;	
+	li.x = radius * cos(lr1) + c1.x;
+	li.y = radius * sin(lr1) + c1.y;
+
+	//	Draw the right line -- 
+
+	CGPoint rl1;
+	CGFloat rr1 = endAngle;
+	rl1.x = radius * cos(rr1) + center.x;
+	rl1.y = radius * sin(rr1) + center.y;
+
+	//	Draw the right indent -- 
+	
+	rx1 = rr1 - M_PI/2.0;
+	c1.x = indent * cos(rx1) + center.x;
+	c1.y = indent * sin(rx1) + center.y;
+	
+	CGPoint ri;
+	ri.x = radius * cos(rr1) + c1.x;
+	ri.y = radius * sin(rr1) + c1.y;
+	
+	//	Make the arc -- 
+
+	lr1 = atan2(li.y - center.y, li.x - center.x);
+	rr1 = atan2(ri.y - center.y, ri.x - center.x);
+	
+	UIBezierPath* arc =
+		[UIBezierPath bezierPathWithArcCenter:center
+									   radius:radius
+								   startAngle:lr1
+									 endAngle:rr1
+									clockwise:YES];
+	return arc;
+	}
+
 @end

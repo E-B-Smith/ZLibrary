@@ -36,6 +36,7 @@
 
 - (void) layoutSubviews
 	{
+	[super layoutSubviews];
 	CGRect bounds = self.bounds;
 	bounds.size.width = MIN(bounds.size.height, bounds.size.width);
 	bounds.size.height = bounds.size.width;
