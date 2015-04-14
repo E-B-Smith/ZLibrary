@@ -131,10 +131,15 @@ extern CGRect ZRectForContentMode(UIViewContentMode mode, CGRect idealRect, CGRe
 
 typedef void (^ZPerformBlockType)(void);
 
+
+static inline dispatch_time_t ZDispatchSeconds(NSTimeInterval seconds)
+	{
+	return dispatch_time(DISPATCH_TIME_NOW, seconds * NSEC_PER_SEC);
+	}
+
 static inline void ZAfterSecondsPerformBlock(NSTimeInterval seconds, ZPerformBlockType block)
 	{
-	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, seconds * NSEC_PER_SEC);
-	dispatch_after(popTime, dispatch_get_main_queue(), block);
+	dispatch_after(ZDispatchSeconds(seconds), dispatch_get_main_queue(), block);
 	}
 
 static inline void ZPerformBlockInBackground(ZPerformBlockType block)
@@ -156,7 +161,6 @@ static inline void ZSleepForSeconds(NSTimeInterval seconds)
 	{
 	usleep((useconds_t) (seconds * 1000000.0));
 	}
-
 
 
 #pragma mark - ZSequentialRand
