@@ -378,4 +378,12 @@ cleanup:
 	return image;
 	}
 
+- (UIImage*) imageScaled:(CGFloat)scale
+	{
+	CGSize size = self.size;
+	size.width *= scale;
+	size.height *= scale;
+	return [self imageWithSize:size];
+	}
+
 @end

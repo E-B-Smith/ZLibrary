@@ -85,4 +85,41 @@
 	return arc;
 	}
 
++ (UIBezierPath*) bezierPathForQuoteWithRect:(CGRect)rect pointyBitHeight:(CGFloat)pointyHeight
+	{
+	void (^ pathAddLeg) (UIBezierPath* path, CGPoint point, CGPoint indent, CGPoint radii) = 
+		^ void (UIBezierPath* path, CGPoint point, CGPoint indent, CGPoint radii)
+			{
+			[path addLineToPoint:CGPointMake(point.x - indent.x, point.y - indent.y)];
+			[path addQuadCurveToPoint:CGPointMake(point.x + radii.x, point.y + radii.y) controlPoint:point];
+			};
+
+	CGFloat radius = 5.0;
+	UIBezierPath * path = [UIBezierPath bezierPath];
+	
+	[path moveToPoint:CGPointMake(rect.origin.x + radius, rect.origin.y)];
+	pathAddLeg(path,
+		CGPointMake(rect.origin.x + rect.size.width, rect.origin.y),
+		CGPointMake(radius, 0.0), CGPointMake(0.0, radius));
+	pathAddLeg(path,
+		CGPointMake(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height),
+		CGPointMake(0.0, radius), CGPointMake(-radius, 0.0));
+
+	//	Add the pointy bit -- 
+	
+	[path addLineToPoint:CGPointMake(rect.origin.x + rect.size.width - 55.0, rect.origin.y + rect.size.height)];
+	[path addLineToPoint:CGPointMake(rect.origin.x + rect.size.width - 65.0, rect.origin.y + rect.size.height + pointyHeight)];
+	[path addLineToPoint:CGPointMake(rect.origin.x + rect.size.width - 75.0, rect.origin.y + rect.size.height)];
+
+	//	Finish the rect -- 
+	
+	pathAddLeg(path,
+		CGPointMake(rect.origin.x, rect.origin.y + rect.size.height),
+		CGPointMake(-radius, 0.0), CGPointMake(0.0, -radius));
+	pathAddLeg(path,
+		CGPointMake(rect.origin.x, rect.origin.y),
+		CGPointMake(0.0, -radius), CGPointMake(radius, 0.0));
+	return path;
+	}
+
 @end

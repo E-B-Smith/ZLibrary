@@ -18,4 +18,7 @@
 							   startAngle:(CGFloat)startAngle
 							     endAngle:(CGFloat)endAngle
 								   indent:(CGFloat)indent;
+
++ (UIBezierPath*) bezierPathForQuoteWithRect:(CGRect)rect pointyBitHeight:(CGFloat)pointyHeight;
+
 @end
