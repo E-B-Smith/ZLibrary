@@ -18,8 +18,8 @@
 	NSData *imageData = UIImagePNGRepresentation(image);
 	NSTextAttachment* a = [[NSTextAttachment alloc] initWithData:imageData ofType:(__bridge NSString*)kUTTypePNG];
 	a.image = image;
-//	a.bounds = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
-	a.bounds = CGRectMake(-6.0, -2.0, 17.0, 17.0);
+	a.bounds = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
+//	a.bounds = CGRectMake(-6.0, -2.0, 17.0, 17.0);
 	
 	NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:a];
 	return string;
@@ -38,7 +38,13 @@
 	NSMutableAttributedString *result = [NSMutableAttributedString new];
 	while (string)
 		{
-		[result appendAttributedString:string];
+		if ([string isKindOfClass:NSAttributedString.class])
+			[result appendAttributedString:string];
+		else
+		if ([string isKindOfClass:NSString.class])		
+			[result appendAttributedString:[[NSAttributedString alloc] initWithString:(NSString*)string]];
+		else
+			[result appendAttributedString:string];
 		string = va_arg(list, NSAttributedString*);
 		}
 	

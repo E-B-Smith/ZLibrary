@@ -17,7 +17,9 @@
 - (UIImage*) imageWithGaussianBlurOfRadius:(CGFloat)radius;
 - (UIImage*) imageSliceAtIndex:(NSInteger)index size:(CGSize)size inset:(CGSize)inset;
 - (UIImage*) imageTintedWithColor:(UIColor*)color;
+
 - (UIImage*) imageWithSize:(CGSize)size;
 - (UIImage*) imageWithAspectFitSize:(CGSize)size;
+- (UIImage*) imageScaled:(CGFloat)scale;
 
 @end
