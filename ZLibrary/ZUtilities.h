@@ -225,6 +225,13 @@ static inline CGFloat Zfrange(CGFloat low, CGFloat value, CGFloat high)
 
 extern void ZLogClassDescription(Class cls);
 
+static inline NSString * ZGenerateNewUUIDString()
+	{
+	return
+		[[[NSUUID UUID] UUIDString]
+			stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	}
+
 
 
 #pragma mark - Mapping Functions
