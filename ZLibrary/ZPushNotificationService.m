@@ -22,6 +22,9 @@ const NSTimeInterval kWriteTimeout  = 60.0;
 const NSTimeInterval kReadTimeout 	= -1.0;
 
 
+#pragma mark ZPushNotificationMessage
+
+
 @implementation ZPushNotificationMessage
 
 - (NSString*) description
@@ -36,7 +39,7 @@ const NSTimeInterval kReadTimeout 	= -1.0;
 @end
 
 
-#pragma mark -
+#pragma mark - ZPushNotificationResponse
 
 
 NSString * const ZPushResponseStatusString[11] =
@@ -92,7 +95,7 @@ NSString * const ZPushResponseStatusString[11] =
 @end
 
 
-#pragma mark -
+#pragma mark - ZPushSocket
 
 
 @interface ZPushSocket : NSObject
@@ -107,7 +110,7 @@ NSString * const ZPushResponseStatusString[11] =
 @end
 
 
-#pragma mark -
+#pragma mark - ZPushNotificationService
 
 
 @interface ZPushNotificationService ()
@@ -419,7 +422,7 @@ NSString * const ZPushResponseStatusString[11] =
 			[ZPushNotificationResponse responseFromBuffer:pushSocket.responseBuffer];
 		response.message = [messages objectForKey:[NSNumber numberWithInteger:response.notificationID]];
 		if (!response.message)
-			ZDebug(@"No message for notificationID #%d.", response.notificationID);
+			ZDebug(@"No saved message for notificationID #%d.", response.notificationID);
 		if (response)
 			{
 			if (response.status == ZPushResponseServiceShutdown)

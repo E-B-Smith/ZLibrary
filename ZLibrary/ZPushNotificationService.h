@@ -15,10 +15,13 @@ extern NSString * const ZPushServiceNotification;
 
 typedef enum ZPushService
 	{
-	ZPushServiceProduction		= 0,
+	ZPushServiceProduction	= 0,
 	ZPushServiceDevelopment	= 1
 	}
 	ZPushService;
+
+
+#pragma mark - ZPushNotificationMessage
 
 
 @interface ZPushNotificationMessage : NSObject
@@ -47,6 +50,9 @@ typedef enum ZPushResponseStatus
 	ZPushResponseStatus;
 
 
+#pragma mark - ZPushNotificationResponse
+
+
 @interface ZPushNotificationResponse : NSObject
 - (NSString*) statusString;
 @property (assign) uint8_t	 			command;
@@ -59,7 +65,7 @@ typedef enum ZPushResponseStatus
 @end
 
 
-#pragma mark -
+#pragma mark - ZPushNotificationService
 
 
 @interface ZPushNotificationService : NSObject
