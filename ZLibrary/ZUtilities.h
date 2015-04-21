@@ -106,6 +106,14 @@ static inline CGRect ZRectInflate(CGRect r, CGFloat dx, CGFloat dy)
 	return CGRectInset(r, dx, dy);
 	}
 
+static inline CGPoint ZPointOffset(CGPoint p, CGPoint offset)
+	{
+	p.x += offset.x;
+	p.y += offset.y;
+	return p;
+	}
+	
+
 #if TARGET_OS_IPHONE
 
 typedef enum UIViewContentModeExtension
