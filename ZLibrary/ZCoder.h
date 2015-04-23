@@ -92,10 +92,8 @@ coderTypeDefinition(id, 	'@', Object, 	object,		Object)
 
 
 @protocol ZDictionaryCoder <NSObject>
-
 - (NSDictionary*) encodeToDictionary;
 + (id) decodeFromDictionary:(NSDictionary*)dictionary;
-
 @end
 
 
@@ -104,6 +102,7 @@ coderTypeDefinition(id, 	'@', Object, 	object,		Object)
 
 @interface NSObject (ZDictionaryCoder)
 - (NSDictionary*) encodeToDictionary;
+- (NSDictionary*) encodeToDictionaryIgnoringMembers:(NSArray*)members;
 + (id) decodeFromDictionary:(NSDictionary*)dictionary;
 @end
 

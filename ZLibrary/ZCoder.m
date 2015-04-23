@@ -252,6 +252,14 @@
 	{
 	return [ZCoder encodeToDictionary:self];
 	}
+	
+- (NSDictionary*) encodeToDictionaryIgnoringMembers:(NSArray*)ignoredMembers
+	{
+	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	ZCoder *coder = [ZCoder encoderWithDictionary:dictionary];
+	[ZCoder encodeObject:self withCoder:coder ignoringMembers:(NSArray*)ignoredMembers];
+	return dictionary;
+	}
 
 + (id) decodeFromDictionary:(NSDictionary*)dictionary
 	{
