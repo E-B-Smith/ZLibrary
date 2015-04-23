@@ -157,6 +157,18 @@ static NSString*	kCopyrightString = nil;
 	return applicationName;
 	}
 
+#ifdef TARGET_OS_MAC
+
++ (NSString*) currentSystemName		{ return @"iMac"; }			//	eDebug
++ (NSString*) currentSystemVersion 	{ return @"10.10.3"; }		//	eDebug
+
+#else
+
++ (NSString*) currentSystemName		{ return [UIDevice currentDevice].systemName; }
++ (NSString*) currentSystemVersion 	{ return [UIDevice currentDevice].systemVersion; }
+
+#endif
+
 + (NSString*) longBuildString
 	{
 	NSString* debug = @"";
@@ -171,8 +183,8 @@ static NSString*	kCopyrightString = nil;
 			debug,
 			[ZBuildInfo buildDateStringWithDateStyle:NSDateFormatterFullStyle
 				timeStyle:NSDateFormatterLongStyle],
-			[UIDevice currentDevice].systemName,
-			[UIDevice currentDevice].systemVersion];
+			[self currentSystemName],
+			[self currentSystemVersion]];
 	return buildString;
 	}
 
