@@ -16,7 +16,7 @@
 #import "ZLibrary.h"
 
 
-typedef NS_ENUM(NSInteger, UIDeviceFamily)
+typedef NS_ENUM(int32_t, UIDeviceFamily)
 	{
 	UIDeviceFamilyUnknown = 0,
     UIDeviceFamilyiPhone,

@@ -11,7 +11,7 @@
 #import "ZDebug.h"
 
 
-typedef NS_ENUM(NSInteger, ZObserverType)
+typedef NS_ENUM(int32_t, ZObserverType)
 	{
 	 ZObserverTypeKeyValue	   = 1
 	,ZObserverTypeNotification = 2

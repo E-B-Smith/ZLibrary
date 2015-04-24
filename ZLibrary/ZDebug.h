@@ -114,7 +114,7 @@ extern "C" {
 #endif
 
 
-typedef NS_ENUM(NSInteger, ZDebugLevel)
+typedef NS_ENUM(int32_t, ZDebugLevel)
 	{
 	 ZDebugLevelNone = 0
 	,ZDebugLevelDebug

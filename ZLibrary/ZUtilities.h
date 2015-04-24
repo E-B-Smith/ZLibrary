@@ -122,7 +122,7 @@ static inline CGPoint ZPointOffset(CGPoint p, CGFloat x, CGFloat y)
 
 #if TARGET_OS_IPHONE
 
-typedef NS_ENUM(NSInteger, UIViewContentModeExtension)
+typedef NS_ENUM(int32_t, UIViewContentModeExtension)
 	{
 	UIViewContentModeClipped	=	(1<<8),
 	UIViewContentModeExtensions = 	0xff00

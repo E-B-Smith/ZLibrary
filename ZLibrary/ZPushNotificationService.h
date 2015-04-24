@@ -13,7 +13,7 @@
 extern NSString * const ZPushServiceNotification;
 
 
-typedef NS_ENUM(NSInteger, ZPushService)
+typedef NS_ENUM(int32_t, ZPushService)
 	{
 	ZPushServiceProduction	= 0,
 	ZPushServiceDevelopment	= 1
@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger, ZPushService)
 @end;
 
 
-typedef NS_ENUM(NSInteger, ZPushResponseStatus)
+typedef NS_ENUM(int32_t, ZPushResponseStatus)
 	{
 	ZPushResponseSuccess 			= 0,
 	ZPushResponseProcessingError 	= 1,
