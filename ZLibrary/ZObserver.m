@@ -11,12 +11,12 @@
 #import "ZDebug.h"
 
 
-typedef enum ZObserverType
+typedef NS_ENUM(int32_t, ZObserverType)
 	{
 	 ZObserverTypeKeyValue	   = 1
 	,ZObserverTypeNotification = 2
-	}
-	ZObserverType;
+	};
+
 
 @interface ZObserverClient : NSObject
 @property (atomic, retain) id  observeObject;

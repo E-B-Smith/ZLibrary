@@ -106,26 +106,52 @@ static inline CGRect ZRectInflate(CGRect r, CGFloat dx, CGFloat dy)
 	return CGRectInset(r, dx, dy);
 	}
 
-static inline CGPoint ZPointOffset(CGPoint p, CGPoint offset)
+static inline CGPoint ZPointOffsetPoint(CGPoint p, CGPoint offset)
 	{
 	p.x += offset.x;
 	p.y += offset.y;
 	return p;
 	}
-	
+
+static inline CGPoint ZPointOffset(CGPoint p, CGFloat x, CGFloat y)
+	{
+	p.x += x; p.y += y;
+	return p;
+	}
+
 
 #if TARGET_OS_IPHONE
 
-typedef enum UIViewContentModeExtension
+typedef NS_ENUM(int32_t, UIViewContentModeExtension)
 	{
 	UIViewContentModeClipped	=	(1<<8),
 	UIViewContentModeExtensions = 	0xff00
-	}
-	UIViewContentModeExtension;
+	};
 
 extern CGRect ZRectForContentMode(UIViewContentMode mode, CGRect idealRect, CGRect boundsRect);
 
 #endif
+
+
+
+#pragma mark Geometric Functions
+//-----------------------------------------------------------------------------------------------
+//
+//                                       Conversion Functions
+//
+//-----------------------------------------------------------------------------------------------
+
+
+static inline double ZDegreesFromRadians(double radians)
+	{
+	return  (fmod(radians, 2.0*M_PI) / 2.0*M_PI) * 360.0;
+	}
+
+static inline double ZFahrenheitFromCelsius(double celsius)
+	{
+	return celsius * 9.0/5.0 + 32.0;
+	}
+
 
 
 #pragma mark - Blocks and Threads
@@ -181,6 +207,7 @@ static inline void ZSleepForSeconds(NSTimeInterval seconds)
 //-----------------------------------------------------------------------------------------------
 
 
+
 extern void     ZSequentialRandSetSeed(uint64_t seed);	//	If -1 is passed as a seed, a seed is choosen from epoch time.
 extern uint64_t ZSequentialRandGetSeed();				//	Returns the value used as a seed.
 extern double   ZSequentialRand();						//	Return a random double in range of [0.0, 1.0).
@@ -230,8 +257,6 @@ static inline CGFloat Zfrange(CGFloat low, CGFloat value, CGFloat high)
     else
         return value;
     }
-
-extern void ZLogClassDescription(Class cls);
 
 static inline NSString * ZGenerateNewUUIDString()
 	{

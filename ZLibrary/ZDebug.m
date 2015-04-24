@@ -20,6 +20,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <sys/sysctl.h>
+#import <objc/runtime.h>
+
 
 //  Handle ARC --
 
@@ -284,4 +286,48 @@ bool ZDebugDebuggerIsAttached()
 
     return ( (info.kp_proc.p_flag & P_TRACED) != 0 );
 	}
+
+
+void ZLogClassDescription(Class class)
+	{
+	//	Dump the class --
+
+	if (!class)
+		{
+		ZLog(@"Class Dump: Class is nil.");
+		return;
+		}
+
+	const char* superclassname = "nil";
+	Class superclass = class_getSuperclass(class);
+	if (superclass) superclassname = class_getName(superclass);
+	if (!superclassname) superclassname = "<nil>";
+
+	ZLog(@"Class '%s' of class '%s':", class_getName(class), superclassname);
+
+	uint count = 0;
+	Method *methods = class_copyMethodList(object_getClass(class), &count);
+	for (int i = 0; i < count; ++i)
+		ZLog(@"Class method name: '%s'", sel_getName(method_getName(methods[i])));
+	if (methods) free(methods);
+
+	count = 0;
+	methods = class_copyMethodList(class, &count);
+	for (int i = 0; i < count; ++i)
+		ZLog(@"Method name: '%s'", sel_getName(method_getName(methods[i])));
+	if (methods) free(methods);
+
+	count = 0;
+	Ivar *ivars = class_copyIvarList(class, &count);
+	for (int i = 0; i < count; ++i)
+		ZLog(@"Ivar name: '%s'.", ivar_getName(ivars[i]));
+	if (ivars) free(ivars);
+
+	count = 0;
+	objc_property_t *properties = class_copyPropertyList(class, &count);
+	for (int i = 0; i < count; ++i)
+		ZLog(@"Property name: '%s'.", property_getName(properties[i]));
+	if (properties) free(properties);
+	}
+
 

@@ -13,12 +13,11 @@
 extern NSString * const ZPushServiceNotification;
 
 
-typedef enum ZPushService
+typedef NS_ENUM(int32_t, ZPushService)
 	{
 	ZPushServiceProduction	= 0,
 	ZPushServiceDevelopment	= 1
-	}
-	ZPushService;
+	};
 
 
 #pragma mark - ZPushNotificationMessage
@@ -33,7 +32,7 @@ typedef enum ZPushService
 @end;
 
 
-typedef enum ZPushResponseStatus
+typedef NS_ENUM(int32_t, ZPushResponseStatus)
 	{
 	ZPushResponseSuccess 			= 0,
 	ZPushResponseProcessingError 	= 1,
@@ -46,8 +45,7 @@ typedef enum ZPushResponseStatus
 	ZPushResponseInvalidToken		= 8,
 	ZPushResponseServiceShutdown 	= 10,
 	ZPushResponseUnkownError 		= 255
-	}
-	ZPushResponseStatus;
+	};
 
 
 #pragma mark - ZPushNotificationResponse
