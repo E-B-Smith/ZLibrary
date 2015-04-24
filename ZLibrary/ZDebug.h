@@ -114,7 +114,7 @@ extern "C" {
 #endif
 
 
-typedef enum ZDebugLevel
+typedef NS_ENUM(NSInteger, ZDebugLevel)
 	{
 	 ZDebugLevelNone = 0
 	,ZDebugLevelDebug
@@ -122,8 +122,7 @@ typedef enum ZDebugLevel
 	,ZDebugLevelLog
 	,ZDebugLevelWarning
 	,ZDebugLevelError
-	}
-	ZDebugLevel;
+	};
 
 
 typedef void (*ZDebugMessageHandlerProcedurePtr)(ZDebugLevel level, NSString* debugString);

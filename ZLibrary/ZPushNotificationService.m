@@ -75,14 +75,14 @@ NSString * const ZPushResponseStatusString[11] =
 - (NSString*) statusString
 	{
 	if (self.status > 10)
-		return [NSString stringWithFormat:@"Unknown status %d", self.status];
+		return [NSString stringWithFormat:@"Unknown status %ld", self.status];
 	else
 		return ZPushResponseStatusString[self.status];
 	}
 
 - (NSString*) description
 	{
-	return [NSString stringWithFormat:@"<%@ #%d Command %d. %d:%@ %@ %@>",
+	return [NSString stringWithFormat:@"<%@ #%d Command %d. %ld:%@ %@ %@>",
 				self.class,
 				self.notificationID,
 				self.command,

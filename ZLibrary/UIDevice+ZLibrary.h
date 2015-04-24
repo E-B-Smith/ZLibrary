@@ -15,15 +15,15 @@
 #import <UIKit/UIKit.h>
 #import "ZLibrary.h"
 
-typedef enum UIDeviceFamily
+
+typedef NS_ENUM(NSInteger, UIDeviceFamily)
 	{
 	UIDeviceFamilyUnknown = 0,
     UIDeviceFamilyiPhone,
     UIDeviceFamilyiPod,
     UIDeviceFamilyiPad,
     UIDeviceFamilyAppleTV
-    }
-	UIDeviceFamily;
+    };
 
 
 @interface UIDevice (ZLibrary)

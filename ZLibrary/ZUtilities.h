@@ -106,22 +106,27 @@ static inline CGRect ZRectInflate(CGRect r, CGFloat dx, CGFloat dy)
 	return CGRectInset(r, dx, dy);
 	}
 
-static inline CGPoint ZPointOffset(CGPoint p, CGPoint offset)
+static inline CGPoint ZPointOffsetPoint(CGPoint p, CGPoint offset)
 	{
 	p.x += offset.x;
 	p.y += offset.y;
 	return p;
 	}
-	
+
+static inline CGPoint ZPointOffset(CGPoint p, CGFloat x, CGFloat y)
+	{
+	p.x += x; p.y += y;
+	return p;
+	}
+
 
 #if TARGET_OS_IPHONE
 
-typedef enum UIViewContentModeExtension
+typedef NS_ENUM(NSInteger, UIViewContentModeExtension)
 	{
 	UIViewContentModeClipped	=	(1<<8),
 	UIViewContentModeExtensions = 	0xff00
-	}
-	UIViewContentModeExtension;
+	};
 
 extern CGRect ZRectForContentMode(UIViewContentMode mode, CGRect idealRect, CGRect boundsRect);
 
