@@ -258,8 +258,6 @@ static inline CGFloat Zfrange(CGFloat low, CGFloat value, CGFloat high)
         return value;
     }
 
-extern void ZLogClassDescription(Class cls);
-
 static inline NSString * ZGenerateNewUUIDString()
 	{
 	return
