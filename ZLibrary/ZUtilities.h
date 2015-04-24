@@ -133,6 +133,27 @@ extern CGRect ZRectForContentMode(UIViewContentMode mode, CGRect idealRect, CGRe
 #endif
 
 
+
+#pragma mark Geometric Functions
+//-----------------------------------------------------------------------------------------------
+//
+//                                       Conversion Functions
+//
+//-----------------------------------------------------------------------------------------------
+
+
+static inline double ZDegreesFromRadians(double radians)
+	{
+	return  (fmod(radians, 2.0*M_PI) / 2.0*M_PI) * 360.0;
+	}
+
+static inline double ZFahrenheitFromCelsius(double celsius)
+	{
+	return celsius * 9.0/5.0 + 32.0;
+	}
+
+
+
 #pragma mark - Blocks and Threads
 //-----------------------------------------------------------------------------------------------
 //
@@ -184,6 +205,7 @@ static inline void ZSleepForSeconds(NSTimeInterval seconds)
 //	the same sequence of 'random' numbers are produced.  Great for testing,
 //	bad for cryptography.
 //-----------------------------------------------------------------------------------------------
+
 
 
 extern void     ZSequentialRandSetSeed(uint64_t seed);	//	If -1 is passed as a seed, a seed is choosen from epoch time.
