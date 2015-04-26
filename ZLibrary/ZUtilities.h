@@ -241,11 +241,8 @@ extern double   ZSequentialRand();						//	Return a random double in range of [0
 #define ZNSNullIfNil(nsobject)				(nsobject)?:[NSNull null]
 
 #define ZRange(value, minValue, maxValue)	MAX(MIN(value, maxValue), minValue)
+#define ZSign(value)						(value < 0) ? -1.0 : 1.0
 
-static inline CGFloat ZSignf(CGFloat n)
-	{
-	return (n < 0.0) ? -1.0 : 1.0;
-	}
 
 static inline CGFloat Zfrange(CGFloat low, CGFloat value, CGFloat high)
     {
