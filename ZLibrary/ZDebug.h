@@ -126,6 +126,8 @@ typedef NS_ENUM(int32_t, ZDebugLevel)
 
 
 extern void ZLogClassDescription(Class class);
+//extern void ZLogInstance(id instance);
+
 typedef void (*ZDebugMessageHandlerProcedurePtr)(ZDebugLevel level, NSString* debugString);
 
 

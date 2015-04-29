@@ -330,4 +330,59 @@ void ZLogClassDescription(Class class)
 	if (properties) free(properties);
 	}
 
+/*
+void ZLogInstance(id<NSObject> instance)
+	{
+	//	Dump the class --
 
+	if (!instance)
+		{
+		ZLog(@"ZLogInstance: Instance is nil.");
+		return;
+		}
+
+	const char* superclassname = "nil";
+	Class class = instance.class;	
+	Class superclass = class_getSuperclass(class);
+	if (superclass) superclassname = class_getName(superclass);
+	if (!superclassname) superclassname = "<nil>";
+
+	ZLog(@"Object %p is class '%s' of class '%s':", instance, class_getName(class), superclassname);
+
+
+	uint count = 0;
+	Method *methods = class_copyMethodList(object_getClass(class), &count);
+	for (int i = 0; i < count; ++i)
+		ZLog(@"Class method name: '%s'", sel_getName(method_getName(methods[i])));
+	if (methods) free(methods);
+
+	count = 0;
+	methods = class_copyMethodList(class, &count);
+	for (int i = 0; i < count; ++i)
+		ZLog(@"Method name: '%s'", sel_getName(method_getName(methods[i])));
+	if (methods) free(methods);
+
+	#define isTypeOf(encoding, type)   (strncmp(encoding, @encode(type), strlen(encoding)) == 0)
+
+	count = 0;
+	Ivar *ivars = class_copyIvarList(class, &count);
+	for (int i = 0; i < count; ++i)
+		{
+		const char* encoding = ivar_getTypeEncoding(ivars[i]);
+		if (isTypeOf(encoding, id))
+			ZLog(@"Ivar '%s' value %@.", ivar_getName(ivars[i]), object_getIvar(instance, ivars[i]));
+		else
+		if (isTypeOf(encoding, float) || isTypeOf(encoding, double))
+			ZLog(@"Ivar '%s' value %f.", ivar_getName(ivars[i]), ((double*) object_getIvar(instance, ivars[i])));
+		else
+		if (*encoding == @encode(<#type-name#>))
+		}
+	if (ivars) free(ivars);
+
+	count = 0;
+	objc_property_t *properties = class_copyPropertyList(class, &count);
+	for (int i = 0; i < count; ++i)
+		ZLog(@"Property name: '%s'.", property_getName(properties[i]));
+	if (properties) free(properties);
+	}	
+*/
