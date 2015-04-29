@@ -255,11 +255,10 @@ static inline CGFloat Zfrange(CGFloat low, CGFloat value, CGFloat high)
         return value;
     }
 
-static inline NSString * ZGenerateNewUUIDString()
+static inline NSString * ZNewUUIDString()
 	{
-	return
-		[[[NSUUID UUID] UUIDString]
-			stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	return [[[NSUUID UUID] UUIDString]
+				stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 	}
 
 

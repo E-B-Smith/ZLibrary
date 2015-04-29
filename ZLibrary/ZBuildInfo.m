@@ -16,6 +16,7 @@
 
 #import "ZBuildInfo.h"
 #import "ZDebug.h"
+#include <sys/sysctl.h>
 
 
 char kBuildTimeStamp [] = __TIME__ " " __DATE__ "\0";
@@ -157,15 +158,37 @@ static NSString*	kCopyrightString = nil;
 	return applicationName;
 	}
 
++ (NSString*) hardwareModel
+	{
+	NSString * result = nil;
+	size_t length = 0;
+	sysctlbyname("hw.model", NULL, &length, NULL, 0);
+	if (length)
+		{
+		char *model = malloc(length*sizeof(char));
+		sysctlbyname("hw.model", model, &length, NULL, 0);
+		result = [NSString stringWithUTF8String:model];
+		free(model);
+		}
+	return result;
+	}
+
 #ifdef TARGET_OS_MAC
 
-+ (NSString*) currentSystemName		{ return @"iMac"; }			//	eDebug
-+ (NSString*) currentSystemVersion 	{ return @"10.10.3"; }		//	eDebug
+static inline NSDictionary* systemDictionary()
+	{
+	NSDictionary *dictionary =
+		[NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"];
+	return dictionary;
+	}
+
++ (NSString*) operatingSystemName		{ return systemDictionary()[@"ProductName"]; }
++ (NSString*) operatingSystemVersion 	{ return systemDictionary()[@"ProductUserVisibleVersion"]; }
 
 #else
 
-+ (NSString*) currentSystemName		{ return [UIDevice currentDevice].systemName; }
-+ (NSString*) currentSystemVersion 	{ return [UIDevice currentDevice].systemVersion; }
++ (NSString*) operatingSystemName		{ return [UIDevice currentDevice].systemName; }
++ (NSString*) operatingSystemVersion 	{ return [UIDevice currentDevice].systemVersion; }
 
 #endif
 
@@ -177,14 +200,15 @@ static NSString*	kCopyrightString = nil;
 #endif	
 	
 	NSString* buildString =
-		[NSString stringWithFormat:@"%@ Version %@%@ Built %@ running on %@ %@",
+		[NSString stringWithFormat:@"%@ Version %@%@ Built %@ running on %@ %@ %@",
 			[ZBuildInfo applicationName],
 			[ZBuildInfo versionString], 
 			debug,
 			[ZBuildInfo buildDateStringWithDateStyle:NSDateFormatterFullStyle
 				timeStyle:NSDateFormatterLongStyle],
-			[self currentSystemName],
-			[self currentSystemVersion]];
+			[self hardwareModel],
+			[self operatingSystemName],
+			[self operatingSystemVersion]];
 	return buildString;
 	}
 
