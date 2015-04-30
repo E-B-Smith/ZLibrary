@@ -59,7 +59,7 @@
 		}
 	else
 		{
-		ZDebug(@"Could not find dictionary entry for %@.", node);
+		ZDebug(@"Could not find dictionary entry for %@.", path);
 		}
 		
 	return result;
