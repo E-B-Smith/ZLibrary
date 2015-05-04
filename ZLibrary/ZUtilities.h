@@ -227,8 +227,8 @@ extern double   ZSequentialRand();						//	Return a random double in range of [0
 #endif
 
 
-#define ZMacroStringifyInner(x)		#x
-#define ZMacroStringify(x)			ZMacroStringifyInner(x)
+#define ZStringifyMacroInner(x)		#x
+#define ZStringifyMacro(x)			ZStringifyMacroInner(x)
 
 
 #define ZInitializeArray(array, value)		\

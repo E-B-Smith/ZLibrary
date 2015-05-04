@@ -43,6 +43,12 @@
 	return error;
 	}
 
+- (void) loadURL:(NSURL*)URL
+	{
+	NSURLRequest * request = [NSURLRequest requestWithURL:URL];
+	[self loadRequest:request];
+	}
+
 - (void) displayText:(NSString*)rawMessage
 	{
 	NSString* kBackupHTML =

@@ -14,8 +14,9 @@
 
 - (NSError*) loadHTMLFromMainBundleWithFileName:(NSString*)name;
 - (NSError*) loadHTMLFromLocalURL:(NSURL*)URL;
+- (void)     loadURL:(NSURL*)URL;
 - (void) displayText:(NSString*)message;
 - (CGSize) documentSize;
-- (CGSize) contentSize;
+- (CGSize) contentSize;		//	eDebug - Not reliable?
 
 @end
