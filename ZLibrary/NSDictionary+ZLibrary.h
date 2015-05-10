@@ -12,7 +12,7 @@
 
 @interface NSDictionary (ZLibrary)
 
-- (id) objectOfClass:(Class)class forPath:(NSString*)path;
+- (id) objectOfClass:(Class)class forPath:(NSString*)format, ...;
 
 @end
 

@@ -13,8 +13,13 @@
 
 @implementation NSDictionary (ZLibrary)
 
-- (id) objectOfClass:(Class)class forPath:(NSString*)path
+- (id) objectOfClass:(Class)class forPath:(NSString*)format, ...
 	{
+	va_list args;
+	va_start(args, format);
+	NSString *path = [[NSString alloc] initWithFormat:format arguments:args];
+	va_end(args);
+
 	id result = self;
 	NSString *node = nil;
 	NSScanner *scanner = [NSScanner scannerWithString:path];
