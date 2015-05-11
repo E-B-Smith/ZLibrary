@@ -97,7 +97,7 @@
 	BOOL scaleToFit = self.scalesPageToFit;
 	
 	self.scalesPageToFit = NO;
-	self.frame = CGRectMake(0.0, 0.0, 320.0, 1.0);
+	//self.frame = CGRectMake(0.0, 0.0, 320.0, 1.0);
 	
 	CGSize size;
 	size.height = [[self stringByEvaluatingJavaScriptFromString:@"document.height"] floatValue];
