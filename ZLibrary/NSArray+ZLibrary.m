@@ -23,6 +23,7 @@
 - (NSMutableArray*) shuffledArray
 	{
 	NSMutableArray * array = [NSMutableArray arrayWithArray:self];
+	if (array.count <= 0) return array;
 	for (NSUInteger index = array.count-1; index > 0; --index)
 		{
 		int newIndex = rint(ZSequentialRand() * (double) index);
