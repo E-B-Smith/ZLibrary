@@ -158,7 +158,9 @@ extern void ZDebugSetOptions(NSString* debugOptions);								//	Set file level d
 
 #define ZDebug(...)									do  { ZDebugMessageProcedure(ZDebugLevelDebug, __FILE__, __LINE__, __VA_ARGS__); } while (0)
 
-#define ZDebugLogMethod()							ZDebug(@"%@",  NSStringFromSelector(_cmd));
+#define ZDebugLogMethod()							ZDebug(@"%@",  NSStringFromSelector(_cmd))
+
+#define ZDebugLogError(error)						ZDebug(@"Error: %@",  error)
 
 #define ZDebugAssert(condition)						do  { BOOL b = ZDebugAssertProcedure((condition), __FILE__, __LINE__, #condition, nil); \
 														if (!b) { ZDebugBreakPoint(); } \
@@ -196,6 +198,7 @@ extern void ZDebugSetOptions(NSString* debugOptions);								//	Set file level d
 
 #define ZDebug(...)									do {} while (0)
 #define ZDebugLogMethod()							do {} while (0)
+#define ZDebugLogError(error)						do {} while (0)
 #define ZDebugLogFunctionName()						do {} while (0)
 #define ZDebugAssert(Condition)						do {} while (0)
 #define ZDebugAssertWithMessage(condition, message)	do {} while (0)
