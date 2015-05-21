@@ -21,5 +21,6 @@
 
 - (NSString*) stringRelativeToNow;
 + (NSDate*)   now;
++ (NSDate*)   dateFromString:(NSString*)dateString withFormat:(NSString*)format;
 
 @end

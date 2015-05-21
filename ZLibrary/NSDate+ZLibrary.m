@@ -71,5 +71,14 @@
 	{
 	return [NSDate date];
 	}
+
++ (NSDate*)   dateFromString:(NSString*)dateString withFormat:(NSString*)format
+	{
+	NSDate *result;
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	dateFormatter.dateFormat = format;
+	result = [dateFormatter dateFromString:dateString];
+	return result;
+	}
 	
 @end
