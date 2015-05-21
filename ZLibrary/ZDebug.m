@@ -375,7 +375,7 @@ void ZLogInstance(id<NSObject> instance)
 		if (isTypeOf(encoding, float) || isTypeOf(encoding, double))
 			ZLog(@"Ivar '%s' value %f.", ivar_getName(ivars[i]), ((double*) object_getIvar(instance, ivars[i])));
 		else
-		if (*encoding == @encode(<#type-name#>))
+		if (*encoding == @encode(:type-name:))
 		}
 	if (ivars) free(ivars);
 

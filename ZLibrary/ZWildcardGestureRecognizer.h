@@ -17,7 +17,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface ZWildcardGestureRecognizer : UIGestureRecognizer
+@interface ZWildcardGestureRecognizer : UITapGestureRecognizer
 - (id) initWithTarget:(id)target action:(SEL)action;
 @property (strong) NSArray * excludedViews;
 @end
