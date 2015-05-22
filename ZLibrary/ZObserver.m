@@ -9,6 +9,7 @@
 
 #import "ZObserver.h"
 #import "ZDebug.h"
+#import <objc/runtime.h>
 
 
 typedef NS_ENUM(int32_t, ZObserverType)
@@ -82,6 +83,58 @@ typedef NS_ENUM(int32_t, ZObserverType)
 	#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 	[client.target performSelector:client.selector];
 	#pragma clang diagnostic pop
+	}
+
+@end
+
+
+#pragma mark - ZDenotification
+
+
+@interface ZDenotification ()
+	{
+	void* denotificationObject;	//	void* rather than id to avoid some compiler weirdness
+	}
+- (instancetype) initWithDenotificationObject:(id)object;
+@end
+
+@implementation ZDenotification
+
+- (instancetype) initWithDenotificationObject:(id)object
+	{
+	self = [super init];
+	if (!self) return self;
+	self->denotificationObject = (__bridge void *) object;
+	return self;
+	}
+	
+- (void) dealloc
+	{
+#if 0
+
+//	if (denotificationObject)
+	ZDenotification *x = self;
+	__weak id ob = x->denotificationObject;
+	NSLog(@"Dealloc %@:%p.", x, x->denotificationObject);
+	NSLog(@"Dealloc %@:%p.", x, ob);
+	[[NSNotificationCenter defaultCenter] removeObserver:self->denotificationObject];
+	
+#else
+
+	id object = (__bridge id)(self->denotificationObject);
+	assert(object);
+	[[NSNotificationCenter defaultCenter] removeObserver:object];
+	
+#endif
+	}
+
++ (void) addDenotificationObject:(id)object
+	{
+	const void* kKey = "ZDenotification";
+	ZDenotification *denotifier = objc_getAssociatedObject(object, kKey);
+	if (!object || denotifier) return;
+	denotifier = [[ZDenotification alloc] initWithDenotificationObject:object];
+	objc_setAssociatedObject(object, kKey, denotifier, OBJC_ASSOCIATION_RETAIN);
 	}
 
 @end

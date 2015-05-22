@@ -13,3 +13,9 @@
 @interface ZObserver : NSObject
 - (void) observeKeyPath:(NSString*)keyPath ofObject:(id)object target:(id)target selector:(SEL)selector;
 @end
+
+
+@interface ZDenotification : NSObject
++ (void) addDenotificationObject:(id<NSObject>)object;
+@end
+
