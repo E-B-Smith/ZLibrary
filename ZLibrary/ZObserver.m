@@ -88,53 +88,48 @@ typedef NS_ENUM(int32_t, ZObserverType)
 @end
 
 
-#pragma mark - ZDenotification
+#pragma mark - ZAutoremoveNotificationObserver
 
 
-@interface ZDenotification ()
+@interface ZAutoremoveNotificationObserver ()
 	{
-	void* denotificationObject;	//	void* rather than id to avoid some compiler weirdness
+	void* observingObject;	//	Use 'void*' rather than 'id' to avoid some compiler weirdness.
 	}
-- (instancetype) initWithDenotificationObject:(id)object;
 @end
 
-@implementation ZDenotification
 
-- (instancetype) initWithDenotificationObject:(id)object
-	{
-	self = [super init];
-	if (!self) return self;
-	self->denotificationObject = (__bridge void *) object;
-	return self;
-	}
-	
+#pragma mark - ZAutoremoveNotificationObserver
+
+
+@implementation ZAutoremoveNotificationObserver
+
 - (void) dealloc
 	{
-#if 0
-
-//	if (denotificationObject)
-	ZDenotification *x = self;
-	__weak id ob = x->denotificationObject;
-	NSLog(@"Dealloc %@:%p.", x, x->denotificationObject);
-	NSLog(@"Dealloc %@:%p.", x, ob);
-	[[NSNotificationCenter defaultCenter] removeObserver:self->denotificationObject];
-	
-#else
-
-	id object = (__bridge id)(self->denotificationObject);
-	assert(object);
-	[[NSNotificationCenter defaultCenter] removeObserver:object];
-	
-#endif
+	id object = (__bridge id)(self->observingObject);
+	if (object)
+		[[NSNotificationCenter defaultCenter] removeObserver:object];
+	else
+		NSLog(@"Warning: No observer to remove for %@.", NSStringFromClass(self.class));
 	}
 
-+ (void) addDenotificationObject:(id)object
++ (void) observer:(id)object
 	{
-	const void* kKey = "ZDenotification";
-	ZDenotification *denotifier = objc_getAssociatedObject(object, kKey);
+	const void* kKey = class_getName(self.class);
+	ZAutoremoveNotificationObserver *denotifier = objc_getAssociatedObject(object, kKey);
 	if (!object || denotifier) return;
-	denotifier = [[ZDenotification alloc] initWithDenotificationObject:object];
+	denotifier = [[ZAutoremoveNotificationObserver alloc] init];
+	if (!denotifier) return;
+	denotifier->observingObject = (__bridge void *) object;
 	objc_setAssociatedObject(object, kKey, denotifier, OBJC_ASSOCIATION_RETAIN);
 	}
 
++ (void) cancelAutoremoveForObserver:(id)object
+	{
+	const void* kKey = class_getName(self.class);
+	ZAutoremoveNotificationObserver *denotifier = objc_getAssociatedObject(object, kKey);
+	denotifier->observingObject = nil;
+	objc_setAssociatedObject(object, kKey, nil, OBJC_ASSOCIATION_RETAIN);
+	}
+
 @end
+

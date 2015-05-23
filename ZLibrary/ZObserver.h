@@ -15,7 +15,12 @@
 @end
 
 
-@interface ZDenotification : NSObject
-+ (void) addDenotificationObject:(id<NSObject>)object;
-@end
+#pragma mark - ZAutoremoveNotificationObserver
 
+
+@interface ZAutoremoveNotificationObserver : NSObject
+
++ (void) observer:(id)object;
++ (void) cancelAutoremoveForObserver:(id)object;
+
+@end
