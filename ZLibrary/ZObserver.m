@@ -109,7 +109,7 @@ typedef NS_ENUM(int32_t, ZObserverType)
 	if (object)
 		[[NSNotificationCenter defaultCenter] removeObserver:object];
 	else
-		NSLog(@"Warning: No observer to remove for %@.", NSStringFromClass(self.class));
+		ZDebug(@"Warning: No observer to remove for %@.", NSStringFromClass(self.class));
 	}
 
 + (void) observer:(id)object
