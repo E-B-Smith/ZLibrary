@@ -206,11 +206,13 @@
 		2B3C4CE51AD2694F00A61EBA /* ZWildcardGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWildcardGestureRecognizer.h; sourceTree = "<group>"; };
 		2B3C4CE61AD2694F00A61EBA /* ZWildcardGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWildcardGestureRecognizer.m; sourceTree = "<group>"; };
 		2B3C4D211AD26A2800A61EBA /* ZLibrary.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLibrary.pch; sourceTree = "<group>"; };
+		2B4FE1A01B1530F8000ACD46 /* License.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = License.md; sourceTree = "<group>"; };
+		2B4FE1A11B1530F8000ACD46 /* ReadMe.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
 		2BA76DC01AD268A300EF8C1E /* libZLibrary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libZLibrary.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BA76DC31AD268A300EF8C1E /* ZLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZLibrary.h; sourceTree = "<group>"; };
 		2BA76DC51AD268A300EF8C1E /* ZLibrary.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLibrary.m; sourceTree = "<group>"; };
 		2BA76DCB1AD268A300EF8C1E /* ZLibraryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZLibraryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2BA76DD11AD268A300EF8C1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2BA76DD11AD268A300EF8C1E /* ZLibraryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ZLibraryTests-Info.plist"; path = "ZLibrary/ZLibraryTests-Info.plist"; sourceTree = SOURCE_ROOT; };
 		2BF7F00B1B14E7E7007CED78 /* NSDate+ZLibrary.Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ZLibrary.Test.m"; sourceTree = "<group>"; };
 		2BF7F00C1B14E7E7007CED78 /* NSFileHandle+ZLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileHandle+ZLibrary.h"; sourceTree = "<group>"; };
 		2BF7F00D1B14E7E7007CED78 /* NSFileHandle+ZLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileHandle+ZLibrary.m"; sourceTree = "<group>"; };
@@ -245,9 +247,10 @@
 		2BA76DB71AD268A300EF8C1E = {
 			isa = PBXGroup;
 			children = (
+				2B4FE1A11B1530F8000ACD46 /* ReadMe.md */,
+				2B4FE1A01B1530F8000ACD46 /* License.md */,
 				2B3C4D211AD26A2800A61EBA /* ZLibrary.pch */,
 				2BA76DC21AD268A300EF8C1E /* ZLibrary */,
-				2BA76DCF1AD268A300EF8C1E /* ZLibraryTests */,
 				2BA76DC11AD268A300EF8C1E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				2BA76DC51AD268A300EF8C1E /* ZLibrary.m */,
 				2B3C4CCC1AD2694F00A61EBA /* ZLibrary+PList.h */,
 				2B3C4CCD1AD2694F00A61EBA /* ZLibrary+PList.m */,
+				2BA76DD11AD268A300EF8C1E /* ZLibraryTests-Info.plist */,
 				2B3C4CCE1AD2694F00A61EBA /* ZLine.h */,
 				2B3C4CCF1AD2694F00A61EBA /* ZLine.m */,
 				2B3C4CD01AD2694F00A61EBA /* ZMath.h */,
@@ -385,22 +389,6 @@
 				2B3C4CE61AD2694F00A61EBA /* ZWildcardGestureRecognizer.m */,
 			);
 			path = ZLibrary;
-			sourceTree = "<group>";
-		};
-		2BA76DCF1AD268A300EF8C1E /* ZLibraryTests */ = {
-			isa = PBXGroup;
-			children = (
-				2BA76DD01AD268A300EF8C1E /* Supporting Files */,
-			);
-			path = ZLibraryTests;
-			sourceTree = "<group>";
-		};
-		2BA76DD01AD268A300EF8C1E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				2BA76DD11AD268A300EF8C1E /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -683,7 +671,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = ZLibraryTests/Info.plist;
+				INFOPLIST_FILE = "ZLibrary/ZLibraryTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -696,7 +684,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = ZLibraryTests/Info.plist;
+				INFOPLIST_FILE = "ZLibrary/ZLibraryTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
