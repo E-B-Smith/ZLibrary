@@ -66,6 +66,12 @@
 		2BA76DC41AD268A300EF8C1E /* ZLibrary.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2BA76DC31AD268A300EF8C1E /* ZLibrary.h */; };
 		2BA76DC61AD268A300EF8C1E /* ZLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA76DC51AD268A300EF8C1E /* ZLibrary.m */; };
 		2BA76DCC1AD268A300EF8C1E /* libZLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA76DC01AD268A300EF8C1E /* libZLibrary.a */; };
+		2BF7F0161B14E7E7007CED78 /* NSFileHandle+ZLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7F00D1B14E7E7007CED78 /* NSFileHandle+ZLibrary.m */; };
+		2BF7F0171B14E7E7007CED78 /* ZCommandLineTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7F0101B14E7E7007CED78 /* ZCommandLineTask.m */; };
+		2BF7F0181B14E7E7007CED78 /* ZLabelControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7F0121B14E7E7007CED78 /* ZLabelControl.m */; };
+		2BF7F0191B14E7E7007CED78 /* ZReadLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7F0141B14E7E7007CED78 /* ZReadLine.m */; };
+		2BF7F01A1B14E804007CED78 /* NSDate+ZLibrary.Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7F00B1B14E7E7007CED78 /* NSDate+ZLibrary.Test.m */; };
+		2BF7F01C1B14EABA007CED78 /* ZTriangle.Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B3C4CE21AD2694F00A61EBA /* ZTriangle.Test.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,6 +211,16 @@
 		2BA76DC51AD268A300EF8C1E /* ZLibrary.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLibrary.m; sourceTree = "<group>"; };
 		2BA76DCB1AD268A300EF8C1E /* ZLibraryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZLibraryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BA76DD11AD268A300EF8C1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2BF7F00B1B14E7E7007CED78 /* NSDate+ZLibrary.Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ZLibrary.Test.m"; sourceTree = "<group>"; };
+		2BF7F00C1B14E7E7007CED78 /* NSFileHandle+ZLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileHandle+ZLibrary.h"; sourceTree = "<group>"; };
+		2BF7F00D1B14E7E7007CED78 /* NSFileHandle+ZLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileHandle+ZLibrary.m"; sourceTree = "<group>"; };
+		2BF7F00E1B14E7E7007CED78 /* ZBuildInfo.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ZBuildInfo.sh; sourceTree = "<group>"; };
+		2BF7F00F1B14E7E7007CED78 /* ZCommandLineTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCommandLineTask.h; sourceTree = "<group>"; };
+		2BF7F0101B14E7E7007CED78 /* ZCommandLineTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCommandLineTask.m; sourceTree = "<group>"; };
+		2BF7F0111B14E7E7007CED78 /* ZLabelControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLabelControl.h; sourceTree = "<group>"; };
+		2BF7F0121B14E7E7007CED78 /* ZLabelControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLabelControl.m; sourceTree = "<group>"; };
+		2BF7F0131B14E7E7007CED78 /* ZReadLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZReadLine.h; sourceTree = "<group>"; };
+		2BF7F0141B14E7E7007CED78 /* ZReadLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZReadLine.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,11 +272,14 @@
 				2B3C4C811AD2694F00A61EBA /* NSAttributedString+ZLibrary.m */,
 				2B3C4C821AD2694F00A61EBA /* NSDate+ZLibrary.h */,
 				2B3C4C831AD2694F00A61EBA /* NSDate+ZLibrary.m */,
+				2BF7F00B1B14E7E7007CED78 /* NSDate+ZLibrary.Test.m */,
 				2B3C4C841AD2694F00A61EBA /* NSDictionary+ZLibrary.h */,
 				2B3C4C851AD2694F00A61EBA /* NSDictionary+ZLibrary.m */,
 				2B3C4C861AD2694F00A61EBA /* NSDictionary+ZLibrary.Test.m */,
 				2B3C4C871AD2694F00A61EBA /* NSException+ZLibrary.h */,
 				2B3C4C881AD2694F00A61EBA /* NSException+ZLibrary.m */,
+				2BF7F00C1B14E7E7007CED78 /* NSFileHandle+ZLibrary.h */,
+				2BF7F00D1B14E7E7007CED78 /* NSFileHandle+ZLibrary.m */,
 				2B3C4C891AD2694F00A61EBA /* NSMutableArray+ZLibrary.h */,
 				2B3C4C8A1AD2694F00A61EBA /* NSMutableArray+ZLibrary.m */,
 				2B3C4C8B1AD2694F00A61EBA /* NSObject+ZLibrary.h */,
@@ -305,12 +324,15 @@
 				2B3C4CB21AD2694F00A61EBA /* ZBlurredImageView.m */,
 				2B3C4CB31AD2694F00A61EBA /* ZBuildInfo.h */,
 				2B3C4CB41AD2694F00A61EBA /* ZBuildInfo.m */,
+				2BF7F00E1B14E7E7007CED78 /* ZBuildInfo.sh */,
 				2B3C4CB51AD2694F00A61EBA /* ZBuildInfo.Test.m */,
 				2B3C4CB61AD2694F00A61EBA /* ZCircularImageView.h */,
 				2B3C4CB71AD2694F00A61EBA /* ZCircularImageView.m */,
 				2B3C4CB81AD2694F00A61EBA /* ZCoder.h */,
 				2B3C4CB91AD2694F00A61EBA /* ZCoder.m */,
 				2B3C4CBA1AD2694F00A61EBA /* ZCoder.Test.m */,
+				2BF7F00F1B14E7E7007CED78 /* ZCommandLineTask.h */,
+				2BF7F0101B14E7E7007CED78 /* ZCommandLineTask.m */,
 				2B3C4CBB1AD2694F00A61EBA /* ZDebug.h */,
 				2B3C4CBC1AD2694F00A61EBA /* ZDebug.m */,
 				2B3C4CBD1AD2694F00A61EBA /* ZDebug.Test.m */,
@@ -328,6 +350,8 @@
 				2B3C4CC91AD2694F00A61EBA /* ZKeyChain.m */,
 				2B3C4CCA1AD2694F00A61EBA /* ZKeyValueObserver.h */,
 				2B3C4CCB1AD2694F00A61EBA /* ZKeyValueObserver.m */,
+				2BF7F0111B14E7E7007CED78 /* ZLabelControl.h */,
+				2BF7F0121B14E7E7007CED78 /* ZLabelControl.m */,
 				2BA76DC31AD268A300EF8C1E /* ZLibrary.h */,
 				2BA76DC51AD268A300EF8C1E /* ZLibrary.m */,
 				2B3C4CCC1AD2694F00A61EBA /* ZLibrary+PList.h */,
@@ -344,6 +368,8 @@
 				2B3C4CD71AD2694F00A61EBA /* ZPushNotificationService.m */,
 				2B3C4CD81AD2694F00A61EBA /* ZRadialGradientLayer.h */,
 				2B3C4CD91AD2694F00A61EBA /* ZRadialGradientLayer.m */,
+				2BF7F0131B14E7E7007CED78 /* ZReadLine.h */,
+				2BF7F0141B14E7E7007CED78 /* ZReadLine.m */,
 				2B3C4CDA1AD2694F00A61EBA /* ZScrollControlView.h */,
 				2B3C4CDB1AD2694F00A61EBA /* ZScrollControlView.m */,
 				2B3C4CDC1AD2694F00A61EBA /* ZShapeButton.h */,
@@ -479,7 +505,9 @@
 				2B3C4CEB1AD2694F00A61EBA /* NSDictionary+ZLibrary.m in Sources */,
 				2B3C4D141AD2694F00A61EBA /* ZLine.m in Sources */,
 				2B3C4CED1AD2694F00A61EBA /* NSException+ZLibrary.m in Sources */,
+				2BF7F0191B14E7E7007CED78 /* ZReadLine.m in Sources */,
 				2B3C4D0E1AD2694F00A61EBA /* ZGradientLayer.m in Sources */,
+				2BF7F0181B14E7E7007CED78 /* ZLabelControl.m in Sources */,
 				2B3C4D081AD2694F00A61EBA /* ZCoder.m in Sources */,
 				2B3C4D1B1AD2694F00A61EBA /* ZShapeButton.m in Sources */,
 				2B3C4D001AD2694F00A61EBA /* UIWindow+ZLibrary.m in Sources */,
@@ -500,6 +528,7 @@
 				2B3C4D0D1AD2694F00A61EBA /* ZGradientButton.m in Sources */,
 				2B3C4D1F1AD2694F00A61EBA /* ZUtilities.m in Sources */,
 				2B3C4D101AD2694F00A61EBA /* ZKeyboardNextFieldView.m in Sources */,
+				2BF7F0161B14E7E7007CED78 /* NSFileHandle+ZLibrary.m in Sources */,
 				2B3C4CFD1AD2694F00A61EBA /* UIView+ZLibrary.m in Sources */,
 				2B3C4CFF1AD2694F00A61EBA /* UIWebView+ZLibrary.m in Sources */,
 				2B3C4CE91AD2694F00A61EBA /* NSAttributedString+ZLibrary.m in Sources */,
@@ -508,6 +537,7 @@
 				2B3C4D031AD2694F00A61EBA /* ZApplicationAutoUpdate.m in Sources */,
 				2B3C4D041AD2694F00A61EBA /* ZBlurredImageView.m in Sources */,
 				2B3C4D1C1AD2694F00A61EBA /* ZSingleton.m in Sources */,
+				2BF7F0171B14E7E7007CED78 /* ZCommandLineTask.m in Sources */,
 				2B3C4CEF1AD2694F00A61EBA /* NSObject+ZLibrary.m in Sources */,
 				2BA76DC61AD268A300EF8C1E /* ZLibrary.m in Sources */,
 				2B3C4D051AD2694F00A61EBA /* ZBuildInfo.m in Sources */,
@@ -522,7 +552,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B3C4D291AD26B7700A61EBA /* NSScanner+ZLibrary.Test.m in Sources */,
+				2BF7F01C1B14EABA007CED78 /* ZTriangle.Test.m in Sources */,
 				2B3C4D241AD26B3900A61EBA /* NSDictionary+ZLibrary.Test.m in Sources */,
+				2BF7F01A1B14E804007CED78 /* NSDate+ZLibrary.Test.m in Sources */,
 				2B3C4D251AD26B4100A61EBA /* ZBuildInfo.Test.m in Sources */,
 				2B3C4D231AD26B2F00A61EBA /* UIDevice+ZLibrary.Test.m in Sources */,
 				2B3C4D2A1AD26B8D00A61EBA /* ZCoder.Test.m in Sources */,

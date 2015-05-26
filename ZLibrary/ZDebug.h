@@ -158,7 +158,7 @@ extern void ZDebugSetOptions(NSString* debugOptions);								//	Set file level d
 
 #define ZDebug(...)									do  { ZDebugMessageProcedure(ZDebugLevelDebug, __FILE__, __LINE__, __VA_ARGS__); } while (0)
 
-#define ZDebugLogMethod()							ZDebug(@"%@",  NSStringFromSelector(_cmd))
+#define ZDebugLogMethodName()						ZDebug(@"%@",  NSStringFromSelector(_cmd))
 
 #define ZDebugLogError(error)						ZDebug(@"Error: %@",  error)
 

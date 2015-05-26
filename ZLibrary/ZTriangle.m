@@ -62,6 +62,47 @@ void ZSortPointsByY(CGPoint* points, int Count)
 	}
 
 
+BOOL ZTriangleContainsPoint(ZTriangle t, CGPoint p)
+	{
+	//	Uses barycentric triangles to compute if point is in the triangle --
+	//
+	//	Adapted from Dr. Dobbs Journal:
+	//	http://www.ddj.com/184404201;jsessionid=UKAQIOFG1U454QSNDLOSKHSCJUNN2JVN?pgno=1
+	
+	CGPoint e0,e1,e2;
+	CGFloat u, v, d;
+	
+	e0.x = p.x - t.a.x;
+	e0.y = p.y - t.a.y;
+	
+	e1.x = t.b.x - t.a.x;
+	e1.y = t.b.y - t.a.y;
+	
+	e2.x = t.c.x - t.a.x;
+	e2.y = t.c.y - t.a.y;
+	
+	if (e1.x == 0.0)
+		{
+		if (e2.x == 0.0) return false;
+		u = e0.x / e2.x;
+		if (u < 0.0 || u > 1.0) return false;
+		if (e1.y == 0.0) return false;
+		v = (e0.y - (e2.y * u)) / e1.y;
+		if (v < 0.0) return false;
+		}
+	else
+		{
+		d = (e2.y * e1.x) - (e2.x * e1.y);
+		if (d == 0.0) return false;
+		u = ((e0.y * e1.x) - (e0.x * e1.y)) / d;
+		if (u < 0.0 || u > 1.0) return false;
+		v = (e0.x - (e2.x * u)) / e1.x;
+		if (v < 0.0) return false;
+		}
+	if ((u+v) > 1.0) return false;
+	return true;
+	}
+
 /*
 CGFloat ZTriangleRectIntersectionArea(ZTriangle t, CGRect r)
 	{
@@ -165,47 +206,6 @@ CGFloat ZTriangleIntersectionArea(ZTriangle tri1, ZTriangle tri2)
 	
 	CGFloat area = fabs(areaSum - areaDif) * 0.5;
 	return area;
-	}
-	
-BOOL zPointIsInTriangle(CGPoint p, ZTriangle t)
-	{
-	//	Uses barycentric triangles to compute if point is in the triangle --
-	//
-	//	Adapted from Dr. Dobbs Journal:
-	//	http://www.ddj.com/184404201;jsessionid=UKAQIOFG1U454QSNDLOSKHSCJUNN2JVN?pgno=1
-	
-	CGPoint e0,e1,e2;
-	CGFloat u, v, d;
-	
-	e0.x = p.x - t.a.x;
-	e0.y = p.y - t.a.y;
-	
-	e1.x = t.b.x - t.a.x;
-	e1.y = t.b.y - t.a.y;
-	
-	e2.x = t.c.x - t.a.x;
-	e2.y = t.c.y - t.a.y;
-	
-	if (e1.x == 0.0)
-		{
-		if (e2.x == 0.0) return false;
-		u = e0.x / e2.x;
-		if (u < 0.0 || u > 1.0) return false;
-		if (e1.y == 0.0) return false;
-		v = (e0.y - (e2.y * u)) / e1.y;
-		if (v < 0.0) return false;
-		}
-	else
-		{
-		d = (e2.y * e1.x) - (e2.x * e1.y);
-		if (d == 0.0) return false;
-		u = ((e0.y * e1.x) - (e0.x * e1.y)) / d;
-		if (u < 0.0 || u > 1.0) return false;
-		v = (e0.x - (e2.x * u)) / e1.x;
-		if (v < 0.0) return false;
-		}
-	if ((u+v) > 1.0) return false;
-	return true;
 	}
 	
 

@@ -20,7 +20,7 @@
 
 @implementation NSDate (ZLibrary)
 
-#if 1
+#if 0
 
 - (NSString*) stringRelativeToNow
 	{
@@ -72,7 +72,7 @@
 	return [NSDate date];
 	}
 
-+ (NSDate*)   dateFromString:(NSString*)dateString withFormat:(NSString*)format
++ (NSDate*) dateFromString:(NSString*)dateString withFormat:(NSString*)format
 	{
 	NSDate *result;
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -80,5 +80,30 @@
 	result = [dateFormatter dateFromString:dateString];
 	return result;
 	}
-	
+
++ (NSDateFormatter*) RFC8222DateFormatter
+	{
+	static NSDateFormatter * kRFC8222DateFormat = nil;
+    static dispatch_once_t onceToken = 0;
+    dispatch_once(&onceToken,
+	^	{
+		//	Format like: Mon, 2 Jan 2006 15:04:05 -0700
+		kRFC8222DateFormat = [[NSDateFormatter alloc] init];
+		//kRFC8222DateFormat.timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
+		kRFC8222DateFormat.dateFormat = @"E, d MMM yyyy H:mm:ss ZZZ";
+		});
+	return kRFC8222DateFormat;
+	}
+
+- (NSString*) RFC8222String
+	{
+	return [[NSDate RFC8222DateFormatter] stringFromDate:self];
+	}
+
++ (NSDate*) dateFromRFC8222String:(NSString*)string
+	{
+	return [[NSDate RFC8222DateFormatter] dateFromString:string];
+	}
+
 @end
+

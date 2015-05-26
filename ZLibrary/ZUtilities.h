@@ -243,6 +243,8 @@ extern double   ZSequentialRand();						//	Return a random double in range of [0
 #define ZRange(value, minValue, maxValue)	MAX(MIN(value, maxValue), minValue)
 #define ZSign(value)						(value < 0) ? -1.0 : 1.0
 
+#define ZUnusedVariable(x)					do { (void)(x); } while (0)
+
 
 static inline CGFloat Zfrange(CGFloat low, CGFloat value, CGFloat high)
     {
