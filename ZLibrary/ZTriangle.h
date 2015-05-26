@@ -59,7 +59,7 @@ static inline ZTriangle ZTriangleOffset(ZTriangle t, CGFloat dx, CGFloat dy)
 	return t;
 	}
 	
-extern BOOL			ZTriangleContainsPoint(CGPoint p, ZTriangle t);
+extern BOOL			ZTriangleContainsPoint(ZTriangle t, CGPoint p);
 //extern CGFloat	ZTriangleIntersectionArea(ZTriangle t1, ZTriangle t2);
 extern CGFloat		ZTriangleRectIntersectionArea(ZTriangle t, CGRect r);
 extern void			ZSortPointsByX(CGPoint* points, int Count);
