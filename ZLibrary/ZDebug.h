@@ -148,8 +148,8 @@ extern bool ZDebugDebuggerIsAttached();
 //	Returns the previous handler.
 extern ZDebugMessageHandlerProcedurePtr ZDebugSetMessageHandler(ZDebugMessageHandlerProcedurePtr newHandler);
 
-//extern bool ZDebugSetBreakOnAssertEnabled(bool enable);								//	Returns previous enabled value.
-//extern bool ZDebugBreakOnAssertIsEnabled();
+extern bool ZDebugSetBreakOnAssertEnabled(bool enable);								//	Returns previous enabled value.
+extern bool ZDebugBreakOnAssertIsEnabled();
 
 //extern bool ZDebugIsEnabled();
 //extern bool ZDebugSetEnabled(bool onOff);											//	Returns previous state of ZDebugIsEnabled().
@@ -163,11 +163,11 @@ extern void ZDebugSetOptions(NSString* debugOptions);								//	Set file level d
 #define ZDebugLogError(error)						ZDebug(@"Error: %@",  error)
 
 #define ZDebugAssert(condition)						do  { BOOL b = ZDebugAssertProcedure((condition), __FILE__, __LINE__, #condition, nil); \
-														if (!b) { ZDebugBreakPoint(); } \
+														if (!b && ZDebugBreakOnAssertIsEnabled()) { ZDebugBreakPoint(); } \
 														} while (0)
 
 #define ZDebugAssertWithMessage(condition, message)	do  { BOOL b = ZDebugAssertProcedure((condition), __FILE__, __LINE__, #condition, message); \
-														if (!b) { ZDebugBreakPoint(); } \
+														if (!b && ZDebugBreakOnAssertIsEnabled()) { ZDebugBreakPoint(); } \
 														} while (0)
 
 #define ZDebugLogFunctionName() 					ZDebug(@"%s", __FUNCTION__)
@@ -197,7 +197,7 @@ extern void ZDebugSetOptions(NSString* debugOptions);								//	Set file level d
 #define ZDebugSetOptions(debugOptions)				/*true*/
 
 #define ZDebug(...)									do {} while (0)
-#define ZDebugLogMethod()							do {} while (0)
+#define ZDebugLogMethodName()							do {} while (0)
 #define ZDebugLogError(error)						do {} while (0)
 #define ZDebugLogFunctionName()						do {} while (0)
 #define ZDebugAssert(Condition)						do {} while (0)

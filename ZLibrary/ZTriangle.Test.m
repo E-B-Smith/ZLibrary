@@ -32,7 +32,7 @@
 	XCTAssertFalse(ZTriangleContainsPoint(t, p), @"Point %@ should *not* be in triangle %@.", NSStringFromCGPoint(p), NSStringFromZTriangle(t))
 
 #define TestPointInTriangle(p, t) \
-	XCTAssertFalse(ZTriangleContainsPoint(t, p), @"Point %@ should be in triangle %@.", NSStringFromCGPoint(p), NSStringFromZTriangle(t))
+	XCTAssertTrue(ZTriangleContainsPoint(t, p), @"Point %@ should be in triangle %@.", NSStringFromCGPoint(p), NSStringFromZTriangle(t))
 
 #define TestTriangleArea \
 	{ \
