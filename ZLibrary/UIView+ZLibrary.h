@@ -34,17 +34,11 @@ extern void ZDebugGlobalEnableDebugViewFrames(BOOL enabled);
 - (UIImage*) imageWithSubviews:(BOOL)includeSubviews;
 
 - (CGRect) currentWindowBounds;
-
-- (UIColor*) nextDebugColor;
-- (void) setShowDebugFrame:(BOOL)on;
-- (void) setShowDebugSubviewFrames:(BOOL)on;
-
 - (void) setBackgroundColorPatternNamed:(NSString*)name;
-
 - (UIViewController*) viewController;
-
 - (void) removeAllSubviews;
-
 - (UIColor*) apparentBackgroundColor;
+
+- (void) setDebugShowFrames:(BOOL)on;
 
 @end

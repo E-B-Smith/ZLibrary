@@ -142,7 +142,7 @@ void ZDebugGlobalEnableDebugViewFrames(BOOL enabled)
 	globalDebugViewFramesAreEnabled = enabled;
 	}
 
-- (void) setShowDebugSubviewFrames:(BOOL)on
+- (void) setDebugShowFrames:(BOOL)on
 	{
 	#if defined(ZDEBUG)
 	
