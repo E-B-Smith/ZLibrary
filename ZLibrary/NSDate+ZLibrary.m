@@ -20,13 +20,13 @@
 
 @implementation NSDate (ZLibrary)
 
-#if 0
+#if 1
 
 - (NSString*) stringRelativeToNow
 	{
-	NSTimeInterval intervals[] = { 2*60.0, 	2.0*60.0*60.0, 		24.0*60.0*60.0, 		7.0*24.0*60.0*60.0 };
-	NSTimeInterval modulus[] =   {   60.0,			 60.0,			 60.0*60.0,			24.0*60.0*60.0 };
-	NSString * strings [] = 	 { @"now",	   @"minutes", 	   	      @"hours",    			   @"days" };
+	NSTimeInterval intervals[] = { 2*60.0, 			2.0*60.0*60.0, 		23.0*60.0*60.0, 	48.0*60.0*60.0,	4.0*24.0*60.0*60.0 };
+	NSTimeInterval modulus[] =   {    0.0,					 60.0,			 60.0*60.0,				   0.0,	    24.0*60.0*60.0 };
+	NSString * strings [] = 	 { @"A moment ago",	   @"minutes", 	   	      @"hours",		  @"A day ago", 		   @"days" };
 
 	NSTimeInterval span = - [self timeIntervalSinceNow];
 
@@ -34,13 +34,15 @@
 	while (i < _countof(intervals) && span > intervals[i]) ++i;
 
 	NSString * result = nil;
-	if (i == 0)
-		result = @"A moment ago";
-	else
 	if (i < _countof(intervals))
 		{
-		NSInteger d = span / modulus[i];
-		result = [NSString stringWithFormat:@"%ld %@ ago", (long)d, strings[i]];
+		if (modulus[i] <= 0.0)
+			result = strings[i];
+		else
+			{
+			NSInteger d = span / modulus[i];
+			result = [NSString stringWithFormat:@"%ld %@ ago", (long)d, strings[i]];
+			}
 		}
 	else
 		{

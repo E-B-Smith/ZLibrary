@@ -16,6 +16,7 @@
 
 #import <XCTest/XCTest.h>
 #import "NSDate+ZLibrary.h"
+#import "ZDebug.h"
 
 
 @interface NSDateZLibraryTest : XCTestCase
@@ -55,4 +56,32 @@
 		@"Dates not equal.");
 	}
 
+- (void) testRelativeDate
+	{
+	ZLog([[[NSDate date] dateByAddingTimeInterval:-30.0] stringRelativeToNow]);
+	ZLog([[[NSDate date] dateByAddingTimeInterval:-60.0] stringRelativeToNow]);
+	ZLog([[[NSDate date] dateByAddingTimeInterval:-90.0] stringRelativeToNow]);
+	ZLog([[[NSDate date] dateByAddingTimeInterval:-60.0*2.0] stringRelativeToNow]);
+	ZLog([[[NSDate date] dateByAddingTimeInterval:-60.0*18.0] stringRelativeToNow]);
+
+	ZLog([[[NSDate date] dateByAddingTimeInterval:-60.0*60.0] stringRelativeToNow]);
+	ZLog([[[NSDate date] dateByAddingTimeInterval:-60.0*90.0] stringRelativeToNow]);
+	ZLog([[[NSDate date] dateByAddingTimeInterval:-60.0*60.0*5.0] stringRelativeToNow]);
+
+	ZLog([[[NSDate date] dateByAddingTimeInterval:-60.0*60.0*23.0] stringRelativeToNow]);
+	ZLog([[[NSDate date] dateByAddingTimeInterval:-60.0*60.0*24.0] stringRelativeToNow]);
+	ZLog([[[NSDate date] dateByAddingTimeInterval:-60.0*60.0*25.0] stringRelativeToNow]);
+	ZLog([[[NSDate date] dateByAddingTimeInterval:-60.0*60.0*47.0] stringRelativeToNow]);
+	
+	ZLog([[[NSDate date] dateByAddingTimeInterval:-60.0*60.0*48.0] stringRelativeToNow]);
+	ZLog([[[NSDate date] dateByAddingTimeInterval:-60.0*60.0*49.0] stringRelativeToNow]);
+
+	ZLog([[[NSDate date] dateByAddingTimeInterval:-60.0*60.0*48.0] stringRelativeToNow]);
+	ZLog([[[NSDate date] dateByAddingTimeInterval:-60.0*60.0*72.0] stringRelativeToNow]);
+	ZLog([[[NSDate date] dateByAddingTimeInterval:-60.0*60.0*24.0*7.0] stringRelativeToNow]);
+	ZLog([[[NSDate date] dateByAddingTimeInterval:-60.0*60.0*24.0*14.0] stringRelativeToNow]);
+	ZLog([[[NSDate date] dateByAddingTimeInterval:-60.0*60.0*24.0*365.0] stringRelativeToNow]);
+	ZLog([[[NSDate date] dateByAddingTimeInterval:-60.0*60.0*24.0*365.0*2.0] stringRelativeToNow]);
+	}
+	
 @end
