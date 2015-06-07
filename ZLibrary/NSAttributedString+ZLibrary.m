@@ -27,7 +27,7 @@
 
 + (NSAttributedString*) stringWithString:(NSString *)string
 	{
-	return [[NSAttributedString alloc] initWithString:string];
+	return (string) ? [[NSAttributedString alloc] initWithString:string] : [[NSAttributedString alloc] init];
 	}
 
 + (NSAttributedString*) stringByAppendingStrings:(NSAttributedString*)string, ...
