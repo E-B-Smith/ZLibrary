@@ -24,6 +24,6 @@
 @property (assign) CGFloat endRadius;
 @property (assign) CGGradientDrawingOptions options;
 
-@property (strong) NSArray *colors;			//	UIColor array.
-@property (strong) NSArray *locations;		//	NSNumber array.
+@property (strong) NSArray *colors;			//	NSArray* <UIColor*>
+@property (strong) NSArray *locations;		//	NSArray* <NSNumber*>
 @end

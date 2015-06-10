@@ -29,7 +29,7 @@
 @implementation ZRadialGradientLayer
 
 
-- (void) commonInit
+- (void) initZRadialGradientLayer
 	{
 	self.delegate = self;
 	self.needsDisplayOnBoundsChange = YES;	
@@ -39,7 +39,7 @@
 	{
 	self = [super init];
 	if (!self) return self;
-	[self commonInit];
+	[self initZRadialGradientLayer];
 	return self;
 	}
 	
@@ -47,7 +47,7 @@
 	{
 	self = [super initWithCoder:aDecoder];
 	if (!self) return self;
-	[self commonInit];
+	[self initZRadialGradientLayer];
 	return self;
 	}
 		
@@ -55,7 +55,7 @@
 	{
 	self = [super initWithLayer:layer];
 	if (!self) return self;
-	[self commonInit];
+	[self initZRadialGradientLayer];
 	return self;
 	}
 	
