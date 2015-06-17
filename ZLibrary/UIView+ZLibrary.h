@@ -33,7 +33,7 @@ extern void ZDebugGlobalEnableDebugViewFrames(BOOL enabled);
 - (UIImage*) image;
 - (UIImage*) imageWithSubviews:(BOOL)includeSubviews;
 
-- (CGRect) currentWindowBounds;
+//- (CGRect) currentWindowBounds;
 - (void) setBackgroundColorPatternNamed:(NSString*)name;
 - (UIViewController*) viewController;
 - (void) removeAllSubviews;

@@ -83,6 +83,7 @@
 	return view;
 	}
 
+/*
 - (CGRect) currentWindowBounds
 	{
 	UIWindow *window = self.window ?: [[UIApplication sharedApplication] keyWindow];
@@ -97,6 +98,7 @@
 			
 	return frame;
 	}
+*/
 
 - (UIImage*) imageWithSubviews:(BOOL)includeSubviews
 	{
