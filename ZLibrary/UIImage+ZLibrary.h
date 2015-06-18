@@ -21,5 +21,6 @@
 - (UIImage*) imageWithSize:(CGSize)size;
 - (UIImage*) imageWithAspectFitSize:(CGSize)size;
 - (UIImage*) imageScaled:(CGFloat)scale;
+- (UIImage*) imageCroppedToRect:(CGRect)rect;
 
 @end

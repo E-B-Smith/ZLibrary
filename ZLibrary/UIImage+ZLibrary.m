@@ -317,6 +317,33 @@ cleanup:
 	return image;
 	}
 
+- (UIImage*) imageCroppedToRect:(CGRect)cropRect
+	{
+	CGRect rect = CGRectMake(0.0, 0.0, self.size.width, self.size.height);
+	cropRect = CGRectIntersection(rect, cropRect);
+	if (CGRectIsNull(cropRect)) return nil;
+	
+	UIGraphicsBeginImageContextWithOptions(cropRect.size, NO, self.scale);
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	if (!context) return nil;
+	
+	//	Orient the image correctly -- 
+	CGContextScaleCTM(context, 1, -1);
+	CGContextTranslateCTM(context, 0, -cropRect.size.height);
+	
+	//	Set the color -- 
+	CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
+	CGContextFillRect(context, cropRect);
+	rect.origin.x = - cropRect.origin.x;
+	rect.origin.y = - cropRect.origin.y;
+	CGContextDrawImage(context, rect, self.CGImage);
+
+	UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+
+	return image;
+	}
+	
 - (UIImage*) imageWithSize:(CGSize)size
 	{
 	CGRect rect = CGRectMake(0.0, 0.0, size.width, size.height);
