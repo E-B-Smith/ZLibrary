@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------------------------
 //
 //																					  ZTriangle.m
-//																					 ZLibrary-Mac
+//																					     ZLibrary
 //
 //																 Some math and geometry functions
 //																		 Edward Smith, March 2009

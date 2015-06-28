@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------------------------
 //
 //																			    NSDate+ZLibrary.m
-//																					 ZLibrary-iOS
+//																					     ZLibrary
 //
 //								   											   NSDate extensions.
 //																	  Edward Smith, February 2015

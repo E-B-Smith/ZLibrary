@@ -1,10 +1,18 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  ZScrollControlView.m
-//  ZLibrary-iOS
+//																			 ZScrollControlView.m
+//																					 ZLibrary-iOS
 //
-//  Created by Edward Smith on 12/30/14.
-//  Copyright (c) 2014 Edward Smith. All rights reserved.
+//	                           Prevents touches to controls on scroll views from being cancelled.
+//																	   Edward Smith, August 2014. 
 //
+//								 -©- Copyright © 1996-2015 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
+
 
 
 #import "ZScrollControlView.h"

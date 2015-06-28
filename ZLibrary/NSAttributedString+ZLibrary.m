@@ -1,10 +1,17 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  NSAttributedString+ZLibrary.m
-//  ZLibrary
+//																	NSAttributedString+ZLibrary.h
+//																					     ZLibrary
 //
-//  Created by Edward Smith on 12/24/13.
-//  Copyright (c) 2013 Edward Smith, All rights reserved.
+//								   				 Categories for working with NSAttributedStrings.
+//																	  Edward Smith, December 2013
 //
+//								 -©- Copyright © 1996-2014 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
 
 
 #import <MobileCoreServices/MobileCoreServices.h>

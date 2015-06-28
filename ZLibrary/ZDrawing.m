@@ -15,6 +15,9 @@ void ZDrawLinearGradientRect(
 		CGColorRef startColor, CGPoint startPoint,
 		CGColorRef endColor, CGPoint endPoint)
 	{
+	if (!context) context = UIGraphicsGetCurrentContext();
+	if (!context) return;
+	
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGFloat locations[] = { 0.0, 1.0 };
  
@@ -40,6 +43,9 @@ void ZDrawLinearGradientRect(
 
 void  ZDrawGradientFrameRect(CGContextRef context, CGRect outerRect, CGColorRef outerColor, CGFloat gradientBias, CGRect innerRect, CGColorRef innerColor)
 	{
+	if (!context) context = UIGraphicsGetCurrentContext();
+	if (!context) return;
+	
 	//	Draw top --
 
 	CGRect r = outerRect;
