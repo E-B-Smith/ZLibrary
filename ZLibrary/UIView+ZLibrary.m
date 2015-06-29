@@ -102,16 +102,18 @@
 
 - (UIImage*) imageWithSubviews:(BOOL)includeSubviews
 	{
+	UIImage *image = nil;	
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0f);
-	CGContextRef context = UIGraphicsGetCurrentContext();
-
-	if (includeSubviews && [self respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)])
-        [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:YES];
-	else
-        [self.layer renderInContext:context];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-
+	CGContextRef context = UIGraphicsGetCurrentContext();	
+	if (context)
+		{
+		if (includeSubviews && [self respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)])
+			[self drawViewHierarchyInRect:self.bounds afterScreenUpdates:YES];
+		else
+			[self.layer renderInContext:context];
+		image = UIGraphicsGetImageFromCurrentImageContext();
+		UIGraphicsEndImageContext();
+		}
     return image;
 	}
 
