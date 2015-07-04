@@ -314,6 +314,7 @@ static inline BOOL MKCoordinateRegionIsValid(MKCoordinateRegion region)
 @interface CLPlacemark (ZLibrary)
 + (CLPlacemark*) placemarkFromDictionary:(NSDictionary*)dictionary;
 - (NSDictionary*) dictionary;
+- (NSString*) cityName;
 @end
 
 

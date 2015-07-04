@@ -175,6 +175,14 @@ NSString* NSStringFromCLLocationCoordinate2D(CLLocationCoordinate2D location)
 	return dictionary;
 	}
 
+- (NSString*) cityName
+	{
+	if (self.locality.length > 0) return self.locality;
+	if (self.subAdministrativeArea.length > 0) return self.subAdministrativeArea;
+	if (self.administrativeArea.length > 0) return self.administrativeArea;
+	return nil;
+	}
+
 @end
 
 
