@@ -1,10 +1,17 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  UIDeviceZLibrary.m
-//  ZLibrary
+//																		 UIDevice+ZLibrary.Test.m
+//																					 ZLibrary-iOS
 //
-//  Created by Edward Smith on 1/29/14.
-//  Copyright (c) 2014 Edward Smith, All rights reserved.
+//								   											 UIDevice extensions.
+//																	  Edward Smith, December 2013
 //
+//								 -©- Copyright © 1996-2014 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
 
 
 #import <XCTest/XCTest.h>

@@ -3,7 +3,7 @@
 
 //-----------------------------------------------------------------------------------------------
 //
-//																		 ZKeyboardNextFieldView.h
+//																		 ZKeyboardNextFieldView.m
 //																					 ZLibrary-iOS
 //
 //							  		  Adds next/previous/done buttons to the top of the keyboard.

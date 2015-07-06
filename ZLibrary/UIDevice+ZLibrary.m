@@ -1,14 +1,17 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  UIDevice+ZLibrary.m
-//  ZLibrary
+//																			  UIDevice+ZLibrary.m
+//																					 ZLibrary-iOS
 //
-//  Created by Edward Smith on 1/29/14.
-//  Copyright (c) 2014 Edward Smith, All rights reserved.
+//								   											 UIDevice extensions.
+//																	  Edward Smith, December 2013
 //
-//	Based largely on code by Erica Sadun, http://ericasadun.com
-//	iPhone Developer's Cookbook, 6.x Edition
+//								 -©- Copyright © 1996-2014 Edward Smith, all rights reserved. -©-
 //
-// Thanks to Emanuele Vulcano, Kevin Ballard/Eridius, Ryandjohnson, Matt Brown, etc.
+//-----------------------------------------------------------------------------------------------
 
 
 #include "UIDevice+ZLibrary.h"

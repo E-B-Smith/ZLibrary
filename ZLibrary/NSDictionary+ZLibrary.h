@@ -1,10 +1,17 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  NSDictionary+ZLibrary.h
-//  ZLibrary
+//																		  NSDictionary+ZLibrary.h
+//																					     ZLibrary
 //
-//  Created by Edward Smith on 11/26/13.
-//  Copyright (c) 2013 Edward Smith, All rights reserved.
+//								   										 NSDictionary extensions.
+//																	  Edward Smith, November 2013
 //
+//								 -©- Copyright © 1996-2014 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
 
 
 #import <Foundation/Foundation.h>
