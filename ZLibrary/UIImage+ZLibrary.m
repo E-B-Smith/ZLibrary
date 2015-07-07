@@ -405,6 +405,31 @@ cleanup:
 	return image;
 	}
 
+- (UIImage*) imageUnionImage:(UIImage*)image
+	{
+	CGRect rect = CGRectMake(0.0, 0.0, self.size.width, self.size.height);
+	CGRect imageRect = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
+	imageRect = ZCenterRectOverRect(imageRect, rect);
+	
+	UIGraphicsBeginImageContextWithOptions(rect.size, NO, self.scale);
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	if (!context) return nil;
+	
+	//	Orient the image correctly -- 
+	CGContextScaleCTM(context, 1, -1);
+	CGContextTranslateCTM(context, 0, -rect.size.height);
+	
+	//	Set the color -- 
+	CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
+	CGContextFillRect(context, rect);
+	CGContextDrawImage(context, rect, self.CGImage);
+	CGContextDrawImage(context, imageRect, image.CGImage);
+	UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+
+	return newImage;
+	}
+	
 - (UIImage*) imageScaled:(CGFloat)scale
 	{
 	CGSize size = self.size;
