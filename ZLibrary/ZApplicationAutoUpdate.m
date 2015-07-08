@@ -247,7 +247,8 @@ static const NSInteger kRCAAlertTagID = 0xfeed;
 	{
 	self.alert.delegate = nil;
 	[self.alert dismissWithClickedButtonIndex:0 animated:NO];
-
+	self.alert = nil;
+	
 	if ([UIDevice currentDevice].isSimulator)
 		{
 		ZDebug(@"An update is available but ignored because app is running in the simulator.");
@@ -289,22 +290,22 @@ static const NSInteger kRCAAlertTagID = 0xfeed;
 			
 	if (self.forcedUpdate)
 		{
-		if (self.askUpdateCompletionHandler)
-			self.askUpdateCompletionHandler(YES);
 		[self installUpdate];
 		[self askInstallWithForceUpdate:YES completion:nil];
+		if (self.askUpdateCompletionHandler)
+			self.askUpdateCompletionHandler(YES);
 		}
 	else
 		{
 		BOOL willInstall = (alertView.cancelButtonIndex != buttonIndex);
-		if (self.askUpdateCompletionHandler)
-			self.askUpdateCompletionHandler(willInstall);
 		self.alert.delegate = nil;
 		self.alert = nil;
 		if (willInstall)
 			[self installUpdate];
 		else
 			self.myself = nil;
+		if (self.askUpdateCompletionHandler)
+			self.askUpdateCompletionHandler(willInstall);
 		}
 	}
 
@@ -336,16 +337,16 @@ static const NSInteger kRCAAlertTagID = 0xfeed;
 			[updater askInstallWithForceUpdate:forceUpdate completion:
 			^ (BOOL willInstall)
 				{
-				globalApplicationUpdater = nil;
 				if (completionHandler)
 					completionHandler(willInstall);
+				globalApplicationUpdater = nil;			
 				}];
 			}
 		else
 			{
-			globalApplicationUpdater = nil;
 			if (completionHandler)
 				completionHandler(NO);
+			globalApplicationUpdater = nil;
 			}
 		 }];
 	}

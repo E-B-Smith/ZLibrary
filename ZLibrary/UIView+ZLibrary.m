@@ -102,7 +102,8 @@
 
 - (UIImage*) imageWithSubviews:(BOOL)includeSubviews
 	{
-	UIImage *image = nil;	
+	UIImage *image = nil;
+	if (CGSizeEqualToSize(self.bounds.size, CGSizeZero)) return image;
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0.0f);
 	CGContextRef context = UIGraphicsGetCurrentContext();	
 	if (context)
