@@ -118,8 +118,8 @@
 		else
 			[self.layer renderInContext:context];
 		image = UIGraphicsGetImageFromCurrentImageContext();
-		UIGraphicsEndImageContext();
 		}
+	UIGraphicsEndImageContext();
     return image;
 	}
 
