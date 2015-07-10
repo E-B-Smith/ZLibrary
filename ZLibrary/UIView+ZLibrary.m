@@ -52,6 +52,11 @@
 	return (v) ? YES : NO;
 	}
 
+- (void) bringViewToFront
+	{
+	[self.superview bringSubviewToFront:self];
+	}
+	
 - (void) subViewUserInteractionEnabled:(BOOL)isEnabled;
 	{
 	for (UIView* subView in self.subviews)

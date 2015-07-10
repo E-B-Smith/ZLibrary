@@ -29,6 +29,7 @@ extern void ZDebugGlobalEnableDebugViewFrames(BOOL enabled);
 - (UIView*) findSubviewUsingPredicateBlock:(BOOL (^) (UIView* subview))predicateBlock;
 - (void) 	performBlockOnSubviewHeirarchy:(void (^) (UIView* subview))block;
 - (void) 	performBlockOnSuperviewHeirarchy:(void (^) (UIView* subview))block;
+- (void)    bringViewToFront;
 
 - (UIImage*) image;
 - (UIImage*) imageWithSubviews:(BOOL)includeSubviews;
