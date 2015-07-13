@@ -208,14 +208,12 @@
 
 - (void) encodeObject:(id)objv forKey:(NSString *)key
 	{
-	if (objv && key) //	eDebug -- for iOS 8.0.  Seems like an iOS bug?
-		[dictionary setObject:objv forKey:key];
+	if (objv && key) [dictionary setObject:objv forKey:key];
 	}
 
 - (id) decodeObjectForKey:(NSString*)key
 	{
 	return (key) ? [dictionary objectForKey:key] : nil;
-//	return [dictionary objectForKey:key];
 	}
 
 
