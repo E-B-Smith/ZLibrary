@@ -122,7 +122,7 @@
 
 - (CGSize) contentSize
 	{
-	return self.scrollView.contentSize;	//	eDebug - Not reliable?
+	return self.scrollView.contentSize;		//	Not reliable?
 	}
 
 @end

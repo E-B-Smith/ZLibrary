@@ -17,6 +17,6 @@
 - (void)     loadURL:(NSURL*)URL;
 - (void) displayText:(NSString*)message;
 - (CGSize) documentSize;
-- (CGSize) contentSize;		//	eDebug - Not reliable?
+- (CGSize) contentSize;		//	Not reliable?
 
 @end

@@ -18,7 +18,7 @@
 
 - (UIColor*) colorByBlendingWhite:(CGFloat)percent;
 - (UIColor*) colorByBlendingBlack:(CGFloat)percent;
-- (CGFloat)  distanceFromColor:(UIColor*)color;			//	eDebug - Calculated wrong!
+- (CGFloat)  distanceFromColor:(UIColor*)color;			//	Calculated wrong?
 - (CGFloat)  luminosity;
 
 @end
