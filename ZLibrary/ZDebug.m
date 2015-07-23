@@ -225,9 +225,11 @@ BOOL ZDebugAssertProcedure(bool condition, const char* file, int lineNumber, con
 	if (condition) return YES;
 	NSString* s = nil;
 	if (messageString)
-		s = [NSString stringWithFormat:@"Assertion Failed: Assert that '%s'.\nMessage: %@.", conditionString, messageString];
+		s = [NSString stringWithFormat:@"\nAssertion Failed! Assert that '%s'.\nMessage: %@.",
+				conditionString, messageString];
 	else
-		s = [NSString stringWithFormat:@"Assertion Failed: Assert that '%s'.", conditionString];
+		s = [NSString stringWithFormat:@"\nAssertion Failed! Assert that '%s'.",
+				conditionString];
 	ZDebugMessageProcedure(ZDebugLevelAssert, file, lineNumber, s);
 	return NO;
 	}

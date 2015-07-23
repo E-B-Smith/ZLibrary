@@ -26,7 +26,7 @@ extern void ZDebugGlobalEnableDebugViewFrames(BOOL enabled);
 - (BOOL) 	findAndResignFirstResponder;
 - (id) 		findSubviewOfClass:(Class)class_;
 - (id) 		findSuperviewOfClass:(Class)class_;
-- (UIView*) findSubviewUsingPredicateBlock:(BOOL (^) (UIView* subview))predicateBlock;
+- (id) 		findSubviewUsingPredicateBlock:(BOOL (^) (UIView* subview))predicateBlock;
 - (void) 	performBlockOnSubviewHeirarchy:(void (^) (UIView* subview))block;
 - (void) 	performBlockOnSuperviewHeirarchy:(void (^) (UIView* subview))block;
 - (void)    bringViewToFront;
