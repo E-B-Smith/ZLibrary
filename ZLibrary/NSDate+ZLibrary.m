@@ -93,7 +93,7 @@
 		kRFC8222DateFormat = [[NSDateFormatter alloc] init];
 		//kRFC8222DateFormat.timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
 		kRFC8222DateFormat.dateFormat = @"E, d MMM yyyy H:mm:ss ZZZ";
-		});
+		});	
 	return kRFC8222DateFormat;
 	}
 
