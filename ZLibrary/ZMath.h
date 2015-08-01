@@ -26,16 +26,20 @@ extern "C" {
 #endif
 
 
+#ifndef ZRadiansFromDegreesDefined
+#define ZRadiansFromDegreesDefined
+
 static inline CGFloat ZRadiansFromDegrees(CGFloat d)
     {
     return ((M_PI*d)/180.0);
     }
 
-
 static inline CGFloat ZDegreesFromRadians(CGFloat r)
     {
     return ((r/M_PI)*180.0);
     }
+
+#endif
 
 
 extern CGFloat ZRectIntersectionArea(CGRect r1, CGRect r2);

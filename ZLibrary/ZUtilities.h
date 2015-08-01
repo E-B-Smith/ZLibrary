@@ -142,14 +142,30 @@ extern CGRect ZRectForContentMode(UIViewContentMode mode, CGRect idealRect, CGRe
 //-----------------------------------------------------------------------------------------------
 
 
-static inline double ZDegreesFromRadians(double radians)
+#ifndef ZRadiansFromDegreesDefined
+#define ZRadiansFromDegreesDefined
+
+static inline CGFloat ZRadiansFromDegrees(CGFloat d)
+    {
+    return ((M_PI*d)/180.0);
+    }
+
+static inline CGFloat ZDegreesFromRadians(CGFloat radians)
 	{
 	return  (fmod(radians, 2.0*M_PI) / 2.0*M_PI) * 360.0;
 	}
 
+#endif
+
+
 static inline double ZFahrenheitFromCelsius(double celsius)
 	{
 	return celsius * 9.0/5.0 + 32.0;
+	}
+
+static inline double ZCelsiusFromFahrenheit(double fahrenheit)
+	{
+	return (fahrenheit - 32.0) * 5.0/9.0;
 	}
 
 

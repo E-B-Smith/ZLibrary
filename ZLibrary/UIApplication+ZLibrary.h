@@ -1,10 +1,17 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  UIApplication+ZLibrary.h
-//  ZLibrary
+//																		 UIApplication+ZLibrary.h
+//																					 ZLibrary-iOS
 //
-//  Created by Edward Smith on 11/29/13.
-//  Copyright (c) 2013 Edward Smith, All rights reserved.
+//								   				  				UIApplication+ZLibrary Extensions
+//																	  Edward Smith, November 2013
 //
+//								 -©- Copyright © 1996-2014 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
 
 
 #import <UIKit/UIKit.h>

@@ -44,5 +44,6 @@
 #import "ZBuildInfo.h"
 #import "ZDebug.h"
 #import "ZDrawing.h"
-//#import "ZGeometry.h"
+#import "ZLine.h"
+#import "ZMath.h"
 #import "ZUtilities.h"

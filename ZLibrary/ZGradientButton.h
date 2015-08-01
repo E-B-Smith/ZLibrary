@@ -1,10 +1,17 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  ZGradientButton.h
-//  ZLibrary-iPhone
+//																		   		ZGradientButton.h
+//																					 ZLibrary-iOS
 //
-//  Created by Edward Smith on 3/22/11.
-//  Copyright 2011 Edward Smith, Inc. All rights reserved.
+//								   								   A nicely drawn button for iOS.
+//																	     Edward Smith, March 2011
 //
+//								 -©- Copyright © 1996-2014 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
 
 
 #import <Foundation/Foundation.h>

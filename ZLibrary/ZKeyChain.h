@@ -1,10 +1,17 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  ZKeyChain.h
-//  ZLibrary
+//																		 			  ZKeyChain.h
+//																					 ZLibrary-iOS
 //
-//  Created by Edward Smith on 4/24/14.
-//  Copyright (c) 2014 Edward Smith, All rights reserved.
+//								   				  					   A KeyChain helper methods.
+//																	       Edward Smith, May 2010
 //
+//								 -©- Copyright © 1996-2014 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
 
 
 #import <Foundation/Foundation.h>

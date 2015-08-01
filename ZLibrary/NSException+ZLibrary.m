@@ -1,10 +1,17 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  NSException+ZLibrary.m
-//  ZLibrary
+//																		   NSException+ZLibrary.m
+//																					     ZLibrary
 //
-//  Created by Edward Smith on 11/11/13.
-//  Copyright (c) 2013 Edward Smith, All rights reserved.
+//								   										  NSException extensions.
+//																	  Edward Smith, November 2013
 //
+//								 -©- Copyright © 1996-2014 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
 
 
 #import "NSException+ZLibrary.h"

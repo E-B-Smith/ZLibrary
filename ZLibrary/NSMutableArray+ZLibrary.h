@@ -1,10 +1,17 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  NSMutableArray+ZLibrary.h
-//  ZLibrary
+//																		NSMutableArray+ZLibrary.h
+//																					     ZLibrary
 //
-//  Created by Edward Smith on 5/20/14.
-//  Copyright (c) 2014 Edward Smith, All rights reserved.
+//								   									   NSMutableArray extensions.
+//																	       Edward Smith, May 2014
 //
+//								 -©- Copyright © 1996-2014 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
 
 
 #import <Foundation/Foundation.h>

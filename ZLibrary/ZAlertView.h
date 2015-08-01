@@ -1,10 +1,17 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  ZAlertView.h
-//  ZLibrary-iOS
+//																		 			 ZAlertView.h
+//																					 ZLibrary-iOS
 //
-//  Created by Edward Smith on 11/29/13.
-//  Copyright (c) 2013 Edward Smith, Inc. All rights reserved.
+//								   				  					  A UIAlert view with extras.
+//																	  Edward Smith, November 2013
 //
+//								 -©- Copyright © 1996-2014 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
 
 
 #import <UIKit/UIKit.h>

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------------------------
 //
 //																		 NSString+ZLibrary.Test.m
-//																					 ZLibrary-iOS
+//																					 	 ZLibrary
 //
 //								   				  NSString for transforming & formatting strings.
 //																	  Edward Smith, November 2013

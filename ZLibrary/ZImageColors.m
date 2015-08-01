@@ -1,10 +1,17 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  ZImageColors.m
-//  ZLibrary
+//																		   		   ZImageColors.m
+//																					 ZLibrary-iOS
 //
-//  Created by Edward Smith on 2/13/14.
-//  Copyright (c) 2014 Edward Smith, All rights reserved.
+//								   								   A nicely drawn button for iOS.
+//																	  Edward Smith, February 2014
 //
+//								 -©- Copyright © 1996-2014 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
 
 
 #import "ZImageColors.h"

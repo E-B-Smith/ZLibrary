@@ -2,7 +2,7 @@
 //  ZBlurredImageView.h
 //  ZLibrary
 //
-//  Created by Edward Smith on 1/2/15.
+//  Created by Edward Smith on 1/2/14.
 //  Copyright (c) 2015 Edward Smith. All rights reserved.
 //
 

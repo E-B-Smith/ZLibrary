@@ -70,7 +70,7 @@ void TestDebugProcedure(ZDebugLevel debugLevel, NSString* DebugString)
 	XCTAssertTrue(globalTestDebugMessage == nil, @"ZDebugAssert triggered when it shouldn't. Checked that 2 + 2 == 4.");
 
 	ZDebugAssert(2 + 2 == 5);
-	TestPtr = @"ZDebug.Test.m(72): Assertion Failed: Assert that '2 + 2 == 5'.";
+	TestPtr = @"ZDebug.Test.m(72): \nAssertion Failed! Assert that '2 + 2 == 5'.";
 	XCTAssertEqualObjects(TestPtr, globalTestDebugMessage, @"ZDebugAssert failed to produce the correct debug message.");
 
 	ZLog(@"Testing ZLog procedure. This will display in the console log.");

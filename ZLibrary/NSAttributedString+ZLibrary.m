@@ -3,7 +3,7 @@
 
 //-----------------------------------------------------------------------------------------------
 //
-//																	NSAttributedString+ZLibrary.h
+//																	NSAttributedString+ZLibrary.m
 //																					     ZLibrary
 //
 //								   				 Categories for working with NSAttributedStrings.
