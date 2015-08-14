@@ -51,7 +51,7 @@
 @dynamic backgroundShape;
 - (UIBezierPath*) backgroundShape
 	{
-	CAShapeLayer *mask = self.layer.sublayers.firstObject;
+	CAShapeLayer *mask = (id) self.layer.sublayers.firstObject;
 	if ([mask isKindOfClass:[CAShapeLayer class]])
 		{
 		CGPathRef path = mask.path;
