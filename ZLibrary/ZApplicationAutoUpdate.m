@@ -21,6 +21,9 @@
 #import "UIDevice+ZLibrary.h"
 
 
+#if defined(ZAllowAppStoreNonCompliant)
+
+
 static const NSInteger kRCAAlertTagID = 0xfeed;
 
 
@@ -352,3 +355,50 @@ static const NSInteger kRCAAlertTagID = 0xfeed;
 	}
 
 @end
+
+
+#else	//	! defined(ZAllowAppStoreNonCompliant)
+
+
+@implementation ZApplicationAutoUpdate
+
+- (instancetype) init
+	{
+	self = [super init];
+	return self;
+	}
+
+- (BOOL) isDone					{ return YES; }
+- (BOOL) updateIsAvailable		{ return NO; }
+
+- (void) checkForUpdatesAtURLString:(NSString*)string
+			      completionHandler:(void (^) (ZApplicationAutoUpdate*))completionHandler
+	{
+	if (completionHandler)
+		completionHandler(self);
+	}
+
+- (void) askInstallWithForceUpdate:(BOOL)forcedUpdate
+			            completion:(void (^) (BOOL willUpdate))completionHandler
+	{
+	if (completionHandler)
+		completionHandler(NO);
+	}
+
+
+- (void) installUpdate
+	{
+	}
+
++ (void) checkForUpatesAtURLString:(NSString*)URLString
+					   forceUpdate:(BOOL)forceUpdate
+			            completion:(void (^) (BOOL willUpdate))completionHandler
+	{
+	if (completionHandler)
+		completionHandler(NO);
+	}
+
+@end
+
+#endif	//	defined(ZAllowAppStoreNonCompliant)
+

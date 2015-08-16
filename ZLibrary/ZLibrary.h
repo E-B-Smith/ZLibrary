@@ -34,7 +34,9 @@
 
 
 #if defined(ZAllowAppStoreNonCompliant)
-	//#warning Compiling with ZAllowAppStoreNonCompliant set.
+	#if !DEBUG || PRODUCTION || RELEASE_VERSION
+		#warning Compiling production app with ZAllowAppStoreNonCompliant set.
+	#endif
 	#define APP_STORE_NON_COMPLIANT( x )	x
 #else
 	#define APP_STORE_NON_COMPLIANT( x )

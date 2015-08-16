@@ -1,4 +1,12 @@
 
+
+Compile Options
+===============
+
+* ZAllowAppStoreNonCompliant
+* ZDEBUG
+
+
 Git Notes
 =========
 
@@ -35,7 +43,7 @@ Subtrees
 
 Add Tree:
 
-		git remote add ZLibrary ssh://git@violent.blue/~/ZLibrary.git
+		git remote add ZLibrary ssh://git@git.violent.blue/~/ZLibrary.git
 		git subtree add --prefix=.../External/ZLibrary ZLibrary master
 
 Pull:
