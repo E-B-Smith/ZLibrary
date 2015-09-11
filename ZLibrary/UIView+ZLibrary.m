@@ -128,14 +128,14 @@
 	return [self imageWithSubviews:YES];
 	}
 
-- (void) performBlockOnSubviewHeirarchy:(void (^) (UIView* subview))block
+- (void) performBlockOnSubviews:(void (^) (UIView* subview))block
 	{
 	block(self);
 	for (UIView* view in self.subviews)
-		[view performBlockOnSubviewHeirarchy:block];
+		[view performBlockOnSubviews:block];
 	}
 
-- (void) performBlockOnSuperviewHeirarchy:(void (^) (UIView* subview))block
+- (void) performBlockOnSuperviews:(void (^) (UIView* subview))block
 	{
 	UIView* view = self;
 	while (view)
@@ -157,7 +157,7 @@ void ZDebugGlobalEnableDebugViewFrames(BOOL enabled)
 	#if defined(ZDEBUG)
 	
 	if (!(on && globalDebugViewFramesAreEnabled)) return;
-	[self performBlockOnSubviewHeirarchy:
+	[self performBlockOnSubviews:
 		^ (UIView *subview) { subview.showDebugFrame = YES; }];
 	
 	#endif
