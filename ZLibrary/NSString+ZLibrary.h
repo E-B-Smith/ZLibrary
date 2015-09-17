@@ -42,7 +42,7 @@
 
 //	Measuring strings --
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IOS
 - (CGRect) drawingRectForRect:(CGRect)rect withFont:(UIFont*)font lines:(NSInteger)lines;
 #endif 
 

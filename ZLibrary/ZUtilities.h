@@ -120,7 +120,7 @@ static inline CGPoint ZPointOffset(CGPoint p, CGFloat x, CGFloat y)
 	}
 
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IOS
 
 typedef NS_ENUM(int32_t, UIViewContentModeExtension)
 	{

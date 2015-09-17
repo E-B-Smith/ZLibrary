@@ -77,6 +77,9 @@
 	return (range.location != NSNotFound);
 	}
 
+#if 0
+//	Deprecated 
+
 - (NSString*) stringByEncodingWithPercentEscapes
 	{
 	NSString *newString = (__bridge_transfer NSString*)
@@ -89,6 +92,14 @@
 //	[newString autorelease];
 	return newString;
 	}
+#else
+
+- (NSString*) stringByEncodingWithPercentEscapes
+	{
+	return [self stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+	}
+
+#endif 
 
 - (NSString*) stringByDecodingPercentEscapes
 	{
@@ -291,7 +302,7 @@
 	return phoneString;
 	}
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IOS
 
 - (CGRect) drawingRectForRect:(CGRect)rect withFont:(UIFont*)font lines:(NSInteger)lines
 	{
