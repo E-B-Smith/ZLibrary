@@ -195,7 +195,7 @@ NSString* NSStringFromCLLocationCoordinate2D(CLLocationCoordinate2D location)
 
 
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IOS
 
 CGRect ZRectForContentMode(UIViewContentMode mode, CGRect idealRect, CGRect boundsRect)
 	{
