@@ -25,4 +25,14 @@
 	return NO;
 	}
 
+- (BOOL) pointInside:(CGPoint)point withEvent:(UIEvent *)event
+	{
+	for (UIView *view in self.subviews)
+		{
+		if ([view pointInside:point withEvent:event])
+			return YES;
+		}
+	return NO;
+	}
+	
 @end
