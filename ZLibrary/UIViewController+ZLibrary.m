@@ -41,4 +41,14 @@
 	return nil;
 	}
 
+- (UINavigationController*) presentingNavigationController
+	{
+	if (self.navigationController)
+		return self.navigationController;
+	UIViewController *vc = self.presentingViewController;
+	while (vc && ![vc isKindOfClass:[UINavigationController class]])
+		vc = vc.presentingViewController;
+	return (UINavigationController*) vc;
+	}
+
 @end

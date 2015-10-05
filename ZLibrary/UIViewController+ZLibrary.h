@@ -12,7 +12,7 @@
 
 @interface UIViewController (ZLibrary)
 
-- (void) forceViewToLoad;
 + (UIViewController*) activeViewController;
-
+- (void) forceViewToLoad;
+- (UINavigationController*) presentingNavigationController;
 @end
