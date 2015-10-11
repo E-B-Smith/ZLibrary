@@ -1,5 +1,5 @@
 //
-//  ZCircularImageView.m
+//  ZRoundImageView.m
 //  ZLibrary
 //
 //  Created by Edward Smith on 5/9/14.
@@ -7,11 +7,11 @@
 //
 
 
-#import "ZCircularImageView.h"
+#import "ZRoundImageView.h"
 #import "ZUtilities.h"
 
 
-@interface ZCircularImageView ()
+@interface ZRoundImageView ()
 	{
 	CAShapeLayer	*mask;
 	CAShapeLayer	*border;
@@ -20,7 +20,7 @@
 @end
 
 
-@implementation ZCircularImageView
+@implementation ZRoundImageView
 
 - (void) setBorderColor:(UIColor*)borderColor
 	{

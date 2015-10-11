@@ -21,4 +21,5 @@
 + (NSAttributedString*) stringWithImage:(UIImage*)image;
 + (NSAttributedString*) stringWithString:(NSString*)string;
 + (NSAttributedString*) stringByAppendingStrings:(NSAttributedString*)string, ...;
++ (NSAttributedString*) stringWithString:(NSString*)string font:(UIFont*)font;
 @end
