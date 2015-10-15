@@ -1,10 +1,17 @@
+
+
+
+//-----------------------------------------------------------------------------------------------
 //
-//  UIImage+ZLibrary.h
-//  ZLibrary
+//																			   UIImage+ZLibrary.h
+//																					     ZLibrary
 //
-//  Created by Edward Smith on 12/9/13.
-//  Copyright (c) 2013 Edward Smith, All rights reserved.
+//								   											  UIImage extensions.
+//																	 Edward Smith, Decemeber 2013
 //
+//								 -©- Copyright © 1996-2014 Edward Smith, all rights reserved. -©-
+//
+//-----------------------------------------------------------------------------------------------
 
 
 #import <UIKit/UIKit.h>

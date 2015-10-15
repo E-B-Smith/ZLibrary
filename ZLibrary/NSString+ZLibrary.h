@@ -43,7 +43,8 @@
 //	Measuring strings --
 
 #if TARGET_OS_IOS
-- (CGRect) drawingRectForRect:(CGRect)rect withFont:(UIFont*)font lines:(NSInteger)lines;
+- (CGRect)  drawingRectForRect:(CGRect)rect withFont:(UIFont*)font lines:(NSInteger)lines;
+- (CGFloat) fontPointSizeForSize:(CGSize)size font:(UIFont*)font lines:(NSInteger)lines;
 #endif 
 
 @end

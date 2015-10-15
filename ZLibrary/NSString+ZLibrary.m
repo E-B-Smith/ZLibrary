@@ -315,6 +315,51 @@
 	return r;
 	}
 
+/*
+- (CGFloat) fontSizeFillingRect:(CGRect)rect withFont:(UIFont*)font lines:(NSInteger)lines
+	{
+	//	NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+	//	NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin
+
+	NSAttributedString * as =
+		[[NSAttributedString alloc]
+			initWithString:self
+			attributes:@{ NSFontAttributeName : font }];
+
+	NSStringDrawingContext *context = [NSStringDrawingContext new];
+	context.minimumScaleFactor = 0.10;
+
+	CGRect r = [as boundingRectWithSize:rect.size
+		options:NSStringDrawingUsesDeviceMetrics
+		context:context];
+
+	return floor(context.actualScaleFactor * font.pointSize);
+	}
+*/
+
+- (CGFloat) fontPointSizeForSize:(CGSize)size font:(UIFont*)font lines:(NSInteger)lines
+	{
+	CGRect rect = CGRectZero;
+	rect.size = size;
+	UILabel * label = [[UILabel alloc] initWithFrame:rect];
+	label.numberOfLines = lines;
+	label.font = font;
+	label.text = self;
+
+	CGFloat fontSize = font.pointSize;
+	while (fontSize > 8.0)
+		{
+		CGSize s = CGSizeMake(size.width, 5000.0);
+		s = [label sizeThatFits:s];
+		if (s.height <= size.height && s.width <= size.width)
+			break;
+		fontSize -= 1.0;
+		label.font = [label.font fontWithSize:fontSize];
+		}
+
+	return label.font.pointSize;
+	}
+
 #endif
 
 @end
