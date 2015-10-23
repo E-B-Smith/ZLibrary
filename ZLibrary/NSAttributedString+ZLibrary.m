@@ -59,4 +59,9 @@
 	return result;
 	}
 
++ (NSAttributedString*) stringWithString:(NSString*)string font:(UIFont*)font
+	{
+	return [[NSAttributedString alloc] initWithString:string attributes: @{ NSFontAttributeName:font }];
+	}
+
 @end

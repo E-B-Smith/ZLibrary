@@ -1,5 +1,5 @@
 //
-//  ZCircularImageView.h
+//  ZRoundImageView.h
 //  ZLibrary
 //
 //  Created by Edward Smith on 5/9/14.
@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface ZCircularImageView : UIImageView
+@interface ZRoundImageView : UIImageView
 @property (nonatomic, retain) UIColor *borderColor;
 @property (nonatomic, retain) UIImage *overlayImage;
 @end
