@@ -362,4 +362,17 @@
 
 #endif
 
+- (NSString*) stringByValidatingEmailAddress
+	{
+	NSString*email = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	NSError*error = nil;
+	NSRegularExpression *regex =
+		[NSRegularExpression regularExpressionWithPattern:@"^.+?@.+?\\..+$" options:0 error:&error];
+		
+	NSTextCheckingResult* result = [regex firstMatchInString:email options:0 range:NSMakeRange(0, email.length)];
+	if (!result  || result.range.location == NSNotFound)
+		return nil;
+	return email;
+	}
+
 @end

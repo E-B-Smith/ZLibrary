@@ -40,6 +40,8 @@
 
 - (NSString*) stringFormattedAsPhoneNumberWithBackspace:(BOOL)backspace;
 
+- (NSString*) stringByValidatingEmailAddress;
+
 //	Measuring strings --
 
 #if TARGET_OS_IOS
