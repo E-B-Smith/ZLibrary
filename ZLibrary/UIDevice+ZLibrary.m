@@ -553,7 +553,27 @@ WifiVendor
 	{
 	return [self dik:@"SerialNumber"];
 	}
-	
+
+- (NSString*) OSBuildVersion
+	{
+    int mib[2] = {CTL_KERN, KERN_OSVERSION};
+    u_int namelen = sizeof(mib) / sizeof(mib[0]);
+
+    //	Get the size for the buffer --
+
+    size_t bufferSize = 0;
+    sysctl(mib, namelen, NULL, &bufferSize, NULL, 0);
+
+    u_char buildBuffer[bufferSize];
+    int result = sysctl(mib, namelen, buildBuffer, &bufferSize, NULL, 0);
+
+	NSString *version = nil;
+    if (result >= 0)
+        version = [[NSString alloc] initWithBytes:buildBuffer length:bufferSize encoding:NSUTF8StringEncoding];
+
+    return version;
+	}
+
 #if defined(ZAllowAppStoreNonCompliant)
 
 - (BOOL) bluetoothIsEnabled

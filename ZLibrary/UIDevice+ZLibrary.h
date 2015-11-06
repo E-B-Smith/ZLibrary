@@ -41,6 +41,7 @@ typedef NS_ENUM(int32_t, UIDeviceFamily)
 - (NSString*) localizedModelIdentifier;	//	The 'pretty' hardware string: 'iPhone 5S GSM'.
 - (NSString*) hardwareModelIdentifier;	//	The raw hardware string, like 'N51AP'. Not so useful.
 - (NSString*) serialNumber;
+- (NSString*) OSBuildVersion;
 
 - (UIDeviceFamily)  deviceFamily;
 
