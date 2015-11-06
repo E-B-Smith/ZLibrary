@@ -71,6 +71,7 @@ APP_STORE_NON_COMPLIANT( - (NSString*) usbSerialString; )
 UIDeviceIDMacro( "AppleTV2,1",	"Apple TV 2G",			"K66AP" )
 UIDeviceIDMacro( "AppleTV3,1",	"Apple TV 3G",			"J33AP" )
 UIDeviceIDMacro( "AppleTV3,2",	"Apple TV 3G",			"J33IAP")
+UIDeviceIDMacro( "AppleTV5,3",	"Apple TV 4G",			"")
 
 UIDeviceIDMacro( "iPad1,1",		"iPad 1G",				"K48AP" )
 UIDeviceIDMacro( "iPad2,1",		"iPad 2 Wi-Fi",			"K93AP" )
@@ -112,6 +113,9 @@ UIDeviceIDMacro( "iPhone6,2",	"iPhone 5s Global",		"N53AP" )
 
 UIDeviceIDMacro( "iPhone7,1",	"iPhone 6+ Global",		"N56AP" )
 UIDeviceIDMacro( "iPhone7,2",	"iPhone 6 Global",		"N61AP" )
+
+UIDeviceIDMacro( "iPhone8,1", 	"iPhone 6s", 			"N71AP" )	//	 N71AP, N71mAP
+UIDeviceIDMacro( "iPhone8,2",	"iPhone 6s Plus",		"N66AP" )	//	 N66AP, N66mAP
 
 UIDeviceIDMacro( "iPod1,1",		"iPod touch 1G",		"N45AP" )
 UIDeviceIDMacro( "iPod2,1",		"iPod touch 2G",		"N72AP" )
