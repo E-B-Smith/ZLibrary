@@ -19,8 +19,11 @@
 
 #import <sys/socket.h>
 #import <sys/sysctl.h>
+#import <sys/types.h>
+#import <ifaddrs.h>
 #import <net/if.h>
 #import <net/if_dl.h>
+#import <arpa/inet.h>
 
 
 #pragma mark Keys for deviceInfoForKey:
@@ -554,7 +557,7 @@ WifiVendor
 	return [self dik:@"SerialNumber"];
 	}
 
-- (NSString*) OSBuildVersion
+- (NSString*) systemBuildVersion
 	{
     int mib[2] = {CTL_KERN, KERN_OSVERSION};
     u_int namelen = sizeof(mib) / sizeof(mib[0]);
@@ -563,13 +566,14 @@ WifiVendor
 
     size_t bufferSize = 0;
     sysctl(mib, namelen, NULL, &bufferSize, NULL, 0);
+	if (bufferSize <= 0) return nil;
 
     u_char buildBuffer[bufferSize];
     int result = sysctl(mib, namelen, buildBuffer, &bufferSize, NULL, 0);
 
 	NSString *version = nil;
     if (result >= 0)
-        version = [[NSString alloc] initWithBytes:buildBuffer length:bufferSize encoding:NSUTF8StringEncoding];
+        version = [[NSString alloc] initWithBytes:buildBuffer length:bufferSize-1 encoding:NSUTF8StringEncoding];
 
     return version;
 	}
@@ -596,5 +600,102 @@ WifiVendor
 	}
 
 #endif
+
+
+#pragma mark - IPAddress
+
+
+#define IOS_CELLULAR    @"pdp_ip0"
+#define IOS_WIFI        @"en0"
+#define IOS_VPN         @"utun0"
+#define IP_ADDR_IPv4    @"ipv4"
+#define IP_ADDR_IPv6    @"ipv6"
+
+
+- (NSString*) localIPAddressIPv4
+	{
+	return [self localIPAddressPreferIPv4:YES];
+	}
+
+- (NSString*) localIPAddressIPv6
+	{
+	return [self localIPAddressPreferIPv4:NO];
+	}
+
+- (NSString *) localIPAddressPreferIPv4:(BOOL)preferIPv4
+	{
+    NSArray *searchOrder =
+		(preferIPv4)
+		? @[ IOS_VPN @"/" IP_ADDR_IPv4, IOS_VPN @"/" IP_ADDR_IPv6, IOS_WIFI @"/" IP_ADDR_IPv4,
+		     IOS_WIFI @"/" IP_ADDR_IPv6, IOS_CELLULAR @"/" IP_ADDR_IPv4, IOS_CELLULAR @"/" IP_ADDR_IPv6 ]
+
+		: @[ IOS_VPN @"/" IP_ADDR_IPv6, IOS_VPN @"/" IP_ADDR_IPv4, IOS_WIFI @"/" IP_ADDR_IPv6,
+			 IOS_WIFI @"/" IP_ADDR_IPv4, IOS_CELLULAR @"/" IP_ADDR_IPv6, IOS_CELLULAR @"/" IP_ADDR_IPv4 ] ;
+
+    NSDictionary *addresses = [self IPAddresses];
+    ZDebug(@"addresses: %@", addresses);
+
+    __block NSString *address;
+    [searchOrder enumerateObjectsUsingBlock:
+	^ (NSString *key, NSUInteger idx, BOOL *stop)
+		{
+		address = addresses[key];
+		if (address) *stop = YES;
+        }];
+
+    return address ? address : @"0.0.0.0";
+	}
+
+- (NSMutableDictionary<NSString*, NSString*>*) IPAddresses
+	{
+    NSMutableDictionary *addresses = [NSMutableDictionary dictionaryWithCapacity:8];
+
+    // Retrieve the current interfaces - returns 0 on success
+
+    struct ifaddrs *interfaces = NULL;
+    if (getifaddrs(&interfaces) != 0)
+		{
+		if (interfaces) freeifaddrs(interfaces);
+		return addresses;
+		}
+
+	// Loop through linked list of interfaces --
+
+	struct ifaddrs *interface = NULL;
+	for(interface=interfaces; interface; interface=interface->ifa_next)
+		{
+		if(!(interface->ifa_flags & IFF_UP))	// || (interface->ifa_flags & IFF_LOOPBACK))
+			continue;
+
+		const struct sockaddr_in *addr = (const struct sockaddr_in*)interface->ifa_addr;
+		if (!addr) continue;
+
+		NSString *type = 0;
+		NSString *name = [NSString stringWithUTF8String:interface->ifa_name];
+		char addrBuf[ MAX(INET_ADDRSTRLEN, INET6_ADDRSTRLEN) ];
+
+		if (addr->sin_family == AF_INET)
+			{
+			if (inet_ntop(AF_INET, &addr->sin_addr, addrBuf, INET_ADDRSTRLEN))
+				type = IP_ADDR_IPv4;
+			}
+		else
+		if (addr->sin_family == AF_INET6)
+			{
+			const struct sockaddr_in6 *addr6 = (const struct sockaddr_in6*)interface->ifa_addr;
+			if(inet_ntop(AF_INET6, &addr6->sin6_addr, addrBuf, INET6_ADDRSTRLEN))
+				type = IP_ADDR_IPv6;
+			}
+
+		if (name && type)
+			{
+			NSString *key = [NSString stringWithFormat:@"%@/%@", name, type];
+			addresses[key] = [NSString stringWithUTF8String:addrBuf];
+			}
+		}
+
+    if (interfaces) freeifaddrs(interfaces);
+    return addresses;
+	}
 
 @end

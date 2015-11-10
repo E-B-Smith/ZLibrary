@@ -25,6 +25,9 @@
 #import "ZLibrary.h"
 
 
+#pragma mark UIDevice+ZLibrary
+
+
 typedef NS_ENUM(int32_t, UIDeviceFamily)
 	{
 	UIDeviceFamilyUnknown = 0,
@@ -41,7 +44,7 @@ typedef NS_ENUM(int32_t, UIDeviceFamily)
 - (NSString*) localizedModelIdentifier;	//	The 'pretty' hardware string: 'iPhone 5S GSM'.
 - (NSString*) hardwareModelIdentifier;	//	The raw hardware string, like 'N51AP'. Not so useful.
 - (NSString*) serialNumber;
-- (NSString*) OSBuildVersion;
+- (NSString*) systemBuildVersion;
 
 - (UIDeviceFamily)  deviceFamily;
 
@@ -55,6 +58,8 @@ typedef NS_ENUM(int32_t, UIDeviceFamily)
 - (BOOL) isSimulator;
 - (BOOL) isiPad;
 - (NSString*) MACAddress;
+- (NSString*) localIPAddressIPv4;
+- (NSString*) localIPAddressIPv6;
 - (BOOL) hasRetinaDisplay;
 
 APP_STORE_NON_COMPLIANT( - (BOOL) bluetoothIsEnabled; )
