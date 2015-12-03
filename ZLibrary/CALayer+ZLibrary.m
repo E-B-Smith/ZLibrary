@@ -70,6 +70,7 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 	shape.path = path.CGPath;
 	shape.lineWidth = 0.5f;
 	shape.strokeColor = color;
+	shape.zPosition = 2.0;
 	}
 
 - (void) removeLine

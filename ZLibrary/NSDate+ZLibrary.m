@@ -26,9 +26,9 @@
 	{
 	NSTimeInterval intervals[] = { 2*60.0, 			   120.0*60.0, 		23.0*60.0*60.0, 	48.0*60.0*60.0,	4.0*24.0*60.0*60.0 };
 	NSTimeInterval modulus[] =   {    0.0,					 60.0,			 60.0*60.0,				   0.0,	    24.0*60.0*60.0 };
-	NSString * strings [] = 	 { @"A moment ago",	   @"minutes", 	   	      @"hours",		  @"A day ago", 		   @"days" };
+	NSString * strings [] = 	 { @"a moment",	       @"minutes", 	   	      @"hours",		       @"a day", 		   @"days" };
 
-	NSTimeInterval span = - [self timeIntervalSinceNow];
+	NSTimeInterval span = fabsl([self timeIntervalSinceNow]);
 
 	int i = 0;
 	while (i < _countof(intervals) && span > intervals[i]) ++i;
@@ -41,7 +41,7 @@
 		else
 			{
 			NSInteger d = span / modulus[i];
-			result = [NSString stringWithFormat:@"%ld %@ ago", (long)d, strings[i]];
+			result = [NSString stringWithFormat:@"%ld %@", (long)d, strings[i]];
 			}
 		}
 	else
