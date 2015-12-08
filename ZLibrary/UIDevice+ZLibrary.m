@@ -191,10 +191,11 @@ WifiVendor
 
 - (BOOL) isSimulator
 	{
-	NSRange r = [self.model
-		rangeOfString:@"Simulator"
-		options:NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch];
-	return (r.location == NSNotFound) ? NO : YES;
+	#if TARGET_IPHONE_SIMULATOR
+		return YES;
+	#else
+		return NO;
+	#endif
 	}
 
 
