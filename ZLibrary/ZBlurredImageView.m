@@ -59,11 +59,19 @@
 	{
 	if (!!blur == !!self.isBlurred) return;
 	_blurred = blur;
-	[self updateBlurAnimated:animated];
+	[self updateBlurAnimated:animated duration:0.0];
 	}
 
-- (void) updateBlurAnimated:(BOOL)animated
+- (void) setBlurred:(BOOL)blur animated:(BOOL)animated duration:(NSTimeInterval)duration
 	{
+	if (!!blur == !!self.isBlurred) return;
+	_blurred = blur;
+	[self updateBlurAnimated:animated duration:duration];
+	}
+
+- (void) updateBlurAnimated:(BOOL)animated duration:(NSTimeInterval)duration
+	{
+	if (duration <= 0.0) duration = 0.80;
 	if (self.isBlurred)
 		{
 		blurLayer = [CALayer layer];
@@ -84,7 +92,7 @@
 			animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
 			animation.fromValue = @0.0;
 			animation.toValue   = @1.0;
-			animation.duration  = 0.8;
+			animation.duration  = duration;
 			animation.fillMode  = kCAFillModeForwards;
 			animation.removedOnCompletion = YES;
 			[blurLayer addAnimation:animation forKey:@"opacity"];
@@ -103,7 +111,7 @@
 			animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
 			animation.fromValue = @0.0;
 			animation.toValue   = @1.0;
-			animation.duration  = 0.8;
+			animation.duration  = duration;
 			animation.fillMode  = kCAFillModeForwards;
 			animation.removedOnCompletion = YES;
 			[blurLayer addAnimation:animation forKey:@"opacity"];
@@ -121,13 +129,13 @@
 	{
 	if (blurRadius == self.blurRadius) return;
 	_blurRadius = blurRadius;
-	[self updateBlurAnimated:NO];
+	[self updateBlurAnimated:NO duration:-1.0];
 	}
 
 - (void) setBlurColor:(UIColor *)blurColor
 	{
 	_blurColor = blurColor;
-	[self updateBlurAnimated:NO];
+	[self updateBlurAnimated:NO duration:-1.0];
 	}
 
 @end
