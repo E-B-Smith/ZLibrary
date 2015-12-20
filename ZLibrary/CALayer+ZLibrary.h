@@ -28,3 +28,9 @@
 - (void) removeAllSublayers;
 
 @end
+
+
+@interface ZUnderlineLayer : CAShapeLayer
++ (ZUnderlineLayer*) layerWithColor:(CGColorRef)color width:(CGFloat)width;
+@end
+

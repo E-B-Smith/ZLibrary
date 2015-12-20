@@ -42,4 +42,5 @@ extern void ZDebugGlobalEnableDebugViewFrames(BOOL enabled);
 
 - (void) setDebugShowFrames:(BOOL)on;
 
+- (void) addUnderlineWithColor:(UIColor*)color width:(CGFloat)width;
 @end

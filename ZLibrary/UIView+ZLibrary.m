@@ -15,6 +15,7 @@
 
 
 #import "UIView+ZLibrary.h"
+#import "CALayer+ZLibrary.h"
 
 
 @implementation UIView (ZLibrary)
@@ -250,5 +251,12 @@ void ZDebugGlobalEnableDebugViewFrames(BOOL enabled)
 		}
 	return color;
 	}
-	
+
+- (void) addUnderlineWithColor:(UIColor*)color width:(CGFloat)width
+	{
+	ZUnderlineLayer *underline = [ZUnderlineLayer layerWithColor:color.CGColor width:width];
+	[self.layer addSublayer:underline];
+	[underline setNeedsLayout];
+	}
+
 @end

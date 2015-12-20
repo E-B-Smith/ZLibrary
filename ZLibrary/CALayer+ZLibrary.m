@@ -86,3 +86,66 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 	}
 
 @end
+
+
+#pragma mark - ZUnderlineLayer
+
+
+@interface ZUnderlineLayer ()
+@property (weak, nonatomic) CALayer *lastSuperLayer;
+@end
+
+
+@implementation ZUnderlineLayer
+
+- (void) dealloc
+	{
+	self.lastSuperLayer = nil;
+	}
+
+-(void) setLastSuperLayer:(CALayer*)lastSuperLayer_
+	{
+	if (self.lastSuperLayer != lastSuperLayer_)
+		{
+		if (self.lastSuperLayer)
+			[self.lastSuperLayer removeObserver:self forKeyPath:@"bounds"];
+		_lastSuperLayer = lastSuperLayer_;
+		[self.lastSuperLayer addObserver:self forKeyPath:@"bounds" options:0 context:NULL];
+		}
+	}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath
+					   ofObject:(id)object
+					 	 change:(NSDictionary<NSString *,id> *)change
+						context:(void *)context
+	{
+	[self setNeedsLayout];
+	}
+
+- (void) layoutSublayers
+	{
+	[super layoutSublayers];
+	self.lastSuperLayer = self.superlayer;
+	self.frame = self.superlayer.bounds;
+	self.backgroundColor = [UIColor clearColor].CGColor;
+
+	CGSize size = self.bounds.size;
+	UIBezierPath *path = [UIBezierPath bezierPath];
+	[path moveToPoint:CGPointMake(0.0, size.height)];
+	[path addLineToPoint:CGPointMake(size.width, size.height)];
+	self.path = path.CGPath;
+	}
+
++ (ZUnderlineLayer*) layerWithColor:(CGColorRef)color width:(CGFloat)width
+	{
+	ZUnderlineLayer *layer = [ZUnderlineLayer layer];
+	layer.strokeColor = color;
+	layer.lineWidth = width;
+	layer.delegate = layer;
+	[layer setNeedsLayout];
+	return layer;
+	}
+
+@end
+
+
