@@ -92,6 +92,9 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 
 
 @interface ZUnderlineLayer ()
+	{
+	CGSize lastSize;
+	}
 @property (weak, nonatomic) CALayer *lastSuperLayer;
 @end
 
@@ -103,17 +106,14 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 	self.lastSuperLayer = nil;
 	}
 
--(void) setLastSuperLayer:(CALayer*)lastSuperLayer_
+- (void) setLastSuperLayer:(CALayer *)lastSuperLayer_
 	{
-	if (self.lastSuperLayer != lastSuperLayer_)
-		{
-		if (self.lastSuperLayer)
-			[self.lastSuperLayer removeObserver:self forKeyPath:@"bounds"];
-		_lastSuperLayer = lastSuperLayer_;
-		[self.lastSuperLayer addObserver:self forKeyPath:@"bounds" options:0 context:NULL];
-		}
+	if (_lastSuperLayer ==  lastSuperLayer_) return;
+	[self.lastSuperLayer removeObserver:self forKeyPath:@"bounds"];
+	_lastSuperLayer	= lastSuperLayer_;
+	[self.lastSuperLayer addObserver:self forKeyPath:@"bounds" options:0 context:NULL];
 	}
-
+	
 - (void) observeValueForKeyPath:(NSString *)keyPath
 					   ofObject:(id)object
 					 	 change:(NSDictionary<NSString *,id> *)change
@@ -122,17 +122,22 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 	[self setNeedsLayout];
 	}
 
+- (id<CAAction>)actionForKey:(NSString *)key
+	{
+	self.lastSuperLayer = self.superlayer;
+	return [super actionForKey:key];
+	}
+	
 - (void) layoutSublayers
 	{
 	[super layoutSublayers];
-	self.lastSuperLayer = self.superlayer;
 	self.frame = self.superlayer.bounds;
 	self.backgroundColor = [UIColor clearColor].CGColor;
 
-	CGSize size = self.bounds.size;
+	lastSize = self.bounds.size;
 	UIBezierPath *path = [UIBezierPath bezierPath];
-	[path moveToPoint:CGPointMake(0.0, size.height)];
-	[path addLineToPoint:CGPointMake(size.width, size.height)];
+	[path moveToPoint:CGPointMake(0.0, lastSize.height)];
+	[path addLineToPoint:CGPointMake(lastSize.width, lastSize.height)];
 	self.path = path.CGPath;
 	}
 
@@ -145,7 +150,5 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 	[layer setNeedsLayout];
 	return layer;
 	}
-
+	
 @end
-
-
