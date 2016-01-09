@@ -92,10 +92,7 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 
 
 @interface ZUnderlineLayer ()
-	{
-	CGSize lastSize;
-	}
-@property (weak, nonatomic) CALayer *lastSuperLayer;
+@property (assign, nonatomic) CALayer *lastSuperLayer;
 @end
 
 
@@ -109,9 +106,9 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 - (void) setLastSuperLayer:(CALayer *)lastSuperLayer_
 	{
 	if (_lastSuperLayer ==  lastSuperLayer_) return;
-	[self.lastSuperLayer removeObserver:self forKeyPath:@"bounds"];
+	[_lastSuperLayer removeObserver:self forKeyPath:@"bounds"];
 	_lastSuperLayer	= lastSuperLayer_;
-	[self.lastSuperLayer addObserver:self forKeyPath:@"bounds" options:0 context:NULL];
+	[_lastSuperLayer addObserver:self forKeyPath:@"bounds" options:0 context:NULL];
 	}
 	
 - (void) observeValueForKeyPath:(NSString *)keyPath
@@ -134,7 +131,7 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 	self.frame = self.superlayer.bounds;
 	self.backgroundColor = [UIColor clearColor].CGColor;
 
-	lastSize = self.bounds.size;
+	CGSize lastSize = self.bounds.size;
 	UIBezierPath *path = [UIBezierPath bezierPath];
 	[path moveToPoint:CGPointMake(0.0, lastSize.height)];
 	[path addLineToPoint:CGPointMake(lastSize.width, lastSize.height)];
