@@ -202,7 +202,7 @@ static inline void ZPerformBlockOnMainThread(ZPerformBlockType block)
 	dispatch_async(dispatch_get_main_queue(), block);
 	}
 
-static inline void ZPerformBlockOnMainThreadsynchronous(ZPerformBlockType block)
+static inline void ZPerformBlockOnMainThreadSynchronous(ZPerformBlockType block)
 	{
 	dispatch_sync(dispatch_get_main_queue(), block);
 	}
