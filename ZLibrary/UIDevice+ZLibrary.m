@@ -147,9 +147,12 @@ WifiVendor
 - (NSString *) modelIdentifier
 	{
 	NSString* result = [self getSysInfoByName:"hw.machine"];
-	if ([result isEqualToString:@"x86_64"] ||
-		[result isEqualToString:@"i386"])
+	if ([result isEqualToString:@"x86_64"] || [result isEqualToString:@"i386"])
+		{
 		result = [self.model stringByReplacingOccurrencesOfString:@" " withString:@""];
+		if (![result localizedCaseInsensitiveContainsString:@"Simulator"])
+			result = [result stringByAppendingString:@"Simulator"];
+		}
 	return result;
 	}
 
@@ -191,10 +194,11 @@ WifiVendor
 
 - (BOOL) isSimulator
 	{
-	NSRange r = [self.model
-		rangeOfString:@"Simulator"
-		options:NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch];
-	return (r.location == NSNotFound) ? NO : YES;
+	#if (TARGET_IPHONE_SIMULATOR)
+		return YES;
+	#else
+		return NO;
+	#endif	
 	}
 
 
