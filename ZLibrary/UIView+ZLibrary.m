@@ -259,4 +259,62 @@ void ZDebugGlobalEnableDebugViewFrames(BOOL enabled)
 	[underline setNeedsLayout];
 	}
 
+
+#pragma mark - Find the next text input
+
+
+- (NSArray<UIResponder*>*) editableTextInputsInView
+	{
+	NSMutableArray *textInputs = [NSMutableArray new];
+	for (UIView *subview in self.subviews)
+		{
+		BOOL isTextField = [subview isKindOfClass:[UITextField class]];
+		BOOL isEditableTextView = [subview isKindOfClass:[UITextView class]] && [(UITextView *)subview isEditable];
+		if (isTextField || isEditableTextView)
+			[textInputs addObject:subview];
+		else
+			[textInputs addObjectsFromArray:[subview editableTextInputsInView]];
+		}
+	return textInputs;
+	}
+
+- (NSArray<UIResponder*>*) textResponders
+	{
+	NSArray *textInputs = [[[UIApplication sharedApplication] keyWindow] editableTextInputsInView];
+	return [textInputs sortedArrayUsingComparator:
+	^ NSComparisonResult (UIView *textInput1, UIView *textInput2)
+		{
+		UIView *commonAncestorView = textInput1.superview;
+		while (commonAncestorView && ![textInput2 isDescendantOfView:commonAncestorView])
+			commonAncestorView = commonAncestorView.superview;
+		
+		CGRect frame1 = [textInput1 convertRect:textInput1.bounds toView:commonAncestorView];
+		CGRect frame2 = [textInput2 convertRect:textInput2.bounds toView:commonAncestorView];
+		NSComparisonResult result = [@(CGRectGetMinY(frame1)) compare:@(CGRectGetMinY(frame2))];
+		if (result == NSOrderedSame)
+			result = [@(CGRectGetMinX(frame1)) compare:@(CGRectGetMinX(frame2))];
+		return result;
+		}];
+	}
+
+- (UIResponder*) nextTextInputResponder
+	{
+	NSArray *_textResponders = self.textResponders;
+	NSArray *firstResponders = [_textResponders filteredArrayUsingPredicate:
+		[NSPredicate predicateWithBlock:
+			^ BOOL(UIResponder *responder, NSDictionary *bindings)
+				{
+				return [responder isFirstResponder];
+				}]];
+	UIResponder *firstResponder = [firstResponders lastObject];
+	NSInteger offset = 1;
+	NSInteger firstResponderIndex = [_textResponders indexOfObject:firstResponder];
+	NSInteger adjacentResponderIndex = firstResponderIndex != NSNotFound ? firstResponderIndex + offset : NSNotFound;
+	UIResponder *adjacentResponder = nil;
+	if (adjacentResponderIndex >= 0 && adjacentResponderIndex < (NSInteger)_textResponders.count)
+		adjacentResponder = [_textResponders objectAtIndex:adjacentResponderIndex];
+
+	return adjacentResponder;
+	}
+
 @end
