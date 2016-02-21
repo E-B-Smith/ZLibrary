@@ -200,7 +200,7 @@ void ZDebugMessageProcedure(ZDebugLevel debugLevel, const char* file, int lineNu
 	ZDebugAssert(file && [message isKindOfClass:[NSString class]]);
 	NSString* f = [[NSString stringWithCString:file encoding:NSMacOSRomanStringEncoding] lastPathComponent];
 	NSString* fileLower = [f lowercaseString];
-	if (debugLevel == ZDebugLevelAssert || debugLevel > ZDebugLevelNone)
+	if (debugLevel == ZDebugLevelAssert || debugLevel > ZDebugLevelDebug)
 		{}
 	else
 	if ([ZDebugIncludeFiles containsObject:@"allon"])
