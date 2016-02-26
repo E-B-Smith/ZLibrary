@@ -85,18 +85,37 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 	for (CALayer*v in sv) [v removeFromSuperlayer];
 	}
 
+- (ZBorderLayer*) addBorderWithEdges:(UIRectEdge)edges color:(CGColorRef)color width:(CGFloat)width
+	{
+	NSString *kBorderLayerName = @"ZBorderLayer";
+	ZBorderLayer *layer = (id) [self sublayerNamed:kBorderLayerName];
+	if (layer)
+		{
+		layer.edges = edges;
+		layer.color = color;
+		layer.width = width;
+		}
+	else
+		{
+		layer = [ZBorderLayer borderWithEdges:edges color:color width:width];
+		layer.name = kBorderLayerName;
+		[self addSublayer:layer];
+		}
+	return layer;
+	}
+
 @end
 
 
-#pragma mark - ZUnderlineLayer
+#pragma mark - ZBorderLayer
 
 
-@interface ZUnderlineLayer ()
+@interface ZBorderLayer ()
 @property (assign, nonatomic) CALayer *lastSuperLayer;
 @end
 
 
-@implementation ZUnderlineLayer
+@implementation ZBorderLayer : CAShapeLayer
 
 - (void) dealloc
 	{
@@ -124,7 +143,7 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 	self.lastSuperLayer = self.superlayer;
 	return [super actionForKey:key];
 	}
-	
+
 - (void) layoutSublayers
 	{
 	[super layoutSublayers];
@@ -133,19 +152,38 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 
 	CGSize lastSize = self.bounds.size;
 	UIBezierPath *path = [UIBezierPath bezierPath];
-	[path moveToPoint:CGPointMake(0.0, lastSize.height)];
-	[path addLineToPoint:CGPointMake(lastSize.width, lastSize.height)];
+	if (self.edges & UIRectEdgeBottom)
+		{
+		[path moveToPoint:CGPointMake(0.0, lastSize.height)];
+		[path addLineToPoint:CGPointMake(lastSize.width, lastSize.height)];
+		}
+	if (self.edges & UIRectEdgeTop)
+		{
+		[path moveToPoint:CGPointMake(0.0, 0.0)];
+		[path addLineToPoint:CGPointMake(lastSize.width, 0.0)];
+		}
+	if (self.edges & UIRectEdgeLeft)
+		{
+		[path moveToPoint:CGPointMake(0.0, 0.0)];
+		[path addLineToPoint:CGPointMake(0.0, lastSize.height)];
+		}
+	if (self.edges & UIRectEdgeRight)
+		{
+		[path moveToPoint:CGPointMake(lastSize.width, 0.0)];
+		[path addLineToPoint:CGPointMake(lastSize.width, lastSize.height)];
+		}
 	self.path = path.CGPath;
 	}
 
-+ (ZUnderlineLayer*) layerWithColor:(CGColorRef)color width:(CGFloat)width
++ (ZBorderLayer*) borderWithEdges:(UIRectEdge)edges color:(CGColorRef)color width:(CGFloat)width
 	{
-	ZUnderlineLayer *layer = [ZUnderlineLayer layer];
+	ZBorderLayer *layer = [ZBorderLayer layer];
+	layer.edges = edges;
 	layer.strokeColor = color;
 	layer.lineWidth = width;
 	layer.delegate = layer;
 	[layer setNeedsLayout];
 	return layer;
 	}
-	
+
 @end

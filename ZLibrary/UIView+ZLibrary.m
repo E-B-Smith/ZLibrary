@@ -254,7 +254,10 @@ void ZDebugGlobalEnableDebugViewFrames(BOOL enabled)
 
 - (void) addUnderlineWithColor:(UIColor*)color width:(CGFloat)width
 	{
-	ZUnderlineLayer *underline = [ZUnderlineLayer layerWithColor:color.CGColor width:width];
+	ZBorderLayer *underline =
+		[ZBorderLayer borderWithEdges:UIRectEdgeBottom
+			color:color.CGColor
+			width:width];
 	[self.layer addSublayer:underline];
 	[underline setNeedsLayout];
 	}

@@ -17,8 +17,15 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-@interface CALayer (ZLibrary)
+@interface ZBorderLayer : CAShapeLayer
++ (ZBorderLayer*) borderWithEdges:(UIRectEdge)edges color:(CGColorRef)color width:(CGFloat)width;
+@property (nonatomic, assign) CGColorRef color;
+@property (nonatomic, assign) CGFloat 	 width;
+@property (nonatomic, assign) UIRectEdge edges;
+@end
 
+
+@interface CALayer (ZLibrary)
 - (CALayer*) findSublayerUsingPredicateBlock:(BOOL (^) (CALayer* sublayer))predicateBlock;
 - (CALayer*) sublayerNamed:(NSString*)name;
 
@@ -27,10 +34,8 @@
 
 - (void) removeAllSublayers;
 
+- (ZBorderLayer*) addBorderWithEdges:(UIRectEdge)edges color:(CGColorRef)color width:(CGFloat)width;
 @end
 
 
-@interface ZUnderlineLayer : CAShapeLayer
-+ (ZUnderlineLayer*) layerWithColor:(CGColorRef)color width:(CGFloat)width;
-@end
 
