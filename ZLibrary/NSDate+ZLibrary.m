@@ -26,9 +26,32 @@
 	{
 	NSTimeInterval intervals[] = { 2*60.0, 			   120.0*60.0, 		23.0*60.0*60.0, 	48.0*60.0*60.0,	4.0*24.0*60.0*60.0 };
 	NSTimeInterval modulus[] =   {    0.0,					 60.0,			 60.0*60.0,				   0.0,	    24.0*60.0*60.0 };
-	NSString * strings [] = 	 { @"a moment",	       @"minutes", 	   	      @"hours",		       @"a day", 		   @"days" };
 
-	NSTimeInterval span = fabsl([self timeIntervalSinceNow]);
+	NSString * pastStrings [] =
+		{
+		@"a moment ago",
+		@"%ld minutes ago",
+		@"%ld hours ago",
+		@"a day ago",
+		@"%ld days ago"
+		};
+
+	NSString * futureStrings [] =
+		{
+		@"in a moment",
+		@"in %ld minutes",
+		@"in %ld hours",
+		@"in a day",
+		@"in %ld days"
+		};
+
+	BOOL isFuture = YES;
+	NSTimeInterval span = [self timeIntervalSinceNow];
+	if (span < 0.0)
+		{
+		isFuture = NO;
+		span *= -1.0;
+		}
 
 	int i = 0;
 	while (i < _countof(intervals) && span > intervals[i]) ++i;
@@ -36,13 +59,12 @@
 	NSString * result = nil;
 	if (i < _countof(intervals))
 		{
-		if (modulus[i] <= 0.0)
-			result = strings[i];
+		NSInteger d = 0;
+		if (modulus[i] > 0.0) d = span / modulus[i];
+		if (isFuture)
+			result = [NSString stringWithFormat:futureStrings[i], (long) d];
 		else
-			{
-			NSInteger d = span / modulus[i];
-			result = [NSString stringWithFormat:@"%ld %@", (long)d, strings[i]];
-			}
+			result = [NSString stringWithFormat:pastStrings[i], d];
 		}
 	else
 		{
