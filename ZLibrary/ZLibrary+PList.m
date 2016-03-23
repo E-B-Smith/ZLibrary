@@ -217,8 +217,8 @@
 		else
 		if ([item isKindOfClass:[NSArray class]])
 			{
-			NSMutableArray* newArray = [((NSArray*)item) arrayForPListEncodingInvalidObjects];
-			[newArray addObject:newArray];
+			NSMutableArray* itemArray = [((NSArray*)item) arrayForPListEncodingInvalidObjects];
+			[newArray addObject:itemArray];
 			}
 		else
 		if ([item isKindOfClass:[NSDictionary class]])

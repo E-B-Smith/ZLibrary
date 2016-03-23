@@ -63,7 +63,7 @@ NSString* stringFromDate(NSDate* date, NSDateFormatterStyle dateStyle, NSDateFor
 		[formatter setDateStyle:dateStyle];
 		[formatter setTimeStyle:timeStyle];
 		dateString = [formatter stringFromDate:date];
-		release_if_needed(formatter);
+		formatter = release_if_needed(formatter);
 		}
 	else
 	if ([NSDateFormatter resolveClassMethod:@selector(localizedStringFromDate:dateStyle:timeStyle:)])
