@@ -32,12 +32,12 @@
 	return string;
 	}
 
-+ (NSAttributedString*) stringWithString:(NSString *)string
++ (NSAttributedString*) string:(NSString *)string
 	{
 	return (string) ? [[NSAttributedString alloc] initWithString:string] : [[NSAttributedString alloc] init];
 	}
 
-+ (NSAttributedString*) stringByAppendingStrings:(NSAttributedString*)string, ...
++ (NSMutableAttributedString*) stringWithStrings:(NSAttributedString*)string, ...
 	{
 	va_list list;
 	va_start(list, string);
@@ -45,9 +45,6 @@
 	NSMutableAttributedString *result = [NSMutableAttributedString new];
 	while (string)
 		{
-		if ([string isKindOfClass:NSAttributedString.class])
-			[result appendAttributedString:string];
-		else
 		if ([string isKindOfClass:NSString.class])		
 			[result appendAttributedString:[[NSAttributedString alloc] initWithString:(NSString*)string]];
 		else
@@ -59,9 +56,14 @@
 	return result;
 	}
 
-+ (NSAttributedString*) stringWithString:(NSString*)string font:(UIFont*)font
++ (NSAttributedString*) string:(NSString*)string withFont:(UIFont*)font
 	{
 	return [[NSAttributedString alloc] initWithString:string attributes: @{ NSFontAttributeName:font }];
+	}
+
++ (NSAttributedString*) string:(NSString*)string withColor:(UIColor*)color
+	{
+	return [[NSAttributedString alloc] initWithString:string attributes: @{ NSStrokeColorAttributeName:color }];
 	}
 
 @end

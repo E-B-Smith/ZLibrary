@@ -19,7 +19,8 @@
 
 @interface NSAttributedString (ZLibrary)
 + (NSAttributedString*) stringWithImage:(UIImage*)image;
-+ (NSAttributedString*) stringWithString:(NSString*)string;
-+ (NSAttributedString*) stringByAppendingStrings:(NSAttributedString*)string, ...;
-+ (NSAttributedString*) stringWithString:(NSString*)string font:(UIFont*)font;
++ (NSMutableAttributedString*) stringWithStrings:(NSAttributedString*)string, ...;
++ (NSAttributedString*) string:(NSString*)string;
++ (NSAttributedString*) string:(NSString*)string withFont:(UIFont*)font;
++ (NSAttributedString*) string:(NSString*)string withColor:(UIColor*)color;
 @end
