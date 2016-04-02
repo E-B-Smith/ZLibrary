@@ -320,4 +320,10 @@ void ZDebugGlobalEnableDebugViewFrames(BOOL enabled)
 	return adjacentResponder;
 	}
 
+- (UIResponder*) firstTextInputResponder
+	{
+	NSArray *_textResponders = self.textResponders;
+	return _textResponders.firstObject;
+	}
+
 @end

@@ -44,5 +44,6 @@ extern void ZDebugGlobalEnableDebugViewFrames(BOOL enabled);
 
 - (void) addUnderlineWithColor:(UIColor*)color width:(CGFloat)width;
 
+- (UIResponder*) firstTextInputResponder;
 - (UIResponder*) nextTextInputResponder;
 @end
