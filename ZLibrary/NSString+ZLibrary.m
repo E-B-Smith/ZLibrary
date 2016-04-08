@@ -146,7 +146,15 @@
 	{
 	return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 	}
-	
+
+- (NSString*) stringByLeftTrimmingWhiteSpace
+	{
+	NSRange r = [self rangeOfCharacterFromSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	if (r.location == 0)
+		return [self substringFromIndex:r.length];
+	return self;
+	}
+
 - (NSString*) stringByEncodingJSONCharacters
 	{
 	NSCharacterSet* badCharacters = [NSCharacterSet characterSetWithCharactersInString:@"\n\t\r\b\"\'&\f\\"];
