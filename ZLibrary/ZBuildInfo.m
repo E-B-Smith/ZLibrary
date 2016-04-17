@@ -227,6 +227,30 @@ static inline NSDictionary* systemDictionary()
 	return buildString;
 	}
 
++ (NSString*) mediumBuildString
+	{
+	NSString* debug = @"";
+#if DEBUG
+	debug = @" Debug";
+#endif	
+	
+	NSString* buildString =
+		[NSString stringWithFormat:@"%@ Version %@%@",
+			[ZBuildInfo applicationName],
+			[ZBuildInfo versionString], 
+			debug];
+	return buildString;
+	}
+
++ (NSString*) mediumCompileDateString
+	{
+	NSString* buildString =
+		[NSString stringWithFormat:@"Built %@",
+			[ZBuildInfo buildDateStringWithDateStyle:NSDateFormatterFullStyle
+				timeStyle:NSDateFormatterLongStyle]];
+	return buildString;
+	}
+
 + (NSComparisonResult) compareVersionString:(NSString*)string1 withVersionString:(NSString*)string2
 	{
 	NSArray *a1 = [string1 componentsSeparatedByString:@"."];

@@ -78,6 +78,9 @@
 + (NSString*)	versionString;
 + (NSString*)	copyrightString;
 
++ (NSString*) mediumBuildString;
++ (NSString*) mediumCompileDateString;
+
 + (NSComparisonResult) compareVersionString:(NSString*)string1 withVersionString:(NSString*)string2;
 
 @end
