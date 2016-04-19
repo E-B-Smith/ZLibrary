@@ -342,7 +342,7 @@ cleanup:
 	CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
 	CGContextFillRect(context, cropRect);
 	rect.origin.x = - cropRect.origin.x;
-	rect.origin.y = - cropRect.origin.y;
+	rect.origin.y = (cropRect.size.height - self.size.height) + cropRect.origin.y;
 	CGContextDrawImage(context, rect, self.CGImage);
 
 	UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
