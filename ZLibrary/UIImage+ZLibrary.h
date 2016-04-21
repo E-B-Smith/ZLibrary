@@ -30,5 +30,6 @@
 - (UIImage*) imageScaled:(CGFloat)scale;
 - (UIImage*) imageCroppedToRect:(CGRect)rect;
 - (UIImage*) imageUnionImage:(UIImage*)image;
+- (UIImage*) imageOrientedCorrectly;
 
 @end
