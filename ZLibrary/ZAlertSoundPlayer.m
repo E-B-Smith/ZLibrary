@@ -68,7 +68,7 @@ void alertSoundCompletionProcedure(SystemSoundID soundID, void* alertSoundPlayer
 		AudioServicesDisposeSystemSoundID(soundID);
 	}
 
-+ (ZAlertSoundPlayer*) alertSoundWithBundleResourceName:(NSString *)filename
++ (ZAlertSoundPlayer*) alertSoundWithBundleResourceNamed:(NSString *)filename
 	{
 	NSURL* url = nil;
 	if (filename)
