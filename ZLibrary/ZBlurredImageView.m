@@ -71,7 +71,7 @@
 
 - (void) updateBlurAnimated:(BOOL)animated duration:(NSTimeInterval)duration
 	{
-	if (duration <= 0.0) duration = 0.80;
+	if (duration < 0.0) duration = 0.80;
 	if (self.isBlurred)
 		{
 		blurLayer = [CALayer layer];
@@ -136,6 +136,13 @@
 	{
 	_blurColor = blurColor;
 	[self updateBlurAnimated:NO duration:-1.0];
+	}
+
+- (void) layoutSubviews
+	{
+	[super layoutSubviews];
+	if (!CGRectEqualToRect(self.bounds, blurLayer.bounds))
+		[self updateBlurAnimated:NO duration:0.0];
 	}
 
 @end
