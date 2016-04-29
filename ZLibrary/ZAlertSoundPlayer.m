@@ -92,7 +92,9 @@ void alertSoundCompletionProcedure(SystemSoundID soundID, void* alertSoundPlayer
 	{
 	if (soundID)
 		{
-		OSStatus error = AudioServicesAddSystemSoundCompletion(soundID, NULL, NULL, alertSoundCompletionProcedure, (__bridge void *)(self));
+		OSStatus error = AudioServicesAddSystemSoundCompletion(
+			soundID, NULL, NULL, alertSoundCompletionProcedure, (__bridge void *)(self)
+		);
 		if (error)
 			ZLog(@"Error setting sound completion: %d.", error);
 		else
