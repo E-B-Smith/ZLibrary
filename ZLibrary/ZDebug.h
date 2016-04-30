@@ -185,6 +185,8 @@ extern void ZDebugSetOptions(NSString* debugOptions);								//	Set file level d
 
 #define ZDebugAssertIsMainThread()					ZDebugAssert([NSThread isMainThread])
 
+#define ZDebugCompileForDebug(x)					x
+
 
 #else	//	not ZDEBUG ---------------------------------------------------------------------------
 
@@ -200,7 +202,7 @@ extern void ZDebugSetOptions(NSString* debugOptions);								//	Set file level d
 #define ZDebugSetOptions(debugOptions)				/*true*/
 
 #define ZDebug(...)									do {} while (0)
-#define ZDebugLogMethodName()							do {} while (0)
+#define ZDebugLogMethodName()						do {} while (0)
 #define ZDebugLogError(error)						do {} while (0)
 #define ZDebugLogFunctionName()						do {} while (0)
 #define ZDebugAssert(Condition)						do {} while (0)
@@ -209,6 +211,8 @@ extern void ZDebugSetOptions(NSString* debugOptions);								//	Set file level d
 #define ZDebugBreakPoint()							do {} while (0)
 #define ZDebugFlushMessages()						do {} while (0)
 #define ZDebugAssertIsMainThread()					do {} while (0)
+#define ZDebugCompileForDebug(x)					do {} while (0)
+
 
 #endif	//	ZDEBUG --------------------------------------------------------------------------------
 
