@@ -94,6 +94,8 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 		layer.edges = edges;
 		layer.color = color;
 		layer.width = width;
+		[layer setNeedsLayout];
+		[layer setNeedsDisplay];
 		}
 	else
 		{

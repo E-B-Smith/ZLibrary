@@ -18,6 +18,7 @@
 
 
 extern void ZDebugGlobalEnableDebugViewFrames(BOOL enabled);
+extern CGRect ZLayoutVerticalInRectWithMargin(CGRect boundingRect, CGFloat margin, ...);
 
 
 @interface UIView (ZLibrary)

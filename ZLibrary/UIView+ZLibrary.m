@@ -327,3 +327,55 @@ void ZDebugGlobalEnableDebugViewFrames(BOOL enabled)
 	}
 
 @end
+
+
+CGRect ZLayoutVerticalInRectWithMargin(CGRect boundingRect, CGFloat margin, ...)
+	{
+	UIView *lastView = nil;
+	CGRect originalBounds = boundingRect;
+
+	va_list args;
+	va_start(args, margin);
+	UIView *view = va_arg(args, UIView*);
+	while (view)
+		{
+		if (![view isKindOfClass:[UIView class]] || view.hidden)
+			continue;
+
+
+		CGRect bounds;
+		if ([view isKindOfClass:[UILabel class]] ||
+			[view isKindOfClass:[UITextView class]] ||
+			[view isKindOfClass:[UITextField class]])
+			{
+			view.frame = boundingRect;
+			[view sizeToFit];
+			bounds = view.frame;
+			}
+		else
+			{
+			bounds = view.frame;
+			bounds.origin.x = boundingRect.origin.x;
+			bounds.origin.y = boundingRect.origin.y;
+			bounds.size.width = boundingRect.size.width;
+			view.frame = bounds;
+			}
+			
+		if (bounds.size.height > 0.0)
+			boundingRect.origin.y += bounds.size.height + margin;
+
+		lastView = view;
+		view = va_arg(args, UIView*);
+		}
+	va_end(args);
+
+	if (lastView)
+		{
+		CGRect frame = lastView.frame;
+		originalBounds.size.height = frame.origin.y + frame.size.height;
+		}
+	else
+		originalBounds.size.height = 0.0;
+
+	return originalBounds;
+	}
