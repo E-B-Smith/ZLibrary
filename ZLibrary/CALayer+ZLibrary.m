@@ -113,7 +113,7 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 
 
 @interface ZBorderLayer ()
-@property (assign, nonatomic) CALayer *lastSuperLayer;
+@property (weak, nonatomic) CALayer *lastSuperLayer;
 @end
 
 
@@ -126,10 +126,10 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 
 - (void) setLastSuperLayer:(CALayer *)lastSuperLayer_
 	{
-	if (_lastSuperLayer ==  lastSuperLayer_) return;
-	[_lastSuperLayer removeObserver:self forKeyPath:@"bounds"];
+	if (self.lastSuperLayer ==  lastSuperLayer_) return;
+	[self.lastSuperLayer removeObserver:self forKeyPath:@"bounds"];
 	_lastSuperLayer	= lastSuperLayer_;
-	[_lastSuperLayer addObserver:self forKeyPath:@"bounds" options:0 context:NULL];
+	[self.lastSuperLayer addObserver:self forKeyPath:@"bounds" options:0 context:NULL];
 	}
 	
 - (void) observeValueForKeyPath:(NSString *)keyPath
@@ -148,7 +148,6 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 
 - (id<CAAction>)actionForKey:(NSString *)key
 	{
-	//	Older iOS versions:  Need to remove old superlayer as observer.
 	self.lastSuperLayer = self.superlayer;
 	return [super actionForKey:key];
 	}
