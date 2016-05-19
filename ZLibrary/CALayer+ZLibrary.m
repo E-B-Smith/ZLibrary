@@ -140,8 +140,15 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 	[self setNeedsLayout];
 	}
 
+- (void)removeFromSuperlayer
+	{
+	self.lastSuperLayer = nil;
+	[super removeFromSuperlayer];
+	}
+
 - (id<CAAction>)actionForKey:(NSString *)key
 	{
+	//	Older iOS versions:  Need to remove old superlayer as observer.
 	self.lastSuperLayer = self.superlayer;
 	return [super actionForKey:key];
 	}
