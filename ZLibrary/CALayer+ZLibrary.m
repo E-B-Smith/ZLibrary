@@ -113,7 +113,7 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 
 
 @interface ZBorderLayer ()
-@property (weak, nonatomic) CALayer *lastSuperLayer;
+@property (assign, nonatomic) CALayer *lastSuperLayer;
 @end
 
 
@@ -126,10 +126,10 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 
 - (void) setLastSuperLayer:(CALayer *)lastSuperLayer_
 	{
-	if (self.lastSuperLayer ==  lastSuperLayer_) return;
-	[self.lastSuperLayer removeObserver:self forKeyPath:@"bounds"];
+	if (_lastSuperLayer ==  lastSuperLayer_) return;
+	[_lastSuperLayer removeObserver:self forKeyPath:@"bounds"];
 	_lastSuperLayer	= lastSuperLayer_;
-	[self.lastSuperLayer addObserver:self forKeyPath:@"bounds" options:0 context:NULL];
+	[_lastSuperLayer addObserver:self forKeyPath:@"bounds" options:0 context:NULL];
 	}
 	
 - (void) observeValueForKeyPath:(NSString *)keyPath
