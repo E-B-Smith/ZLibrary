@@ -15,6 +15,7 @@
 
 
 #import "CALayer+ZLibrary.h"
+#import "ZDebug.h"
 
 
 @implementation CALayer (ZLibrary)
@@ -113,7 +114,7 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 
 
 @interface ZBorderLayer ()
-@property (assign, nonatomic) CALayer *lastSuperLayer;
+@property (weak, nonatomic) CALayer *lastSuperLayer;
 @end
 
 
@@ -121,6 +122,7 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 
 - (void) dealloc
 	{
+	ZDebug(@"Superlayer 0x%x last 0x%x", self.superlayer, _lastSuperLayer);
 	self.lastSuperLayer = nil;
 	}
 
@@ -148,8 +150,9 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 
 - (id<CAAction>)actionForKey:(NSString *)key
 	{
+	id<CAAction> result = [super actionForKey:key];
 	self.lastSuperLayer = self.superlayer;
-	return [super actionForKey:key];
+	return result;
 	}
 
 - (void) layoutSublayers
