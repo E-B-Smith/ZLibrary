@@ -114,11 +114,13 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 
 
 @interface ZBorderLayer ()
-@property (weak, nonatomic) CALayer *lastSuperLayer;
+//@property (weak, nonatomic) CALayer *lastSuperLayer;
 @end
 
 
 @implementation ZBorderLayer : CAShapeLayer
+
+#if 0	//	----------------------------------------------------------------------
 
 - (void) dealloc
 	{
@@ -196,5 +198,50 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 	[layer setNeedsLayout];
 	return layer;
 	}
+
+#else
+
+- (void) layoutSublayers
+	{
+	[super layoutSublayers];
+	self.frame = self.superlayer.bounds;
+	self.backgroundColor = [UIColor clearColor].CGColor;
+
+	CGSize lastSize = self.bounds.size;
+	UIBezierPath *path = [UIBezierPath bezierPath];
+	if (self.edges & UIRectEdgeBottom)
+		{
+		[path moveToPoint:CGPointMake(0.0, lastSize.height)];
+		[path addLineToPoint:CGPointMake(lastSize.width, lastSize.height)];
+		}
+	if (self.edges & UIRectEdgeTop)
+		{
+		[path moveToPoint:CGPointMake(0.0, 0.0)];
+		[path addLineToPoint:CGPointMake(lastSize.width, 0.0)];
+		}
+	if (self.edges & UIRectEdgeLeft)
+		{
+		[path moveToPoint:CGPointMake(0.0, 0.0)];
+		[path addLineToPoint:CGPointMake(0.0, lastSize.height)];
+		}
+	if (self.edges & UIRectEdgeRight)
+		{
+		[path moveToPoint:CGPointMake(lastSize.width, 0.0)];
+		[path addLineToPoint:CGPointMake(lastSize.width, lastSize.height)];
+		}
+	self.path = path.CGPath;
+	}
+
++ (ZBorderLayer*) borderWithEdges:(UIRectEdge)edges color:(CGColorRef)color width:(CGFloat)width
+	{
+	ZBorderLayer *layer = [ZBorderLayer layer];
+	layer.edges = edges;
+	layer.strokeColor = color;
+	layer.lineWidth = width;
+	[layer setNeedsLayout];
+	return layer;
+	}
+
+#endif
 
 @end
