@@ -23,5 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype) initWithCapacity:(NSUInteger)numItems NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
+- (void) removeObjectAtIndex:(NSUInteger)index;
+- (void) removeLastObject;
+
 @end
 NS_ASSUME_NONNULL_END

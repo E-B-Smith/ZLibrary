@@ -80,4 +80,17 @@
 	return [super initWithCoder:aDecoder];
 	}
 
+- (void) removeObjectAtIndex:(NSUInteger)index
+	{
+	id key = [array objectAtIndex:index];
+	[dictionary removeObjectForKey:key];
+	[array removeObjectAtIndex:index];
+	}
+
+- (void) removeLastObject
+	{
+	NSInteger idx = self.count-1;
+	if (idx >= 0) [self removeObjectAtIndex:idx];
+	}
+
 @end
