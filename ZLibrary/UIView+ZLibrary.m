@@ -53,6 +53,18 @@
 	return (v) ? YES : NO;
 	}
 
++ (void) findAndResignFirstResponder
+	{
+	for (UIView *view in [UIApplication sharedApplication].windows)
+		{
+		[view performBlockOnSubviews:
+		^ (UIView *subview)
+			{
+			[subview resignFirstResponder];
+			}];
+		}
+	}
+
 - (void) bringViewToFront
 	{
 	[self.superview bringSubviewToFront:self];

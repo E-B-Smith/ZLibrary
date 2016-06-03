@@ -25,6 +25,7 @@ extern CGRect ZLayoutVerticalInRectWithMargin(CGRect boundingRect, CGFloat margi
 
 - (UIView*) firstResponder;
 - (BOOL) 	findAndResignFirstResponder;
++ (void) 	findAndResignFirstResponder;
 - (id) 		findSubviewOfClass:(Class)class_;
 - (id) 		findSuperviewOfClass:(Class)class_;
 - (id) 		findSubviewUsingPredicateBlock:(BOOL (^) (UIView* subview))predicateBlock;
