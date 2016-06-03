@@ -119,6 +119,22 @@ static inline CGPoint ZPointOffset(CGPoint p, CGFloat x, CGFloat y)
 	return p;
 	}
 
+static inline CGRect ZAssureRectInsideRect(CGRect r, CGRect container)
+	{
+	CGFloat f = (container.origin.x + container.size.width) - (r.origin.x + r.size.width);
+	if (f < 0.0) r.origin.x += f;
+
+	f = (container.origin.y + container.size.height) - (r.origin.y + r.size.height);
+	if (f < 0.0) r.origin.y += f;
+
+	if (r.origin.y < container.origin.y)
+		r.origin.y = container.origin.y;
+	if (r.origin.x < container.origin.x)
+		r.origin.x = container.origin.x;
+
+	return r;
+	}
+
 
 #if TARGET_OS_IOS
 
