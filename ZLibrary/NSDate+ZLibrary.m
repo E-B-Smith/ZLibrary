@@ -16,6 +16,7 @@
 
 #import "NSDate+ZLibrary.h"
 #import "ZUtilities.h"
+#import <math.h>
 
 
 @implementation NSDate (ZLibrary)
@@ -127,6 +128,24 @@
 + (NSDate*) dateFromRFC8222String:(NSString*)string
 	{
 	return [[NSDate RFC8222DateFormatter] dateFromString:string];
+	}
+
++ (NSString*) timeIntervalString:(NSTimeInterval)interval
+	{
+	interval = fabs(interval);
+	if (interval < 60.0)
+		return [NSString stringWithFormat:@"%d seconds", (int) interval];
+	else
+	if (interval < 60.0*60.0)
+		return [NSString stringWithFormat:@"%d minutes", (int) rint(interval/60.0)];
+	else
+	if (interval < 60.0*60.0*24.0)
+		return [NSString stringWithFormat:@"%d hours", (int) rint(interval/(60.0*60.0))];
+	else
+	if (interval < 60.0*60.0*24.0*7.0)
+		return [NSString stringWithFormat:@"%d days", (int) rint(interval/(60.0*60.0*24.0))];
+	else
+		return [NSString stringWithFormat:@"%d weeks", (int) rint(interval/(60.0*60.0*24.0*7.0))];
 	}
 
 @end

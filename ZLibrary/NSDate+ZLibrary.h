@@ -28,4 +28,6 @@
 - (NSString*) RFC8222String;
 + (NSDate*)   dateFromRFC8222String:(NSString*)string;
 
++ (NSString*) timeIntervalString:(NSTimeInterval)interval;
 @end
+
