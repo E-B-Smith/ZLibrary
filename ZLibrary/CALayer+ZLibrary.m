@@ -113,13 +113,14 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 #pragma mark - ZBorderLayer
 
 
-@interface ZBorderLayer ()
-//@property (weak, nonatomic) CALayer *lastSuperLayer;
+@interface ZBorderLayer () <CAAction>
+@property (weak, nonatomic) CALayer *lastSuperLayer;
 @end
 
 
 @implementation ZBorderLayer : CAShapeLayer
 
+//	Crash debugging.
 #if 0	//	----------------------------------------------------------------------
 
 - (void) dealloc
@@ -206,39 +207,87 @@ static 	NSString* const kShapeLayerName = @"ZLibraryShapeLayer";
 	[super layoutSublayers];
 	self.frame = self.superlayer.bounds;
 	self.backgroundColor = [UIColor clearColor].CGColor;
+	//ZDebug(@"Border edge frame: %@.", NSStringFromCGRect(self.frame));
 
 	CGSize lastSize = self.bounds.size;
 	UIBezierPath *path = [UIBezierPath bezierPath];
-	if (self.edges & UIRectEdgeBottom)
-		{
-		[path moveToPoint:CGPointMake(0.0, lastSize.height)];
-		[path addLineToPoint:CGPointMake(lastSize.width, lastSize.height)];
-		}
+	[path moveToPoint:CGPointZero];
+
 	if (self.edges & UIRectEdgeTop)
-		{
-		[path moveToPoint:CGPointMake(0.0, 0.0)];
 		[path addLineToPoint:CGPointMake(lastSize.width, 0.0)];
-		}
-	if (self.edges & UIRectEdgeLeft)
-		{
-		[path moveToPoint:CGPointMake(0.0, 0.0)];
-		[path addLineToPoint:CGPointMake(0.0, lastSize.height)];
-		}
-	if (self.edges & UIRectEdgeRight)
-		{
+	else
 		[path moveToPoint:CGPointMake(lastSize.width, 0.0)];
+
+	if (self.edges & UIRectEdgeRight)
 		[path addLineToPoint:CGPointMake(lastSize.width, lastSize.height)];
-		}
+	else
+		[path moveToPoint:CGPointMake(lastSize.width, lastSize.height)];
+
+	if (self.edges & UIRectEdgeBottom)
+		[path addLineToPoint:CGPointMake(0.0, lastSize.height)];
+	else
+		[path moveToPoint:CGPointMake(0.0, lastSize.height)];
+
+	if (self.edges & UIRectEdgeLeft)
+		[path addLineToPoint:CGPointZero];
+	else
+		[path moveToPoint:CGPointZero];
+
 	self.path = path.CGPath;
+	[self setNeedsDisplay];
+	}
+
+- (instancetype) init
+	{
+	self = [super init];
+	if (!self) return self;
+	self.contentsGravity = kCAGravityResize;
+	self.needsDisplayOnBoundsChange = YES;
+	self.actions = @{ kCAOnOrderIn: self, kCAOnOrderOut: self, kCATransition: self };
+	return self;
+	}
+
+- (void) dealloc
+	{
+	//ZDebug(@"Superlayer 0x%x last 0x%x", self.superlayer, _lastSuperLayer);
+	self.lastSuperLayer = nil;
+	}
+
+- (void) setLastSuperLayer:(CALayer *)lastSuperLayer_
+	{
+	if (_lastSuperLayer ==  lastSuperLayer_) return;
+	[_lastSuperLayer removeObserver:self forKeyPath:@"bounds"];
+	_lastSuperLayer	= lastSuperLayer_;
+	[_lastSuperLayer addObserver:self forKeyPath:@"bounds" options:0 context:NULL];
+	}
+	
+- (void) observeValueForKeyPath:(NSString *)keyPath
+					   ofObject:(id)object
+					 	 change:(NSDictionary<NSString *,id> *)change
+						context:(void *)context
+	{
+	[self setNeedsLayout];
+	}
+
+- (void)runActionForKey:(NSString *)key
+                 object:(id)anObject
+              arguments:(NSDictionary *)dict
+	{
+	if ([key isEqualToString:kCAOnOrderIn])
+		self.lastSuperLayer = self.superlayer;
+	else
+	if ([key isEqualToString:kCAOnOrderOut])
+		self.lastSuperLayer = nil;
+	[self setNeedsLayout];
 	}
 
 + (ZBorderLayer*) borderWithEdges:(UIRectEdge)edges color:(CGColorRef)color width:(CGFloat)width
 	{
 	ZBorderLayer *layer = [ZBorderLayer layer];
 	layer.edges = edges;
+	layer.fillColor = [UIColor clearColor].CGColor;
 	layer.strokeColor = color;
 	layer.lineWidth = width;
-	[layer setNeedsLayout];
 	return layer;
 	}
 
