@@ -41,7 +41,20 @@
 
 + (ZAlertView*) showAlertWithTitle:(NSString *)title error:(NSError*)error
 	{
-	return [ZAlertView showAlertWithTitle:title message:[NSString stringWithFormat:@"%@", error]];
+	#ifdef showfullerror
+
+		return [ZAlertView showAlertWithTitle:title message:[NSString stringWithFormat:@"%@", error]];
+
+	#else
+
+		NSString *message = [error localizedDescription];
+		if (!message.length)
+			message = error.userInfo.description;
+		if (!message.length)
+			message = error.description;
+		return [ZAlertView showAlertWithTitle:title message:message];
+
+	#endif
 	}
 
 + (ZAlertView*) showAlertWithError:(NSError*)error
