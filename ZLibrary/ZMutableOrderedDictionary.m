@@ -93,4 +93,15 @@
 	if (idx >= 0) [self removeObjectAtIndex:idx];
 	}
 
+- (id) firstObject
+	{
+	return (self.count > 0) ? [self objectAtIndex:0] : nil;
+	}
+
+- (id) lastObject
+	{
+	NSInteger idx = self.count-1;
+	return (idx >= 0) ? [self objectAtIndex:idx] : nil;
+	}
+
 @end

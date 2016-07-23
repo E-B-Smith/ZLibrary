@@ -26,5 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) removeObjectAtIndex:(NSUInteger)index;
 - (void) removeLastObject;
 
+- (nullable ObjectType) firstObject;
+- (nullable ObjectType) lastObject;
+
 @end
 NS_ASSUME_NONNULL_END
