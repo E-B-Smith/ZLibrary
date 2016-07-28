@@ -21,7 +21,7 @@
 @implementation UIApplication (ZLibrary)
 
 + (UIWindow*) topApplicationWindow
-	{
+	{	
 	//	Find the top application window --
 
 	UIWindow *appWindow = nil;
