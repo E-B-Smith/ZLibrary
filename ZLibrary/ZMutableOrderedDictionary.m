@@ -112,7 +112,10 @@
 
 - (NSMutableArray*) mutableArray
 	{
-	return [NSMutableArray arrayWithArray:array];
+	NSMutableArray *result = [NSMutableArray arrayWithCapacity:array.count];
+	for (id key in array)
+		[result addObject:[dictionary objectForKey:key]];
+	return result;
 	}
 
 @end
