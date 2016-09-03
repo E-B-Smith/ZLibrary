@@ -17,7 +17,7 @@
 - (void) forceViewToLoad
 	{
 	if ([UIDevice currentDevice].systemVersion.floatValue >= 9.0)
-		[self forceViewToLoad];
+		[self loadViewIfNeeded];
 	else
 		{
 		CGRect frame = self.view.frame;		//	Forces the view to load.
