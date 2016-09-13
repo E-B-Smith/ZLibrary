@@ -19,7 +19,7 @@
 #import "ZDebug.h"
 
 
-@interface ZRadialGradientLayer ()
+@interface ZRadialGradientLayer () <CALayerDelegate>
 	{
 	CGGradientRef	gradient;
 	}
