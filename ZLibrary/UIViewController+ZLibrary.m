@@ -16,8 +16,13 @@
 
 - (void) forceViewToLoad
 	{
-	CGRect frame = self.view.frame;		//	Forces the view to load.
-	ZCenterRectOverRect(frame, frame);	//	Nonsense call to avoid compiler warning.
+	if ([UIDevice currentDevice].systemVersion.floatValue >= 9.0)
+		[self loadViewIfNeeded];
+	else
+		{
+		CGRect frame = self.view.frame;		//	Forces the view to load.
+		ZCenterRectOverRect(frame, frame);	//	Nonsense call to avoid compiler warning.
+		}
 	}
 
 + (UIViewController*) activeViewController

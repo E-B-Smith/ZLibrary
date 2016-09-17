@@ -25,7 +25,7 @@
 
 - (NSString*) stringRelativeToNow
 	{
-	NSTimeInterval intervals[] = { 2*60.0, 			   120.0*60.0, 		23.0*60.0*60.0, 	48.0*60.0*60.0,	4.0*24.0*60.0*60.0 };
+	NSTimeInterval intervals[] = { 2*60.0, 			   120.0*60.0, 		23.0*60.0*60.0, 	48.0*60.0*60.0,	8.0*24.0*60.0*60.0 };
 	NSTimeInterval modulus[] =   {    0.0,					 60.0,			 60.0*60.0,				   0.0,	    24.0*60.0*60.0 };
 
 	NSString * pastStrings [] =

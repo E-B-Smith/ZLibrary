@@ -1,9 +1,9 @@
 //
 //  ZMutableOrderedDictionary.m
-//  Xprt
+//  ZLibrary
 //
 //  Created by Edward Smith on 5/23/16.
-//  Copyright © 2016 Blitz Technologies. All rights reserved.
+//  Copyright © 2016 Edward Smith. All rights reserved.
 //
 
 
@@ -57,6 +57,12 @@
 	return (key) ? [dictionary objectForKey:key] : nil;
 	}
 
+- (id)objectAtIndexedSubscript:(NSUInteger)index;
+	{
+	id key = [array objectAtIndex:index];
+	return (key) ? [dictionary objectForKey:key] : nil;
+	}
+
 - (instancetype) init
 	{
     self = [super init];
@@ -102,6 +108,14 @@
 	{
 	NSInteger idx = self.count-1;
 	return (idx >= 0) ? [self objectAtIndex:idx] : nil;
+	}
+
+- (NSMutableArray*) mutableArray
+	{
+	NSMutableArray *result = [NSMutableArray arrayWithCapacity:array.count];
+	for (id key in array)
+		[result addObject:[dictionary objectForKey:key]];
+	return result;
 	}
 
 @end

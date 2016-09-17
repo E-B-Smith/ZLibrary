@@ -1,9 +1,9 @@
 //
 //  ZMutableOrderedDictionary.h
-//  Xprt
+//  ZLibrary
 //
 //  Created by Edward Smith on 5/23/16.
-//  Copyright © 2016 Blitz Technologies. All rights reserved.
+//  Copyright © 2016 Edward Smith. All rights reserved.
 //
 
 
@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (ObjectType) objectForKey:(KeyType)aKey;
 - (NSEnumerator<KeyType> *)keyEnumerator;
 - (ObjectType)objectAtIndex:(NSUInteger)index;
+- (ObjectType)objectAtIndexedSubscript:(NSUInteger)index;
 - (instancetype) init NS_DESIGNATED_INITIALIZER;
 - (instancetype) initWithCapacity:(NSUInteger)numItems NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
@@ -29,5 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable ObjectType) firstObject;
 - (nullable ObjectType) lastObject;
 
+- (NSMutableArray<ObjectType>*) mutableArray;
 @end
 NS_ASSUME_NONNULL_END
