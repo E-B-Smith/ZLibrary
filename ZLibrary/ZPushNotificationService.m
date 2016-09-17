@@ -113,7 +113,7 @@ NSString * const ZPushResponseStatusString[11] =
 #pragma mark - ZPushNotificationService
 
 
-@interface ZPushNotificationService ()
+@interface ZPushNotificationService () <GCDAsyncSocketDelegate>
 	{
 	uint32_t	lastNotificationID;
 	NSInteger	sentMessageCount;
