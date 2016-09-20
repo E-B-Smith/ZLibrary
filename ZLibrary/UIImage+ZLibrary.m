@@ -520,7 +520,6 @@ cleanup:
     CGContextRelease(ctx);
     CGImageRelease(cgimg);
     return img;
-
 	}
 
 @end
